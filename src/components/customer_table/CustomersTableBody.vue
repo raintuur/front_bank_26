@@ -1,11 +1,10 @@
 <template>
   <tbody>
-  <tr v-for="customer in customers">
+  <tr v-for="customer in customers" >
     <th scope="row">*</th>
     <td>{{customer.firstName}}</td>
     <td>{{customer.lastName}}</td>
-    <td>{{customer.personalcode}}</td>
-
+    <td>{{customer.personalCode}}</td>
   </tr>
   </tbody>
 </template>
@@ -18,19 +17,18 @@ export default {
         {
           firstName: 'Rain',
           lastName: 'Tüür',
-          personalcode: '38901220277'
+          personalCode: '38405040000'
+        },
+        {
+          firstName: 'Kaja',
+          lastName: 'Vaher',
+          personalCode: '48405040000'
         },
         {
           firstName: 'Kaupo',
-          lastName: 'Tüür',
-          personalcode: '38701220277'
-        },
-        {
-          firstName: 'Astrid',
-          lastName: 'Oras',
-          personalcode: '48901220277'
-        },
-    }
+          lastName: 'Vaher',
+          personalCode: '38405040000'
+        }
       ]
     }
   }

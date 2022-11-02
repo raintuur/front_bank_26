@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-dark table-hover" style="width: 70%" align="center">
+  <table class="table table-dark table-hover">
     <thead>
     <tr>
       <th scope="col">#</th>

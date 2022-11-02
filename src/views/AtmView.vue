@@ -1,6 +1,6 @@
 <template>
 <div>
-  tere maailm asdasdasd
+  Tere Maail!
 </div>
 </template>
 

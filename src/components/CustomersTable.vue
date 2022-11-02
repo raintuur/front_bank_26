@@ -1,10 +1,10 @@
 <template>
-  <table class="table table-dark table-striped m-auto">
+  <table class="table table-dark table-hover">
     <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Eesnimi</th>
-      <th scope="col">Perkonnanimi</th>
+      <th scope="col">Perekonnanimi</th>
       <th scope="col">Isikukood</th>
     </tr>
     </thead>

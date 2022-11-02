@@ -2,7 +2,7 @@
   <div>
 
     <div class="d-flex justify-content-center">
-      <div class="row">
+      <div class="row-cols-1">
         <div class="col">
           <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
         </div>
@@ -10,8 +10,9 @@
           <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
       </div>
+
       <div class="row">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-outline-success">Success</button>
       </div>
     </div>
 
@@ -29,8 +30,9 @@ export default {
     }
   },
   methods: {
-    helloWorld: function () {
-      alert('Hello World')
+
+    helloWorld: function (firstName, lastName) {
+      alert('Hello ' + this.firstName + ' ' + this.lastName)
     }
   }
 

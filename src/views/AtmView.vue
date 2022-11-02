@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="d-flex justify-content-center">
       <div class="row">
         <div class="col">
@@ -11,10 +10,9 @@
         </div>
       </div>
       <div class="row">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-outline-primary">Success</button>
       </div>
     </div>
-
 
   </div>
 </template>
@@ -29,8 +27,8 @@ export default {
     }
   },
   methods: {
-    helloWorld: function () {
-      alert('Hello World')
+    helloWorld: function (firstName, lastName) {
+      alert('Hello ' + this.firstName + ' ' + this.lastName)
     }
   }
 

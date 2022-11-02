@@ -9,16 +9,10 @@
           <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
       </div>
+      <div class="row">
+        <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-outline-primary">Success</button>
+      </div>
     </div>
-
-    <input :value="firstName">
-
-
-    <br>
-    Eesnimi:{{firstName}}
-    <br>
-    Perekonnanimi:{{lastName}}
-
 
   </div>
 </template>
@@ -32,6 +26,11 @@ export default {
       lastName: ''
     }
   },
+  methods: {
+    helloWorld: function (firstName, lastName) {
+      alert('Hello ' + this.firstName + ' ' + this.lastName)
+    }
+  }
 
 
 }

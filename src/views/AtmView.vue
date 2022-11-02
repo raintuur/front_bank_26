@@ -11,14 +11,12 @@
       </div>
     </div>
 
-    <input :value="firstName">
-
 
 
     <br>
-    Eesnimi: {{firstName}}
+    Eesnimi: {{ firstName }}
     <br>
-    Perekonnanimi: {{lastName}}
+    Perekonnanimi: {{ lastName }}
 
 
   </div>
@@ -33,6 +31,7 @@ export default {
       lastName: ''
     }
   },
+
 
 
 }

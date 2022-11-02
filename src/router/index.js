@@ -13,6 +13,11 @@ const routes = [
     component: HomeView
   },
   {
+   path: '/customer',
+   name: 'customerRoute',
+   component: CustomersView
+  },
+  {
     path: '/atm',
     name: 'atmRoute',
     component: AtmView

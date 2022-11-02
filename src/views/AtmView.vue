@@ -1,6 +1,6 @@
 <template>
 <div>
-  Tere Maail!
+  Tere Maailm!
 </div>
 </template>
 

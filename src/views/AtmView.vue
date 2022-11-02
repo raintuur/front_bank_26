@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="d-flex justify-content-center">
       <div class="row">
         <div class="col">
@@ -18,6 +17,16 @@
 <br>
 <br>
     Eesnimi: {{firstName}}
+
+    <input :value="firstName">
+
+
+
+    <br>
+    Eesnimi: {{firstName}}
+    <br>
+    Perekonnanimi: {{lastName}}
+
 
   </div>
 </template>

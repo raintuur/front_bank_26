@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-dark table-striped">
+  <table class="table table-dark table-hover">
     <thead>
     <tr>
       <th scope="col">#</th>
@@ -14,12 +14,6 @@
       <td>Mark</td>
       <td>Otto</td>
       <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thorntl</td>
-      <td>@fat</td>
     </tr>
     </tbody>
   </table>

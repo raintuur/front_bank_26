@@ -1,8 +1,10 @@
 <template>
-  <div class="row m-5">
-
-    <CustomersTable/>
-
+  <div>
+    <div class="row justify-content-md-center m-5">
+      <div class="col-lg-10">
+        <CustomersTable/>
+      </div>
+    </div>
   </div>
 </template>
 

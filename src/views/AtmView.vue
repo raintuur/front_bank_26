@@ -1,23 +1,30 @@
 <template>
   <div>
-
     <div class="d-flex justify-content-center">
       <div class="row">
         <div class="col">
-          <input v-model="firstName" type="text" class="form-control" placeholder="Eesnimi" aria-label="First name">
+          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
         </div>
         <div class="col">
-          <input v-model="lastName" type="text" class="form-control" placeholder="Perekonnanimi" aria-label="Last name">
+          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
       </div>
-
     </div>
+
+    <input :value="firstName">
+
+
+
+    <br>
+    Eesnimi: {{firstName}}
+    <br>
+    Perekonnanimi: {{lastName}}
+
 
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'AtmView',
   data: function () {
@@ -25,7 +32,10 @@ export default {
       firstName: '',
       lastName: ''
     }
-  }
+  },
+
+
 }
+
 
 </script>

@@ -32,7 +32,8 @@ export default {
       firstName: '',
       lastName: ''
     }
-  }
+  },
+
 
 }
 

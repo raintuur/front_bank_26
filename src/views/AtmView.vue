@@ -2,14 +2,20 @@
   <div>
 
     <div class="d-flex justify-content-center">
-      <div class="row">
+      <div class="row-cols-1">
         <div class="col">
-          <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
       </div>
+      <div class="row">
+      </div>
+    </div>
+
+    <div>
+      <button v-on:click="helloWorld('Nipi',' Tiri')" type="button" class="btn btn-light">Light</button>
     </div>
 
   </div>
@@ -17,12 +23,21 @@
 
 <script>
 export default {
-  name: "AtmView"
+  name: 'AtmView',
+  data: function () {
+    return {
+      firstName: '',
+      lastName: ''
+
+    }
+  },
+  methods: {
+    helloWorld: function (firstName, lastName){
+      alert('Hello ' + this.firstName + ' ' + this.lastName)
+    }
+  }
+
 }
 
 
 </script>
-
-<style scoped>
-
-</style>

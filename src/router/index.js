@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AtmView from "@/views/AtmView";
+import CustomersView from "@/views/CustomersView";
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,12 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/customer',
+    name: 'customerRoute',
+    component: CustomersView
+  }
+  ,
   {
     path: '/atm',
     name: 'atmRoute',

@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="d-flex justify-content-center">
       <div class="row">
         <div class="col">
@@ -9,16 +10,10 @@
           <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
       </div>
+      <div class="row">
+        <button type="button" class="btn btn-outline-success">Success</button>
+      </div>
     </div>
-
-    <input :value="firstName">
-
-
-
-    <br>
-    Eesnimi: {{firstName}}
-    <br>
-    Perekonnanimi: {{lastName}}
 
 
   </div>
@@ -33,6 +28,11 @@ export default {
       lastName: ''
     }
   },
+  methods: {
+    helloWorld: function () {
+      alert('Hello World')
+    }
+  }
 
 
 }

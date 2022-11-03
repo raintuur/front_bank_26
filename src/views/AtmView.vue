@@ -2,18 +2,16 @@
   <div>
 
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col col-lg-2">
-          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
+      <div class="row justify-content-start">
+        <div class="col col-lg-5">
+          <select class="form-select" aria-label="Default select example">
+            <option selected disabled>--Linn--</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
-        <div class="col col-lg-2">
-          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-lg  btn-outline-info">Info</button>
-        </div>
+
       </div>
     </div>
 
@@ -29,17 +27,35 @@ export default {
 
   data: function () {
     return {
-      firstName: '',
-      lastName: ''
+      cities:  [
+        {
+          cityName: '',
+          cityNameId: 0
+        }
+      ]
     }
   },
   methods: {
-    helloWorld: function (firstName, lastname) {
-      alert('Hello World! ' + this.firstName + ' ' + this.lastName)
-    }
-  }
 
+   getCitiesSelectBoxInfo: function () {
+
+     this.$http.get('https://stoplight.io/mocks/valiit/myproject/15828373/atm/city')
+         .then(result => {
+           alert('Yes')
+           console.log('Yess, tuli oled!')
+         })
+         .catch(error => {
+           alert('VIGA!')
+           console.log('Oh no!')
+         });
+   }
+  },
+  beforeMount() {
+    this.getCitiesSelectBoxInfo()
+
+  }
 }
+
 
 
 </script>

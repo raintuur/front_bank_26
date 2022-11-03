@@ -2,18 +2,17 @@
   <div>
     <div class="row justify-content-md-center m-5">
       <div class="col-lg-10">
-        <CustomersTable/>
+        <CustomerTable/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CustomersTable from "@/components/CustomersTable";
+import CustomerTable from "@/components/customer_table/CustomerTable";
 
 export default {
-  name: "CustomersView",
-  components: {CustomersTable}
+  components: {CustomerTable}
 }
 </script>
 

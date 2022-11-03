@@ -5,6 +5,7 @@
     <td>{{customer.firstName}}</td>
     <td>{{customer.lastName}}</td>
     <td>{{customer.personalCode}}</td>
+    <td><button v-on:click="alertPersonalCode(customer)" type="button" class="btn btn-light">Light</button></td>
   </tr>
   </tbody>
 </template>
@@ -30,6 +31,13 @@ export default {
           personalCode: '38405040000'
         }
       ]
+    }
+  },
+  methods: {
+    alertPersonalCode: function (customer) {
+
+
+      alert('Isikukood: ' + customer.personalCode)
     }
   }
 }

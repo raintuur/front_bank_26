@@ -1,7 +1,7 @@
 <template>
   <tbody>
   <tr v-for="customer in customers" >
-    <th scope="row">*</th>
+    <th scope="row">{{customer.sequenceNumber}}</th>
     <td>{{customer.firstName}}</td>
     <td>{{customer.lastName}}</td>
     <td>{{customer.personalCode}}</td>
@@ -35,10 +35,17 @@ export default {
   },
   methods: {
     alertPersonalCode: function (customer) {
-
-
       alert('Isikukood: ' + customer.personalCode)
     }
+  },
+  beforeMount() {
+    // // this.customers.forEach(value => )
+    // for (let i=0; i< this.customers.length; i++) {
+    //   this.customers[i].sequenceNumber = i + 1
+    // }
+    let counter = 1
+    console.log('olen siin')
+    this.customers.forEach(customer => customer.sequenceNumber = counter++)
   }
 }
 </script>

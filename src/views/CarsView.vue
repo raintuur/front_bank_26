@@ -1,7 +1,18 @@
 <template>
   <div>
+    <!--  Brand loop  -->
 
-
+    <div v-for="brand in carBrands" class="row justify-content-sm-center m-5">
+      <h4>{{ brand.brandName }}</h4>
+      <div v-for="model in brand.models" class="row m-1">
+        <div class="col">
+          {{ model.modelName }}
+        </div>
+        <div class="col">
+          {{ model.year }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

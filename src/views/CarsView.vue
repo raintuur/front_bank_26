@@ -1,5 +1,5 @@
 <template>
-  <div class="container-sm">
+  <div class="d-flex flex-row bd-highlight mb-3">
     <div v-for="carBrand in carBrands" class="row justify-content-center row-cols-1">
       <h3>{{ carBrand.brandName }}</h3>
       <div v-for="model in carBrand.models" class="col d-flex justify-content-center">

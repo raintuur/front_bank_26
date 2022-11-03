@@ -48,7 +48,9 @@ export default {
   // }
   beforeMount() {
     let counter = 1
-    this.customers.forEach(customer => customer.sequenceNumber = counter++)
+    this.customers.forEach(customer => {
+      customer.sequenceNumber = counter++
+    })
   }
 }
 </script>

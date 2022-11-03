@@ -45,7 +45,12 @@ export default {
     //
     // }
     let counter = 1
-    this.customers.forEach(customer => customer.secuenceNumber = counter++)
+
+    console.log('Olen SIIN')
+    this.customers.forEach(customer => {
+      console.log('customer: ' + JSON.stringify(customer))
+      customer.secuenceNumber = counter++
+    })
   }
 }
 </script>

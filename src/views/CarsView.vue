@@ -1,22 +1,23 @@
 <template>
   <div>
-<!-- Brand loop -->
+<!--  Brand loop  -->
+
+
     <div v-for="brand in carBrands" class="row justify-content-center">
       <h6>{{brand.brandName}}</h6>
       <div v-for="model in brand.models" class="row">
-
         <div class="col">
-          {{model.modelName}}
+        {{model.modelName}}
         </div>
         <div class="col">
-          {{model.year}}
+        {{model.year}}
         </div>
-
       </div>
+
     </div>
 
-  </div>
 
+  </div>
 </template>
 
 <script>

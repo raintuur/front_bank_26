@@ -9,37 +9,58 @@ export default {
     return {
       carBrands: [
         {
-          brandName: ' Audi ',
+          brandName: 'Audi',
           models: [
             {
-              modelName: ' A3 ',
+              modelName: 'A3',
               year: 2011
-            }
+            },
+            {
+              modelName: 'A4',
+              year: 2012
+            },
+            {
+              modelName: 'A6 - RS',
+              year: 2013
+            },
+
           ]
         },
         {
-          brandName: ' ',
+          brandName: 'Opel',
           models: [
             {
-              modelName: ' ',
-              year: 0
+              modelName: 'Astra',
+              year: 2011
+            },
+            {
+              modelName: 'Omega',
+              year: 2012
             }
+
           ]
         },
         {
-          brandName: ' ',
+          brandName: 'Skoda',
           models: [
             {
-              modelName: ' ',
-              year: 0
+              modelName: 'Astra',
+              year: 2011
+            },
+            {
+              modelName: 'Omega',
+              year: 2012
             }
+
           ]
-        },
+        }
       ]
+
     }
-  }
+
 
   }
+
 }
 </script>
 

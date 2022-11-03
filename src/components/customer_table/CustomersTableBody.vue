@@ -1,7 +1,7 @@
 <template>
   <tbody>
   <tr v-for="customer in customers">
-    <th scope="row">{{ customer.sequenceNumber }}</th>
+    <th scope="row">{{customer.sequenceNumber}}</th>
     <td>{{ customer.firstName }}</td>
     <td>{{ customer.lastName }}</td>
     <td>{{ customer.personalCode }}</td>
@@ -41,15 +41,15 @@ export default {
     }
   },
   beforeMount() {
-    //this.customers.forEach(value => )
+    // this.customers.forEach(value => )
     // for (let i = 0; i < this.customers.length; i++) {
     //   this.customers[i].sequenceNumber = i + 1;
     // }
     let counter = 1
 
-    console.log('OLEN SIIN')
+    console.log('olen SIIN')
     this.customers.forEach(customer => {
-
+      console.log('customer: ' + JSON.stringify(customer))
       customer.sequenceNumber = counter++
     })
 

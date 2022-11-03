@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AtmView from "@/views/AtmView";
 import CustomersView from "@/views/CustomersView";
-import carsView from "@/views/CarsView";
+import CarsView from "@/views/CarsView";
 
 Vue.use(VueRouter)
 
@@ -14,9 +14,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/car',
-    name: 'carRoute',
-    component: carsView
+   path: '/car',
+   name: 'carRoute',
+   component: CarsView
   },
   {
    path: '/customer',
@@ -28,7 +28,7 @@ const routes = [
     name: 'atmRoute',
     component: AtmView
   },
-   {
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

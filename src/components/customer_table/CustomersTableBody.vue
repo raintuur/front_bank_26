@@ -46,6 +46,8 @@ export default {
     //   this.customers[i].sequenceNumber = i + 1;
     // }
     let counter = 1
+
+    console.log('olen siin')
     this.customers.forEach(customer => customer.sequenceNumber = counter++)
 
   }

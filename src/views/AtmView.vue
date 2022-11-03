@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    helloWorld: function (firstName, lastname) {
+    helloWorld: function (firstName, lastName) {
       alert('Hello World! ' + this.firstName + ' ' + this.lastName)
     }
   }

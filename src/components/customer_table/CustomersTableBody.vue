@@ -42,9 +42,12 @@ export default {
   },
   beforeMount() {
     // this.customers.forEach(value => )
-    for (let i = 0; i < this.customers.length; i++) {
-      this.customers[i].sequenceNumber = i + 1;
-    }
+    // for (let i = 0; i < this.customers.length; i++) {
+    //   this.customers[i].sequenceNumber = i + 1;
+    // }
+    let counter = 1
+    this.customers.forEach(customer => customer.sequenceNumber = counter++)
+
   }
 }
 </script>

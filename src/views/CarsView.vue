@@ -4,13 +4,13 @@
     <div v-for="brand in carBrands" class="row justify-content-center">
       <h6>{{ brand.brandName }}</h6>
 
-      <div v-for="model in brand.models" class="row col-3">
+      <div v-for="model in brand.models" class="row col-3 m">
 
         <div class="col">
           {{ model.modelName }}
         </div>
          <div class="col">
-           {{ model.modelName }}
+           {{ model.year }}
         </div>
 
 

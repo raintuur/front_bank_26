@@ -36,8 +36,9 @@ export default {
 
     getCitiesSelectBoxInfo: function () {
 
-      this.$http.get('/atm/city')
+      this.$http.get('https://stoplight.io/mocks/astridoras/myproject/12976975/atm/city')
           .then(result => {
+            alert("Yesss)")
             console.log('YESSSSSS, saime vastuse kätte')
           })
           .catch(error => {

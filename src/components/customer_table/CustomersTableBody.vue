@@ -1,10 +1,13 @@
 <template>
   <tbody>
-  <tr v-for="customer in customers" >
+  <tr v-for="customer in customers">
     <th scope="row">*</th>
-    <td>{{customer.firstName}}</td>
-    <td>{{customer.lastName}}</td>
-    <td>{{customer.personalCode}}</td>
+    <td>{{ customer.firstName }}</td>
+    <td>{{ customer.lastName }}</td>
+    <td>{{ customer.personalCode }}</td>
+    <td>
+      <button v-on:click="alertPersonalCode (customer)" type="button" class="btn btn-light">Light</button>
+    </td>
 
   </tr>
   </tbody>
@@ -13,7 +16,7 @@
 export default {
   name: 'CustomersTableBody',
   data: function () {
-    return{
+    return {
       customers: [
         {
           firstName: `Rain`,
@@ -24,10 +27,22 @@ export default {
           firstName: `Kaupo`,
           lastName: `Saar`,
           personalCode: `335456666`
+        },
+        {
+          firstName: `Kaja`,
+          lastName: `Saar`,
+          personalCode: `335456688`
         }
       ]
     }
 
+  },
+  methods: {
+    alertPersonalCode: function () {
+      alert('Isikukood: ' + customer.personalCode)
+    }
   }
 }
 </script>
+
+

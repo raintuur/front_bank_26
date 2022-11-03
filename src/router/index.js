@@ -13,9 +13,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/customers',
-    name: 'customersRoute',
-    component: CustomersView
+   path: '/customer',
+   name: 'customerRoute',
+   component: CustomersView
   },
   {
     path: '/atm',

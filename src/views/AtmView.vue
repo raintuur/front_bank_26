@@ -12,7 +12,7 @@
       </div>
       <div class="row justify-content-md-center">
         <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld()" type="button" class="btn btn-lg  btn-outline-info">Info
+          <button v-on:click="helloWorld()" type="button" class="btn btn-sm  btn-outline-dark">Info
           </button>
         </div>
       </div>

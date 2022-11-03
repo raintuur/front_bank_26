@@ -5,7 +5,7 @@
     <td>{{customer.firstName}}</td>
     <td>{{customer.lastName}}</td>
     <td>{{customer.personalCode}}</td>
-    <td><button v-on:click="alertPersonalCode(customer)" type="button" class="btn btn-light">Light</button></td>
+    <td><button v-on:click="alertPersonalCode(customer)" type="button" class="btn btn-outline-light">Info</button></td>
   </tr>
   </tbody>
 </template>

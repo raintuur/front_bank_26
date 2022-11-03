@@ -1,5 +1,13 @@
 <template>
 
+  <div>
+    <!--Cars Brand rida. Läheb loopi-->
+    <div v-for="carBrand in carBrands" class="row justify-content-md-center">
+      <h3>{{carBrand.brandName}}</h3>
+    </div>
+
+  </div>
+
 </template>
 
 <script>
@@ -23,7 +31,6 @@ export default {
               modelName: 'A6 - RS',
               year: 2013
             },
-
           ]
         },
         {
@@ -37,7 +44,6 @@ export default {
               modelName: 'Omega',
               year: 2012
             }
-
           ]
         },
         {
@@ -51,19 +57,11 @@ export default {
               modelName: 'Omega',
               year: 2012
             }
-
           ]
         }
       ]
-
     }
-
-
   }
-
 }
 </script>
 
-<style scoped>
-
-</style>

@@ -28,12 +28,7 @@ const routes = [
     name: 'atmRoute',
     component: AtmView
   },
-  {
-    path: '/customer',
-    name: 'customerRoute',
-    component: CustomersView
-  },
-  {
+   {
     path: '/about',
     name: 'about',
     // route level code-splitting

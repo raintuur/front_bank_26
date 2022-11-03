@@ -45,12 +45,12 @@ export default {
       alert('Isikukood: '+ personalCode )
     }
   },
-  beforeMounted() {
+  beforeMount() {
     // for (let i = 0; i < this.customers.length; i++) {
     //   this.customers[i].sequenceNumber = i +1;
     // }
     let counter = 1
-    this.customers.forEach(customer => customer.sequenceNumber = counter++)
+    this.customers.forEach(customer=>customer.sequenceNumber = counter++)
   }
 }
 

@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <div v-for="carBrand in carBrands" class="row justify-content-center">
-      <div class="col-2">
-
-        <p>{{carBrand.brandName}}</p>
+  <div class="container-sm">
+    <div v-for="carBrand in carBrands" class="row justify-content-center row-cols-1">
+      <h3>{{ carBrand.brandName }}</h3>
+      <div v-for="model in carBrand.models" class="col d-flex justify-content-center">
+        <div class="row row-cols-2">
+          <div class="col">
+            {{ model.modelName }}
+          </div>
+          <div class="col">
+            {{ model.modelYear }}
+          </div>
+        </div>
       </div>
-<!--      <div v-for="carBrand in carBrands" class="col-2">-->
-<!--        jeje-->
-<!--        -->
-
-<!--      </div>-->
-<!--      <div v-for="model in carBrand.models" class="col-2">-->
-<!--        jejeje-->
-<!--        {{ model.brandName }}-->
-<!--        {{ model.modelYear }}-->
-
-<!--      </div>-->
-
     </div>
   </div>
 </template>
@@ -45,7 +40,7 @@ export default {
           ]
         },
         {
-          brandName: Opel,
+          brandName: 'Opel',
           models: [
             {
               modelName: 'Astra',

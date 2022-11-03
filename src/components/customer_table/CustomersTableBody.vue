@@ -1,18 +1,21 @@
 <template>
   <tbody>
   <tr v-for="customer in customers">
-    <th scope="row">*</th>
-    <td>{{customer.firstName}}</td>
-    <td>{{ customer.lastName}}</td>
-    <td>{{ customer.personalCode}}</td>
-    <td><button v-on:click="alertPersonalCode(customer.personalCode)" type="button" class="btn btn-outline-light">Info</button></td>
+    <th scope="row">{{ customer.sequenceNumber }}</th>
+    <td>{{ customer.firstName }}</td>
+    <td>{{ customer.lastName }}</td>
+    <td>{{ customer.personalCode }}</td>
+    <td>
+      <button v-on:click="alertPersonalCode(customer.personalCode)" type="button" class="btn btn-outline-light">Info
+      </button>
+    </td>
   </tr>
   </tbody>
 </template>
 <script>
 export default {
   name: 'CustomersTableBody',
-  data:function () {
+  data: function () {
     return {
       customers: [
         {
@@ -37,6 +40,15 @@ export default {
     alertPersonalCode: function (personalCode) {
       alert('Isikukood: ' + personalCode)
     }
+  },
+  // beforeMount() {
+  //   for (let i = 0; i < this.customers.length; i++) {
+  //     this.customers[i].sequenceNumber = i+1
+  //   }
+  // }
+  beforeMount() {
+    let counter = 1
+    this.customers.forEach(customer => customer.sequenceNumber = counter++)
   }
 }
 </script>

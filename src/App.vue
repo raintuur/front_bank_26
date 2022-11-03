@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/atm">ATM</router-link> |
       <router-link to="/customer">Customer</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/car">Auto</router-link>
     </nav>
     <router-view/>
   </div>

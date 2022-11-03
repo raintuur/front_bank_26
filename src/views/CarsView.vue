@@ -1,4 +1,21 @@
 <template>
+  <div>
+<!-- Brand loop -->
+    <div v-for="brand in carBrands" class="row justify-content-center">
+      <h6>{{brand.brandName}}</h6>
+      <div v-for="model in brand.models" class="row">
+
+        <div class="col">
+          {{model.modelName}}
+        </div>
+        <div class="col">
+          {{model.year}}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
 </template>
 

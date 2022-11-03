@@ -15,5 +15,6 @@ export default {
   name: "CustomersView",
   components: {CustomersTable}
 }
+
 </script>
 

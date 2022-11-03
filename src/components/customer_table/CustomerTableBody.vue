@@ -1,10 +1,13 @@
 <template>
   <tbody>
   <tr v-for="customer in customers">
-    <th scope="row">*</th>
-    <td>{{customer.firstName}}</td>
-    <td>{{customer.lastName}}</td>
-    <td>{{customer.personalCode}}</td>
+    <th scope="row">{{ customer.sequenceNumber }}</th>
+    <td>{{ customer.firstName }}</td>
+    <td>{{ customer.lastName }}</td>
+    <td>{{ customer.personalCode }}</td>
+    <td>
+      <button v-on:click="alertPersonalCode(customer)" type="button" class="btn btn-outline-light">Light</button>
+    </td>
   </tr>
   </tbody>
 </template>
@@ -21,7 +24,7 @@ export default {
         },
         {
           firstName: 'Kaja',
-          lastName: 'Vaher',
+          lastName: 'Muru',
           personalCode: '487615'
         },
         {
@@ -31,6 +34,20 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    alertPersonalCode: function (customer) {
+      alert('Isikukood: ' + customer.personalCode + ' ' + customer.lastName)
+    }
+  },
+  beforeMount() {
+    // this this.customers.forEach(value => )
+
+    // for (let i = 0; i < this.customers.length; i++) {
+    //   this.customers [i].sequenceNumber = i + 1;
+    // }
+    let counter = 1
+    this.customers.forEach(customer => customer.sequenceNumber = counter++)
   }
 }
 </script>

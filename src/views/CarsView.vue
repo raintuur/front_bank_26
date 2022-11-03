@@ -1,5 +1,12 @@
 <template>
+  <div>
+    <!--  Brand loop  -->
+    <div v-for="carBrand in carBrands" class="row justify-content-center">
+      <h6>{{ carBrand.brandName }}</h6>
 
+    </div>
+
+  </div>
 </template>
 
 <script>

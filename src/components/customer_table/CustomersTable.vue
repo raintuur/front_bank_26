@@ -6,7 +6,7 @@
 </template>
 <script>
 import CustomersTableHead from "@/components/customer_table/CustomersTableHead";
-import CustomersTableBody from "@/components/customer_table/CsutomersTableBody";
+import CustomersTableBody from "@/components/customer_table/CustomersTableBody";
 
 export default {
   name: 'CustomersTable',

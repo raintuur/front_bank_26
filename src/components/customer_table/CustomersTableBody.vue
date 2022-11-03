@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'CustomerTableBody',
+  name: 'CustomersTableBody',
   data: function () {
     return {
       customers: [

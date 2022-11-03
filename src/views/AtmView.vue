@@ -12,12 +12,11 @@
       </div>
       <div class="row justify-content-md-center">
         <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-lg  btn-outline-info">Info</button>
+          <button v-on:click="helloWorld()" type="button" class="btn btn-lg  btn-outline-info">Info
+          </button>
         </div>
       </div>
     </div>
-
-
 
 
   </div>
@@ -34,7 +33,8 @@ export default {
     }
   },
   methods: {
-    helloWorld: function (firstName, lastName) {
+    helloWorld: function () {
+      // alert('Hello ' + firstName + ' ' + lastname)
       alert('Hello World! ' + this.firstName + ' ' + this.lastName)
     }
   }
@@ -43,3 +43,12 @@ export default {
 
 
 </script>
+
+
+
+
+
+
+
+
+

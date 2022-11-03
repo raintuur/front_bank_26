@@ -14,6 +14,11 @@ const routes = [
     component: HomeView
   },
   {
+   path: '/car',
+   name: 'carRoute',
+   component: CarsView
+  },
+  {
    path: '/customer',
    name: 'customerRoute',
    component: CustomersView

@@ -42,7 +42,11 @@ export default {
   },
   beforeMount() {
     let counter = 1;
-    this.customers.forEach(customer => customer.sequenceNumber = counter++)
+
+    this.customers.forEach(customer => {
+      console.log('customer: ' + customer);
+      customer.sequenceNumber = counter++
+    })
 
     /*for (let i = 0; i < this.customers.length; i++) {
       this.customers[i].sequenceNumber = i + 1;

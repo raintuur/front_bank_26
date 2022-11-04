@@ -10,22 +10,7 @@
 
 
           <div class="row">
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Default checkbox
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-              <label class="form-check-label" for="flexCheckChecked">
-                Checked checkbox
-              </label>
-
-            </div>
-
-
+            <ServiceCities/>
 
 
           </div>
@@ -40,18 +25,15 @@
 
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
+import ServiceCities from "@/components/ServiceCities";
 
 export default {
   name: 'AtmView',
-  components: {CitiesDropdown},
+  components: {ServiceCities, CitiesDropdown},
   data: function () {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-
-  }
+  methods: {}
 }
 
 

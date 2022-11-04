@@ -4,9 +4,11 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-2">
-          <select class="form-select" aria-label="Default select example">
-            <option  v-for="city in cities" :value="city.cityNameID">{{city.cityName}}</option>
+          <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
+            <option  selected disabled>--Linn--</option>
+            <option   v-for="city in cities" :value="city.cityNameID">{{city.cityName}}</option>
           </select>
+          {{selectedCityID}}
         </div>
       </div>
 
@@ -21,31 +23,30 @@ export default {
 
   data: function () {
     return {
+      selectedCityID:0,
+      firstName: '',
       cities: [
         {
-          cityName: '-- Vali linn --',
+          cityName: '',
           cityNameID: 0,
-        },
-        {
-          cityName: 'Haapsalu',
-          cityNameID: 1,
-        },
-        {
-          cityName: 'Kuressaare',
-          cityNameID: 2,
-        },
+        }
       ]
     }
   },
   methods: {
+    refreshATMsByCity: function (message) {
+      alert(message)
+    },
     getCitiesSelectBoxInfo: function () {
-      this.$http.get('https://stoplight.io/mocks/liisr/esimeneprojekt/105190846/atm/city')
+      this.$http.get('/atm/city')
           .then(result => {
+            this.cities = result.data
             alert("YESS")
-            // console.log('YESS, saime vastuse!')
+            console.log('CITIES: ' + JSON.stringify(this.cities))
 
           })
           .catch(error => {
+            alert("Viga!")
             console.log('Oh no! Mingi viga!')
           });
 
@@ -57,8 +58,6 @@ export default {
 
   }
 }
-
-
 </script>
 
 

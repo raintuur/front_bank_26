@@ -1,26 +1,16 @@
 <template>
   <div>
-    <div class="col col-2 form-check">
-      <input v-model="isCashOut" class="form-check-input" type="checkbox" value="" id="cashOut">
-      <label class="form-check-label" for="cashOut">
-        Raha väljamakse
-      </label>
-    </div>
-    <div class="col col-2 form-check">
-      <input v-model="isCashIn" class="form-check-input" type="checkbox" value="" id="CashIn" checked>
-      <label class="form-check-label" for="CashIn">
-        Raha sissemakse
-      </label>
-    </div>
-    <div class="col col-2 form-check">
-      <input v-model="isPayments" class="form-check-input" type="checkbox" value="" id="payments" checked>
-      <label class="form-check-label" for="CashIn">
-        Maksed
+    <div v-for="atmService in atmServices" class="col col-2 form-check">
+      <input v-model="atmService.isSelected" class="form-check-input" type="checkbox" value=""
+             :id="atmService.serviceId">
+      <label class="form-check-label" :for="atmService.serviceId">
+        {{ atmService.serviceName }}
       </label>
     </div>
     <button v-on:click="someMethod" type="button" class="btn btn-dark">Dark</button>
   </div>
 </template>
+
 <script>
 export default {
   name: 'CitiesServicesCheckbox',
@@ -28,15 +18,40 @@ export default {
     return {
       isCashOut: Boolean(false),
       isCashIn: Boolean(false),
-      isPayments: Boolean(false)
+      isPayments: Boolean(false),
+
+      atmServices: [
+        {
+          serviceId: 0,
+          serviceName: '',
+          isSelected: Boolean(false)
+        }
+      ]
     }
   },
   methods: {
+
     someMethod: function () {
-      alert('Cashout is ' + this.isCashOut.toString() +
-          '\nCashin is ' + this.isCashIn.toString() +
-          '\nPayments is ' + this.isPayments.toString())
-    }
+      for (let i = 0; i < this.atmServices.length; i++) {
+        console.log(this.atmServices[i].serviceName + ' ' + this.atmServices[i].isSelected)
+      }
+    },
+
+    getServiceSelectBoxInfo: function () {
+      this.$http.get('/atm/service')
+          .then(result => {
+            this.atmServices = result.data
+            console.log('Services = ' + JSON.stringify(this.atmServices))
+          })
+          .catch(error => {
+            alert('Viga')
+            console.log('Ou Nou! Mingi viga tuli vastuseks')
+          });
+    },
+  },
+
+  beforeMount() {
+    this.getServiceSelectBoxInfo()
   }
 }
 </script>

@@ -7,7 +7,7 @@
         {{ atmService.serviceName }}
       </label>
     </div>
-    <button v-on:click="someMethod" type="button" class="btn btn-dark">Dark</button>
+    <button v-on:click="someMethod" type="button" class="btn btn-dark">Kontroll</button>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
     },
 
     getAtmServiceSelectBoxInfo: function () {
+      console.log('Olen Siin')
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data

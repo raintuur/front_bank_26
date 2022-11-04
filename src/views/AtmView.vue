@@ -32,6 +32,7 @@ export default {
       lastName: ''
     }
   },
+
   methods: {
     helloWorld: function () {
       // alert('Hello ' + firstName + ' ' + lastname)

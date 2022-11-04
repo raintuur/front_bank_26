@@ -8,8 +8,6 @@
       </label>
     </div>
 
-<!--    <button v-on:click="check()">kontrolli</button>-->
-
   </div>
 </template>
 <script>
@@ -27,9 +25,6 @@ export default {
     }
   },
   methods: {
-    // check: function () {
-    //   alert('raha sisse: ' + this.atmServices[0].isSelected + ' raha välja' + this.atmServices[1].isSelected)
-    // },
 
     getAtmServicesCheckboxInfo: function () {
       this.$http.get("/atm/service")

@@ -4,13 +4,10 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-
-          <select v-on:change="refreshAtmsByCity('HELLO')" class="form-select" aria-label="Default select example">
-            <option selected disabled>--Linn--</option>
-            <option v-for="city in cities" :value="city.cityNameId">{{city.cityName}}</option>
+          <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
+            <option selected disabled value="0">--Linn--</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
           </select>
-
-
         </div>
       </div>
     </div>
@@ -25,6 +22,8 @@ export default {
 
   data: function () {
     return {
+      selectedCityID: 0,
+      firstName: '',
       cities: [
         {
           cityName: '',
@@ -34,13 +33,6 @@ export default {
     }
   },
   methods: {
-
-    refreshAtmsByCity: function (message) {
-      alert(message)
-    },
-
-
-
     getCitiesSelectBoxInfo: function () {
 
       this.$http.get('/atm/city')
@@ -56,6 +48,7 @@ export default {
 
   },
   beforeMount() {
+
     this.getCitiesSelectBoxInfo()
   }
 

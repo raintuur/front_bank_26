@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CustomersTable from "@/components/CustomersTable";
+import CustomersTable from "@/components/customer_table/CustomersTable";
 
 export default {
   name: "CustomersView",

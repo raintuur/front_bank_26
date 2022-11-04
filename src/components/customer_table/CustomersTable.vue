@@ -5,8 +5,8 @@
   </table>
 </template>
 <script>
-import CustomersTableBody from "@/components/CustomersTableBody";
-import CustomersTableHead from "@/components/CustomersTableHead";
+import CustomersTableBody from "@/components/customer_table/CustomersTableBody";
+import CustomersTableHead from "@/components/customer_table/CustomersTableHead";
 
 export default {
   name: 'CustomersTable',

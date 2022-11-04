@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="form-check">
+    <div v-for="service in atmServices" class="form-check">
       <input v-model="" class="form-check-input" type="checkbox" value=""  id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        Default checkbox
+        {{ service.serviceName }}
       </label>
     </div>
 

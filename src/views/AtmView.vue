@@ -2,18 +2,15 @@
   <div>
 
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col col-lg-2">
-          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
-        </div>
-        <div class="col col-lg-2">
-          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld()" type="button" class="btn btn-lg  btn-outline-info">Info
-          </button>
+      <div class="row justify-content-start">
+        <div class="col col-lg-4">
+          <select v-model="selectedCityId" class="form-select" aria-label="Default select example">
+            <option selected disabled>--Linn--</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{city.cityName}}</option>
+          </select>
+
+
+
         </div>
       </div>
     </div>
@@ -28,16 +25,35 @@ export default {
 
   data: function () {
     return {
+      selectedCityId: 0,
       firstName: '',
-      lastName: ''
+      cities: [
+        {
+          cityName: ' ',
+          cityNameId: 0
+        }
+      ]
     }
   },
   methods: {
-    helloWorld: function () {
-      // alert('Hello ' + firstName + ' ' + lastname)
-      alert('Hello World! ' + this.firstName + ' ' + this.lastName)
+    getCitiesSelectBoxInfo: function () {
+      this.$http.get('/atm/city')
+          .then(result => {
+            this.cities = result.data
+            console.log('CITIES: ' + JSON.stringify(this.cities))
+          })
+      .catch(error => {
+        alert('Viga')
+        console.log('noooo')
+      });
+
     }
-  }
+  },
+
+  beforeMount() {
+    this.getCitiesSelectBoxInfo()
+  },
+
 
 }
 

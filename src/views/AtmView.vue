@@ -1,49 +1,28 @@
 <template>
   <div>
     <div class="container">
-      <div class="row justify-content-start">
+      <div class=" row justify-content-start">
         <div class="col col-lg-3">
-          <select v-model="selectedCityId"  class="form-select" aria-label="--Linn--">
-            <option disabled selected value="0">--Linn--</option>
-            <option v-for="city in cities" :value="city.cityNameId" >{{city.cityName}}</option>
-          </select>
+          <CitiesDropDown/>
         </div>
+      </div>
+      <div class="row row-cols-1 justify-content-md-start">
+        <CitiesServicesCheckbox/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import CitiesDropDown from "@/components/atm_ components/CitiesDropDown";
+import CitiesServicesCheckbox from "@/components/atm_ components/CitiesServicesCheckbox";
+
 export default {
   name: 'AtmView',
-
+  components: {CitiesServicesCheckbox, CitiesDropDown},
   data: function () {
-    return {
-      selectedCityId: 0,
-      firstName: '',
-      cities: [
-        {
-        cityName: '',
-        cityNameId: 0
-      },
-      ]
-    }
+    return {}
   },
-  methods: {
-    getCitiesSelectBoxInfo: function () {
-      this.$http.get('/atm/city')
-          .then(result => {
-            this.cities = result.data
-            console.log('Cities = ' + JSON.stringify(this.cities))
-          })
-          .catch(error => {
-            alert('Viga')
-            console.log('Ou Nou! Mingi viga tuli vastuseks')
-          });
-    },
-  },
-beforeMount() {
-    this.getCitiesSelectBoxInfo()
-}
+  methods: {}
 }
 </script>

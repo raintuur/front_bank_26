@@ -37,7 +37,7 @@ export default {
       }
     },
 
-    getServiceSelectBoxInfo: function () {
+    getAtmServiceSelectBoxInfo: function () {
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data
@@ -51,7 +51,7 @@ export default {
   },
 
   beforeMount() {
-    this.getServiceSelectBoxInfo()
+    this.getAtmServiceSelectBoxInfo()
   }
 }
 </script>

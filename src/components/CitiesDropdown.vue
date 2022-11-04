@@ -30,10 +30,8 @@ export default {
       this.$http.get('/atm/city')
           .then(result => {
             this.cities = result.data
-            console.log('Cities= ' + JSON.stringify(this.cities))
           })
           .catch(error => {
-            alert('Viga')
             console.log('You screwed up :(')
           });
     }

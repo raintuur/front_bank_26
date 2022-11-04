@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="container">
-      <div class=" row justify-content-start">
-        <div class="col col-lg-3">
+      <div class=" row justify-content-start ">
+        <div class="col col-lg-3 mb-5">
           <CitiesDropDown/>
         </div>
       </div>
-      <div class="row row-cols-1 justify-content-md-start">
+      <div class="row row-cols-1 justify-content-start mt-5">
         <CitiesServicesCheckbox/>
       </div>
     </div>

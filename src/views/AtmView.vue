@@ -4,12 +4,12 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-sm-4">
-          <select class="form-select" aria-label="Default select example">
+
+          <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
             <option selected disabled>--Linn--</option>
-            <option value="2">Tartu</option>
-            <option value="1">Tallinn</option>
-            <option value="3">Viljandi</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
           </select>
+
         </div>
       </div>
     </div>
@@ -23,6 +23,10 @@ export default {
 
   data: function () {
     return {
+      selectedCityID: 0,
+
+      firstName: '',
+
       cities: [
         {
           cityName: '',
@@ -33,12 +37,17 @@ export default {
   },
 
   methods: {
+
+
     getCitiesSelectBoxInfo: function () {
-      this.$http.get('https://stoplight.io/mocks/lambikas/citylist/83536708/atm/city')
-          .then(result => {
-            console.log("Yes, saime kätte")
+      this.$http.get('/atm/city')  //urli esimene osa vue.config.js failis
+          .then(result => {  //siia tullakse siis, kui serverist tuleb vastus 200
+            //alert("Korras")
+            this.cities = result.data
+            //console.log(JSON.stringify(this.cities))
           })
-          .catch(error => {
+          .catch(error => {  //siia tullakse siis, kui serverist tuleb muu vastus kui 200
+            //alert("Error")
             console.log("Mingi viga")
           })
     }
@@ -49,12 +58,3 @@ export default {
 
 }
 </script>
-
-
-
-
-
-
-
-
-

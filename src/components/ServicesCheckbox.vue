@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="form-check">
+
+    <div v-for="? in ?" class="form-check">
       <input class="form-check-input" type="checkbox" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
         Default checkbox

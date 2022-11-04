@@ -3,13 +3,13 @@
 
     <div class="container">
       <div class="row justify-content-start">
-        <div class="col col-lg-5">
-          <select class="form-select" aria-label="Default select example">
+        <div class="col col-lg-3">
+
+          <select v-model= "selectedCityId" class="form-select" aria-label="Default select example">
             <option selected disabled>--Linn--</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{city.cityName}}</option>
           </select>
+
         </div>
 
       </div>
@@ -27,6 +27,8 @@ export default {
 
   data: function () {
     return {
+      selectedCityId: 0,
+      firstName: '',
       cities:  [
         {
           cityName: '',
@@ -39,10 +41,10 @@ export default {
 
    getCitiesSelectBoxInfo: function () {
 
-     this.$http.get('https://stoplight.io/mocks/valiit/myproject/15828373/atm/city')
+     this.$http.get('/atm/city')
          .then(result => {
-           alert('Yes')
-           console.log('Yess, tuli oled!')
+           this.cities = result.data
+           console.log('CITIES: ' + JSON.stringify(this.cities))
          })
          .catch(error => {
            alert('VIGA!')

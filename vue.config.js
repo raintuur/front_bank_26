@@ -1,5 +1,5 @@
 module.exports = {
     devServer: {
-        proxy: 'http://localhost:8080'
+        proxy: 'https://stoplight.io/mocks/sandrasandra/myproject/105400027'
     }
 }

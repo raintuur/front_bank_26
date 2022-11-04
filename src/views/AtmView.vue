@@ -4,10 +4,10 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
-            <option selected disabled value="0">--Linn--</option>
-            <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
-          </select>
+
+
+          <CitiesDropdown/>
+
 
           <div class="row">
 
@@ -22,6 +22,7 @@
               <label class="form-check-label" for="flexCheckChecked">
                 Checked checkbox
               </label>
+
             </div>
 
 
@@ -38,41 +39,19 @@
 </template>
 
 <script>
+import CitiesDropdown from "@/components/CitiesDropdown";
+
 export default {
   name: 'AtmView',
-
+  components: {CitiesDropdown},
   data: function () {
     return {
-      selectedCityID: 0,
-      firstName: '',
-      cities: [
-        {
-          cityName: '',
-          cityNameId: 0
-        }
-      ]
+
     }
   },
   methods: {
-    getCitiesSelectBoxInfo: function () {
 
-      this.$http.get('/atm/city')
-          .then(result => {
-            this.cities = result.data
-            console.log('CITIES: ' + JSON.stringify(this.cities))
-          })
-          .catch(error => {
-            alert('VIGA!!!! ')
-            console.log('Oh no. Mingi viga tuli vastuseks')
-          });
-    }
-
-  },
-  beforeMount() {
-
-    this.getCitiesSelectBoxInfo()
   }
-
 }
 
 

@@ -4,12 +4,13 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <select class="form-select" aria-label="Default select example">
+          <select v-model="selectedCityID" v-on:change="refreshAtmsByCity('HELLO!')" class="form-select" aria-label="Default select example">
             <option selected disabled>--Linn--</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{city.cityName}}</option>
           </select>
+
+          {{selectedCityID}}
+
         </div>
       </div>
     </div>
@@ -24,6 +25,10 @@ export default {
 
   data: function () {
     return {
+      selectedCityID: '0',
+
+      firstName: '',
+
       cities: [
         {
           cityName: '',
@@ -34,20 +39,29 @@ export default {
   },
   methods: {
 
+    refreshAtmsByCity: function (message) {
+      alert(message)
+    },
+
     getCitiesSelectBoxInfo: function () {
 
       this.$http.get('/atm/city')
+
+          // kui tuleb 200, siis:
           .then(result => {
-            console.log('YESSSSSS, saime vastuse kätte')
+            this.cities = result.data
+            console.log('CITIES: ' + JSON.stringify(this.cities))
           })
+          // kui tuleb midagi muud kui 200, siis:
           .catch(error => {
-            alert('VIGA!!!! ')
+            alert('VIGA!!!!')
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
     }
 
   },
   beforeMount() {
+
     this.getCitiesSelectBoxInfo()
   }
 

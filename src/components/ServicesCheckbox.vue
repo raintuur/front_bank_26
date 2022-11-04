@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-for="service in atmServices" class="form-check">
-      <input v-model="" class="form-check-input" type="checkbox" value=""  id="flexCheckDefault">
+
+    <div v-for="? in ?" class="form-check">
+      <input class="form-check-input" type="checkbox" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        {{ service.serviceName }}
+        Default checkbox
       </label>
     </div>
-
 
   </div>
 </template>
@@ -23,22 +23,21 @@ export default {
         }
       ]
     }
-
   },
   methods: {
 
-    getATMSevicesCheckboxInfo: function () {
+    getAtmServicesCheckboxInfo: function () {
       this.$http.get('/atm/service')
-          .then(value => {
-            this.atmServices
+          .then(result => {
+            this.atmServices = result.data
           })
           .catch(error => {
-            alert("nooo")
-      });
+            alert("NO!!!!")
+          });
     }
   },
   beforeMount() {
-    this.getATMSevicesCheckboxInfo()
+    this.getAtmServicesCheckboxInfo()
   }
 }
 </script>

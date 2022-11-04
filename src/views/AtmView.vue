@@ -2,23 +2,16 @@
   <div>
 
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="row justify-content-start">
         <div class="col col-lg-2">
-          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
-        </div>
-        <div class="col col-lg-2">
-          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+          <select class="form-select" aria-label="Default select example">
+            <option  v-for="city in cities" :value="city.cityNameID">{{city.cityName}}</option>
+          </select>
         </div>
       </div>
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld()" type="button" class="btn btn-lg  btn-outline-info">Info
-          </button>
-        </div>
-      </div>
+
+
     </div>
-
-
   </div>
 </template>
 
@@ -28,17 +21,41 @@ export default {
 
   data: function () {
     return {
-      firstName: '',
-      lastName: ''
+      cities: [
+        {
+          cityName: '-- Vali linn --',
+          cityNameID: 0,
+        },
+        {
+          cityName: 'Haapsalu',
+          cityNameID: 1,
+        },
+        {
+          cityName: 'Kuressaare',
+          cityNameID: 2,
+        },
+      ]
     }
   },
   methods: {
-    helloWorld: function () {
-      // alert('Hello ' + firstName + ' ' + lastname)
-      alert('Hello World! ' + this.firstName + ' ' + this.lastName)
-    }
-  }
+    getCitiesSelectBoxInfo: function () {
+      this.$http.get('https://stoplight.io/mocks/liisr/esimeneprojekt/105190846/atm/city')
+          .then(result => {
+            alert("YESS")
+            // console.log('YESS, saime vastuse!')
 
+          })
+          .catch(error => {
+            console.log('Oh no! Mingi viga!')
+          });
+
+
+    }
+  },
+  beforeMount() {
+    this.getCitiesSelectBoxInfo()
+
+  }
 }
 
 

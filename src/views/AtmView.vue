@@ -5,7 +5,9 @@
       <div class="row justify-content-start">
         <div class="col col-lg-3">
 
+
           <CitiesDropdown/>
+
 
           <div class="row">
 
@@ -20,7 +22,11 @@
               <label class="form-check-label" for="flexCheckChecked">
                 Checked checkbox
               </label>
+
             </div>
+
+
+
 
           </div>
 
@@ -39,11 +45,16 @@ export default {
   name: 'AtmView',
   components: {CitiesDropdown},
   data: function () {
-    return {}
-  },
-  methods: {}
+    return {
 
+    }
+  },
+  methods: {
+
+  }
 }
+
+
 </script>
 
 

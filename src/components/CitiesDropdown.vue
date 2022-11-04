@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!--          <select v-model="selectedCityID" class="form-select" aria-label="Default select example">-->
-    <!--            <option selected disabled value="0">&#45;&#45;Linn&#45;&#45;</option>-->
-    <!--            <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>-->
-    <!--          </select>-->
+    <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
+      <option selected disabled value="0">--Linn--</option>
+      <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
+    </select>
   </div>
 </template>
 <script>

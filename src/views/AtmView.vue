@@ -3,13 +3,9 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-
           <CitiesDropdown/>
-
           <div class="row">
-
             <ServicesCheckbox/>
-
           </div>
         </div>
       </div>

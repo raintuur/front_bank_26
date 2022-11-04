@@ -7,7 +7,7 @@
 
           <CitiesDropdown/>
 
-            <ServicesCheckBox/>
+          <ServicesCheckBox/>
 
         </div>
       </div>

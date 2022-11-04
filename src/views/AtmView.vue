@@ -13,7 +13,6 @@
 
             <ServicesCheckbox/>
 
-
           </div>
 
         </div>
@@ -26,7 +25,7 @@
 
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
-import ServicesCheckbox from "@/components/customer_table/ServicesCheckbox";
+import ServicesCheckbox from "@/components/ServicesCheckbox";
 
 export default {
   name: 'AtmView',

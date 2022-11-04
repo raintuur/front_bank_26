@@ -1,15 +1,11 @@
 <template>
   <div>
-
     <div v-for="service in atmServices" class="form-check">
-      <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+      <input v-model="service.isSelected" class="form-check-input" type="checkbox" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        {{ service.serviceName }}
+        {{service.serviceName}}
       </label>
     </div>
-
-    <button v-on:click="check()">Kontrolli</button>
-
   </div>
 </template>
 <script>
@@ -27,16 +23,12 @@ export default {
     }
   },
   methods: {
-    check: function () {
-      alert('Raha sisse: ' + this.atmServices[0].isSelected + 'raha välja: ' + this.atmServices[1].isSelected)
-
-    },
-
     getAtmServicesCheckboxInfo: function () {
-      console.log("siin")
+      console.log('OLEN SIIN')
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data
+            console.log('OLEN SIIN2')
           })
           .catch(error => {
             alert("NO!!!!")

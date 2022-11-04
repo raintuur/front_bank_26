@@ -33,6 +33,7 @@ export default {
     },
 
     getAtmServicesCheckboxInfo: function () {
+      console.log("Olen siin")
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data

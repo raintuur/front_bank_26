@@ -10,9 +10,8 @@
 
 
           <div class="row">
+
             <ServicesCheckbox/>
-
-
 
           </div>
 
@@ -32,13 +31,9 @@ export default {
   name: 'AtmView',
   components: {ServicesCheckbox, CitiesDropdown},
   data: function () {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-
-  }
+  methods: {}
 }
 
 

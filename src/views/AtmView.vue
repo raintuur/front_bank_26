@@ -4,10 +4,9 @@
       <div class="row justify-content-start">
         <div class="col col-lg-3">
           <select v-model="selectedCityId"  class="form-select" aria-label="--Linn--">
-            <option disabled selected>--Linn--</option>
+            <option disabled selected value="0">--Linn--</option>
             <option v-for="city in cities" :value="city.cityNameId" >{{city.cityName}}</option>
           </select>
-          {{selectedCityId}}
         </div>
       </div>
     </div>

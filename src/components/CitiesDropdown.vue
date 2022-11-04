@@ -27,7 +27,6 @@ export default {
       this.$http.get('/atm/city')
           .then(result => {
             this.cities = result.data
-            console.log('CITIES: ' + JSON.stringify(this.cities))
           })
           .catch(error => {
             alert('VIGA!')

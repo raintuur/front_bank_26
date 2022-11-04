@@ -5,11 +5,11 @@
   </table>
 </template>
 <script>
-import CustomersTableBody from "@/components/customer_table/CustomersTableBody";
 import CustomersTableHead from "@/components/customer_table/CustomersTableHead";
+import CustomersTableBody from "@/components/customer_table/CustomersTableBody";
 
 export default {
   name: 'CustomersTable',
-  components: {CustomersTableHead, CustomersTableBody}
+  components: {CustomersTableBody, CustomersTableHead}
 }
 </script>

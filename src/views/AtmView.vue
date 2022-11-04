@@ -5,6 +5,7 @@
       <div class="row justify-content-start">
         <div class="col col-lg-3">
 
+
           <CitiesDropdown/>
 
 
@@ -12,8 +13,8 @@
 
             <ServicesCheckbox/>
 
-
           </div>
+
         </div>
       </div>
     </div>
@@ -35,4 +36,14 @@ export default {
   methods: {}
 }
 
+
 </script>
+
+
+
+
+
+
+
+
+

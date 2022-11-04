@@ -6,13 +6,15 @@
         <div class="col col-lg-3">
 
           <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
-            <option  selected disabled>--Linn--</option>
-            <option   v-for="city in cities" :value="city.cityNameID">{{city.cityName}}</option>
+            <option selected disabled>--Linn--</option>
+            <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
           </select>
-          {{selectedCityID}}
+
+
         </div>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -23,41 +25,38 @@ export default {
 
   data: function () {
     return {
-      selectedCityID:0,
+      selectedCityID: 0,
       firstName: '',
       cities: [
         {
           cityName: '',
-          cityNameID: 0,
+          cityNameId: 0
         }
       ]
     }
   },
   methods: {
-    refreshATMsByCity: function (message) {
-      alert(message)
-    },
     getCitiesSelectBoxInfo: function () {
+
       this.$http.get('/atm/city')
           .then(result => {
             this.cities = result.data
-            alert("YESS")
             console.log('CITIES: ' + JSON.stringify(this.cities))
-
           })
           .catch(error => {
-            alert("Viga!")
-            console.log('Oh no! Mingi viga!')
+            alert('VIGA!!!! ')
+            console.log('Oh no. Mingi viga tuli vastuseks')
           });
-
-
     }
+
   },
   beforeMount() {
     this.getCitiesSelectBoxInfo()
-
   }
+
 }
+
+
 </script>
 
 

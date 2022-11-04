@@ -1,20 +1,22 @@
 <template>
-
   <div>
+
     <div class="container">
       <div class="row justify-content-start">
-        <div class="col col-sm-4">
+        <div class="col col-lg-3">
 
           <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
             <option selected disabled>--Linn--</option>
             <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
           </select>
 
+
         </div>
       </div>
     </div>
-  </div>
 
+
+  </div>
 </template>
 
 <script>
@@ -24,37 +26,44 @@ export default {
   data: function () {
     return {
       selectedCityID: 0,
-
       firstName: '',
-
       cities: [
         {
           cityName: '',
-          cityNameId: 0,
+          cityNameId: 0
         }
       ]
     }
   },
-
   methods: {
-
-
     getCitiesSelectBoxInfo: function () {
-      this.$http.get('/atm/city')  //urli esimene osa vue.config.js failis
-          .then(result => {  //siia tullakse siis, kui serverist tuleb vastus 200
-            //alert("Korras")
+
+      this.$http.get('/atm/city')
+          .then(result => {
             this.cities = result.data
-            //console.log(JSON.stringify(this.cities))
+            console.log('CITIES: ' + JSON.stringify(this.cities))
           })
-          .catch(error => {  //siia tullakse siis, kui serverist tuleb muu vastus kui 200
-            //alert("Error")
-            console.log("Mingi viga")
-          })
+          .catch(error => {
+            alert('VIGA!!!! ')
+            console.log('Oh no. Mingi viga tuli vastuseks')
+          });
     }
+
   },
   beforeMount() {
-    this.getCitiesSelectBoxInfo();
+    this.getCitiesSelectBoxInfo()
   }
 
 }
+
+
 </script>
+
+
+
+
+
+
+
+
+

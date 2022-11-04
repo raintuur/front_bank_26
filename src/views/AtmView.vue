@@ -8,26 +8,8 @@
 
           <div class="row">
 
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Default checkbox
-              </label>
-            </div>
+            <ServicesCheckbox/>
 
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-              <label class="form-check-label" for="flexCheckChecked">
-                Checked checkbox
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-              <label class="form-check-label" for="flexCheckChecked">
-                Checked checkbox
-              </label>
-            </div>
           </div>
         </div>
       </div>
@@ -37,41 +19,15 @@
 
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
+import ServicesCheckbox from "@/components/ServicesCheckbox";
 
 export default {
   name: 'AtmView',
-  components: {CitiesDropdown},
+  components: {ServicesCheckbox, CitiesDropdown},
   data: function () {
-    return {
-      selectedCityId: 0,
-      firstName: '',
-      cities: [
-        {
-          cityName: '',
-          cityNameId: 0
-        }
-      ]
+    return {}
+    methods: {
     }
-  },
-  methods: {
-
-    getCitiesSelectBoxInfo: function () {
-      this.$http.get('/atm/city')
-          .then(result => {
-            this.cities = result.data
-
-            alert('YEEEE')
-            console.log('CITIES: ' + JSON.stringify(this.cities))
-          })
-          .catch(error => {
-            alert('viga')
-            console.log('Oh no, mingi viga tuli vastuseks')
-          });
-    }
-  },
-  beforeMount() {
-
-    this.getCitiesSelectBoxInfo()
   }
 }
 

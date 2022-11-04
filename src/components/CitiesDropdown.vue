@@ -2,7 +2,7 @@
   <div>
     <select v-model="selectedCityId" class="form-select" aria-label="Default select example">
       <option selected disabled value="0">--Linn--</option>
-      <option v-for="city in cities" :value="city.cityNameId">{{ city.cityName }}</option>
+      <option v-for="city in cities" :key="city.cityNameId" :value="city.cityNameId">{{ city.cityName }}</option>
     </select>
   </div>
 </template>
@@ -21,5 +21,25 @@ export default {
       ]
     }
   },
+  methods: {
+
+    getCitiesSelectBoxInfo: function () {
+      this.$http.get('/atm/city')
+          .then(result => {
+            this.cities = result.data
+
+            alert('YEEEE')
+            console.log('CITIES: ' + JSON.stringify(this.cities))
+          })
+          .catch(error => {
+            alert('viga')
+            console.log('Oh no, mingi viga tuli vastuseks')
+          });
+    }
+  },
+  beforeMount() {
+
+    this.getCitiesSelectBoxInfo()
+  }
 }
 </script>

@@ -10,8 +10,8 @@
 
 
           <div class="row">
-            <ServiceCities/>
 
+            <ServicesCheckbox/>
 
           </div>
 
@@ -25,11 +25,11 @@
 
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
-import ServiceCities from "@/components/ServiceCities";
+import ServicesCheckbox from "@/components/ServicesCheckbox";
 
 export default {
   name: 'AtmView',
-  components: {ServiceCities, CitiesDropdown},
+  components: {ServicesCheckbox, CitiesDropdown},
   data: function () {
     return {}
   },

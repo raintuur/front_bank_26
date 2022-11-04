@@ -3,7 +3,8 @@
 
     <div class="container">
       <div class="row justify-content-start">
-        <div class="col col-lg-2">
+        <div class="col col-lg-3">
+
           <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
             <option  selected disabled>--Linn--</option>
             <option   v-for="city in cities" :value="city.cityNameID">{{city.cityName}}</option>
@@ -11,9 +12,8 @@
           {{selectedCityID}}
         </div>
       </div>
-
-
     </div>
+
   </div>
 </template>
 

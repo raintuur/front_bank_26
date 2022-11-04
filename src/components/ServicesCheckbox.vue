@@ -26,11 +26,11 @@ export default {
     }
   },
   methods: {
-    // check: function () {
-    //   alert('raha sisse ' + this.atmServices[0].isSelected +
-    //       ' \nraha välja ' + this.atmServices[1].isSelected +
-    //       ' \nmaksed ' + this.atmServices[2].isSelected)
-    // },
+    check: function () {
+      alert('raha sisse ' + this.atmServices[0].isSelected +
+          ' \nraha välja ' + this.atmServices[1].isSelected +
+          ' \nmaksed ' + this.atmServices[2].isSelected)
+    },
 
     getAtmServicesCheckboxInfo: function () {
       console.log('olen siin')

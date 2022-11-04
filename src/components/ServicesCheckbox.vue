@@ -28,11 +28,9 @@ export default {
   },
   methods: {
 
-    check: function () {
-      alert('raha sisse: ' + this.atmServices[0].isSelected + ' raha välja: ' + this.atmServices[1].isSelected)
-    },
 
     getAtmServicesCheckboxInfo: function () {
+      console.log('olen siin')
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data

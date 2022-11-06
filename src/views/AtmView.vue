@@ -9,6 +9,10 @@
 
           <ServicesCheckBox/>
 
+<!--          tabel     -->
+
+
+
         </div>
       </div>
     </div>

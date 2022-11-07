@@ -5,17 +5,13 @@
       <div class="row justify-content-start">
         <div class="col col-lg-3">
           <CitiesDropdown/>
-          
           <div class="row">
-
             <ServicesCheckbox/>
-
           </div>
         </div>
 
-        <div class="col col-9">
+        <div class="col col-lg-9" >
           <AtmLocationsTable :atm-locations="atmLocations"/>
-
         </div>
 
       </div>
@@ -37,7 +33,7 @@ export default {
     return {
       atmLocations: [
         {
-          cityName:'',
+          cityName: '',
           atmLocationInfo: '',
           atmServices: [
             {
@@ -45,8 +41,8 @@ export default {
             }
           ]
         }
-      ]
-      ,
+      ],
+
 
     }
   },
@@ -56,14 +52,14 @@ export default {
       this.$http.get("/atm/info")
           .then(response => {
 
-            this.atmLocation=response.data
-
+            this.atmLocations = response.data
             console.log(response.data)
           })
           .catch(error => {
             console.log(error)
           })
     },
+
   },
   beforeMount() {
     this.getAllAtmLocations()

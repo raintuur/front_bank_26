@@ -47,12 +47,20 @@ export default {
       this.$http.get("/atm/info")
           .then(response => {
             this.atmLocations = response.data
-            console.log(response.data)
+            this.addSequenceNumbers()
+            // console.log(response.data)
           })
           .catch(error => {
             console.log(error)
           })
     },
+    addSequenceNumbers: function (){
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      } )
+    }
   },
   beforeMount() {
     this.getAllAtmLocations()

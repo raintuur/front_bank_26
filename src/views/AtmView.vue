@@ -4,15 +4,16 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <CitiesDropdown/>
-          <div class="row">
-            <ServicesCheckbox/>
-          </div>
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
         </div>
         <div class="col col-lg-9">
           <AtmLocationsTable :atm-locations="atmLocations"/>
         </div>
       </div>
+      <div class="row row-cols-lg-3">
+        <ServicesCheckbox/>
+      </div>
+
     </div>
 
 
@@ -47,15 +48,42 @@ export default {
       this.$http.get("/atm/info")
           .then(response => {
             this.atmLocations = response.data
-            console.log(response.data)
+            this.addSequenceNumbers();
+
           })
           .catch(error => {
             console.log(error)
           })
     },
+
+    getAtmLocationsById: function (selectedCityId) {
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: 15
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+        this.addSequenceNumbers();
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    
+    
+    addSequenceNumbers: function(){
+      let counter =1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      });
+
+    }
   },
   beforeMount() {
     this.getAllAtmLocations()
+    this.getAllLocationsById()
   }
 }
 

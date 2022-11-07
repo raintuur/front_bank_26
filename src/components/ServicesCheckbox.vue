@@ -7,9 +7,6 @@
         {{ service.serviceName }}
       </label>
     </div>
-
-    <button v-on:click="check()"> Kontrolli</button>
-
   </div>
 </template>
 <script>

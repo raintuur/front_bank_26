@@ -10,13 +10,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="atmLocation in atmLocations">
-      <th scope="row">1</th>
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.atmLocationInfo">
+      <th scope="row">{{atmLocation.sequenceNumber}}</th>
       <td>{{ atmLocation.cityName}}</td>
-      <td>Otto</td>
+      <td>{{atmLocation.atmLocationInfo}}</td>
       <td>
-        <div class="row">
-          ???
+        <div v-for="service in atmLocation.atmServices" class="row">
+          {{service.serviceName}}
         </div>
       </td>
       <td>
@@ -24,9 +24,7 @@
       </td>
     </tr>
     </tbody>
-    <!-- todo: seda elementi hakkame for loopima objektist atmLocations'   -->
-    <!-- todo: eesmärk on saada see info propsist
-    ('atmLocations' objekt tuleb componenti kaasa anda)-->
+
     <!-- todo: tekitame ise järjekorra numbrid   -->
   </table>
 </template>
@@ -35,10 +33,7 @@
 export default {
   name: 'AtmLocationsTable',
   props: {
-    atmLocations: []
-  },
-  beforeMount() {
-    alert(JSON.stringify(this.atmLocations))
+    atmLocations: Array ()
   }
 }
 </script>

@@ -6,27 +6,28 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th scope="col">nupp</th>
+      <th scope="col">Nupp</th>
     </tr>
     </thead>
     <tbody>
-
-    <!-- todo: tekitame ise järjekorra numbrid -->
-    <tr v-for="atmLocation in atmLocations">
-      <th scope="row">?</th>
-      <td>{{atmLocation.atmL}}</td>
-      <td>Otto</td>
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.atmLocationInfo">
+      <th scope="row">{{ atmLocation.sequenceNumber }}</th>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.atmLocationInfo }}</td>
       <td>
-        <div class=" row">
-          ?????
+        <div v-for="service in atmLocation.atmServices" class="row">
+          {{ service.serviceName }}
         </div>
       </td>
       <td>
         <button type="button" class="btn btn-light">Alert</button>
       </td>
-
     </tr>
     </tbody>
+    <!-- todo: seda elementi hakkame for loopima objektist atmLocations'   -->
+    <!-- todo: eesmärk on saada see info propsist
+    ('atmLocations' objekt tuleb componenti kaasa anda)-->
+    <!-- todo: tekitame ise järjekorra numbrid   -->
   </table>
 </template>
 
@@ -36,10 +37,14 @@ export default {
   props: {
     atmLocations: Array()
   },
-  beforeMount() {
+  mounted() {
 
-    alert(JSON.stringify(this.atmLocations))
+
+    let counter = 1
+    this.atmLocations.forEach(location => {
+      location.sequenceNumber = counter
+      counter++
+    })
   }
 }
 </script>
-

@@ -41,15 +41,12 @@ export default {
     }
   },
   beforeMount() {
-    // this.customers.forEach(value => )
-    // for (let i = 0; i < this.customers.length; i++) {
-    //   this.customers[i].sequenceNumber = i + 1;
-    // }
+
     let counter = 1
 
-    //console.log('olen SIIN')
+
     this.customers.forEach(customer => {
-      //console.log('customer: ' + JSON.stringify(customer))
+
       customer.sequenceNumber = counter++
     })
 

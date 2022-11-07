@@ -28,10 +28,10 @@ export default {
       this.$http.get('/atm/service')
           .then(result => {
             this.atmServices = result.data
-            console.log('OLEN SIIN2')
+
           })
           .catch(error => {
-            alert("NO!!!!")
+
           });
     }
   },

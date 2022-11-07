@@ -1,23 +1,19 @@
 <template>
-  <div>
 
+  <div>
     <div class="container">
       <div class="row justify-content-start">
-        <div class="col col-lg-3">
+        <div class="col col-lg-5">
           <CitiesDropdown/>
-          <div class="row">
+          <div class="row mt-5">
             <ServicesCheckbox/>
           </div>
         </div>
-
-        <div class="col col-lg-9" >
+        <div class="col col-lg-7" >
           <AtmLocationsTable :atm-locations="atmLocations"/>
         </div>
-
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -42,8 +38,6 @@ export default {
           ]
         }
       ],
-
-
     }
   },
   methods: {
@@ -54,19 +48,24 @@ export default {
 
             this.atmLocations = response.data
             console.log(response.data)
+            this.addSequenceNumbers();
           })
           .catch(error => {
             console.log(error)
           })
     },
-
+    addSequenceNumbers: function () {
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      });
+    }
   },
   beforeMount() {
     this.getAllAtmLocations()
   }
 }
-
-
 </script>
 
 

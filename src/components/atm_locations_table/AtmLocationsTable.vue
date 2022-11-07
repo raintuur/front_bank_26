@@ -1,5 +1,6 @@
 <template>
   <table class="table table-dark table-hover">
+
     <thead>
     <tr>
       <th scope="col">#</th>
@@ -9,24 +10,23 @@
       <th scope="col">nupp</th>
     </tr>
     </thead>
-    <tbody>
 
-    <!-- todo: tekitame ise järjekorra numbrid -->
-    <tr v-for="atmLocation in atmLocations">
-      <th scope="row">?</th>
-      <td>{{atmLocation.atmL}}</td>
-      <td>Otto</td>
+    <tbody>
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.atmLocationInfo">
+      <th scope="row">{{ atmLocation.sequenceNumber }}</th>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.atmLocationInfo }}</td>
       <td>
-        <div class=" row">
-          ?????
+        <div v-for="service in atmLocation.atmServices" class="row">
+          {{ service.serviceName }}
         </div>
       </td>
       <td>
-        <button type="button" class="btn btn-light">Alert</button>
+        <button type="button" class="btn btn-outline-light">Nupp</button>
       </td>
-
     </tr>
     </tbody>
+
   </table>
 </template>
 
@@ -36,10 +36,6 @@ export default {
   props: {
     atmLocations: Array()
   },
-  beforeMount() {
-
-    alert(JSON.stringify(this.atmLocations))
-  }
 }
 </script>
 

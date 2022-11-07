@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="selectedCityId" v-on:change="refreshAtmsByCity('Hello')" class="form-select"
+    <select v-on:change="clickSelectCityEvent()" v-model="selectedCityId" class="form-select"
             aria-label="Default select example">
       <option value="0" selected disabled>--Linn--</option>
       <option v-for="city in cities" :key="city.cityNameId" :value="city.cityNameId">{{ city.cityName }}</option>
@@ -23,9 +23,6 @@ export default {
     }
   },
   methods: {
-    refreshAtmsByCity: function (message) {
-      console.log(message)
-    },
     getCitiesSelectBoxInfo: function () {
       this.$http.get('/atm/city')
           .then(result => {
@@ -34,6 +31,9 @@ export default {
           .catch(error => {
             console.log('You screwed up :(')
           });
+    },
+    clickSelectCityEvent: function () {
+      this.$emit('clickSelectCityEvent', this.selectedCityId)
     }
   },
   beforeMount() {

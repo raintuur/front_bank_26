@@ -12,7 +12,7 @@
 
     <tbody>
     <tr v-for="atmLocation in atmLocations">
-      <th scope="row">{{atmLocation.sequenceNumber}}</th>
+      <th scope="row">{{ atmLocation.sequenceNumber }}</th>
       <td>{{ atmLocation.cityName }}</td>
       <td>{{ atmLocation.atmLocationInfo }}</td>
       <td>
@@ -21,7 +21,9 @@
         </div>
       </td>
       <td>
-        <button type="button" class="btn btn-light">Alert button</button>
+        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button"
+                class="btn btn-light">Alert button
+        </button>
       </td>
     </tr>
     </tbody>
@@ -34,6 +36,11 @@ export default {
   name: "AtmLocationsTable",
   props: {
     atmLocations: Array()
+  },
+  methods: {
+    clickAlertButtonEvent: function (locationName) {
+      this.$emit('clickAlertButtonEvent', locationName)
+    },
   }
 }
 </script>

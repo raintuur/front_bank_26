@@ -3,14 +3,14 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <CitiesDropdown/>
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
             <ServicesCheckbox/>
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" />
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"/>
         </div>
 
 
@@ -43,7 +43,6 @@ export default {
         }
       ],
     }
-
   },
   methods: {
     getAllAtmLocations: function () {
@@ -57,26 +56,34 @@ export default {
             console.log(error)
           })
     },
+    clickAlertButtonEvent: function (locationName) {
+      alert(locationName + ' alert from parent')
+    },
     addSequenceNumbers: function () {
-      let  counter = 1
+      let counter = 1
       this.atmLocations.forEach(location => {
         location.sequenceNumber = counter
         counter++
       })
-    },
-
-    getAtmLocationsById: function () {
+    }
+    ,
+    getAtmLocationsById: function (selectedCityId) {
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityId: 15
+              cityId: selectedCityId
             }
           }
       ).then(response => {
+        this.atmLocations = response.data
+        this.addSequenceNumbers()
         console.log(response.data)
       }).catch(error => {
         console.log(error)
       })
-    },
+    }
+    ,
+
+
   },
   beforeMount() {
     this.getAllAtmLocations()

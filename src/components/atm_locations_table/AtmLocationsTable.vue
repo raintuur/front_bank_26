@@ -20,7 +20,7 @@
         </div>
       </td>
       <td>
-        <button type="button" class="btn btn-light">Alert</button>
+        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">Alert</button>
       </td>
     </tr>
     </tbody>
@@ -34,6 +34,12 @@ export default {
   name: 'AtmLocationsTable',
   props: {
     atmLocations: Array ()
+  },
+
+  methods: {
+    clickAlertButtonEvent: function (locationName) {
+      this.$emit('clickAlertButtonEvent', locationName)
+    }
   }
 }
 </script>

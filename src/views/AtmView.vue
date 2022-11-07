@@ -7,7 +7,7 @@
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
         </div>
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations"/>
+          <AtmLocationsTable :atm-locations="atmLocations"@clickAlertButtonEvent="alertLocationName"/>
         </div>
       </div>
       <div class="row row-cols-lg-3">
@@ -44,6 +44,12 @@ export default {
     }
   },
   methods: {
+
+    alertLocationName: function (locationName) {
+      alert(locationName + ' alert from parent')
+
+    },
+
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
@@ -59,7 +65,7 @@ export default {
     getAtmLocationsById: function (selectedCityId) {
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityId: 15
+              cityId: selectedCityId
             }
           }
       ).then(response => {

@@ -4,14 +4,14 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <CitiesDropdown/>
+          <CitiesDropdown @clickSelectCityEvent = "getAtmLocationsById" />
           <div class="row">
             <ServicesCheckbox/>
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" />
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent = "clickAlertButtonEvent"/>
         </div>
 
       </div>
@@ -44,6 +44,10 @@ export default {
   },
   methods: {
 
+    clickAlertButtonEvent: function (locationName) {
+      alert(locationName + 'alert from parent')
+    },
+
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
@@ -57,13 +61,16 @@ export default {
           })
     },
 
-    getAtmLocationsById: function () {
+    getAtmLocationsById: function (selectedCityId) {
+      alert("Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi")
+
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityId: 15
+              cityId: selectedCityId
             }
           }
       ).then(response => {
+        this.atmLocations = response.data
         console.log(response.data)
       }).catch(error => {
         console.log(error)
@@ -81,7 +88,6 @@ export default {
   },
   beforeMount() {
     this.getAllAtmLocations()
-    this.getAtmLocationsById()
   }
 }
 

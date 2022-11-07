@@ -11,7 +11,10 @@
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations"/>
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
+
+
+          />
         </div>
 
       </div>
@@ -47,6 +50,13 @@ export default {
     }
   },
   methods: {
+
+    clickAlertButtonEvent: function (locationName) {
+      alert (locationName + ' alert from parent')
+
+
+
+    },
 
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")

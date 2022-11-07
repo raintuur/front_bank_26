@@ -10,6 +10,10 @@
           </div>
         </div>
 
+        <div class="col col-lg-9" >
+          <AtmLocationsTable :atm-locations="atmLocations"/>
+        </div>
+
       </div>
     </div>
 
@@ -20,10 +24,11 @@
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
 import ServicesCheckbox from "@/components/ServicesCheckbox";
+import AtmLocationsTable from "@/components/atm_locations_table/AtmLocationsTable";
 
 export default {
   name: 'AtmView',
-  components: {ServicesCheckbox, CitiesDropdown},
+  components: {ServicesCheckbox, CitiesDropdown, AtmLocationsTable},
   data: function () {
     return {
       atmLocations: [
@@ -46,18 +51,41 @@ export default {
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
-
             this.atmLocations = response.data
-            console.log(response.data)
+            this.addSequenceNumbers();
+
           })
           .catch(error => {
             console.log(error)
           })
     },
 
+    getAtmLocationsById: function () {
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: 15
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
+    addSequenceNumbers: function () {
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      });
+    }
+
   },
   beforeMount() {
     this.getAllAtmLocations()
+    this.getAtmLocationsById()
   }
 }
 

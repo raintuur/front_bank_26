@@ -10,7 +10,7 @@
           </div>
         </div>
 
-        <div class="col col-lg-9" >
+        <div class="col col-lg-9">
           <AtmLocationsTable :atm-locations="atmLocations"/>
         </div>
 
@@ -59,6 +59,12 @@ export default {
             console.log(error)
           })
     },
+    addSequenceNumber: function () {
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter++
+      })
+    }
 
   },
   beforeMount() {

@@ -35,7 +35,7 @@ export default {
     },
 
     clickSelectCityEvent: function () {
-      this.$emit('clickSelectCityEvent', this.selectedCityID)
+        this.$emit('clickSelectCityEvent', this.selectedCityID)
     }
 
   },

@@ -32,6 +32,10 @@ export default {
             alert('VIGA!!!! ')
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
+    },
+
+    clickSelectCityEvent: function () {
+      this.$emit('clickSelectCityEvent')
     }
 
     clickSelectCityEvent: function () {

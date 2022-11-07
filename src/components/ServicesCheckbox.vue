@@ -33,7 +33,7 @@ export default {
           )
           .catch(error => {
             alert('Services Checkboxi viga')
-            console.log('you screwed it up')
+            console.log(error)
           })
     }
   },

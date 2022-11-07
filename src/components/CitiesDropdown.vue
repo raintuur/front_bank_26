@@ -38,10 +38,6 @@ export default {
       this.$emit('clickSelectCityEvent')
     }
 
-    clickSelectCityEvent: function () {
-      this.$emit('clickSelectcityEvent')
-    }
-
   },
   beforeMount() {
     this.getCitiesSelectBoxInfo()

@@ -10,7 +10,7 @@
           </div>
         </div>
 
-        <div class="col col-lg-9">
+        <div class="col col-lg-9" >
           <AtmLocationsTable :atm-locations="atmLocations"/>
         </div>
 
@@ -51,19 +51,20 @@ export default {
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
-
             this.atmLocations = response.data
-            console.log(response.data)
+            this.addSequenceNumbers();
+
           })
           .catch(error => {
             console.log(error)
           })
     },
-    addSequenceNumber: function () {
+    addSequenceNumbers: function () {
       let counter = 1
       this.atmLocations.forEach(location => {
-        location.sequenceNumber = counter++
-      })
+        location.sequenceNumber = counter
+        counter++
+      });
     }
 
   },

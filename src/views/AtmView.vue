@@ -60,7 +60,7 @@ export default {
           })
     },
 
-    getAtmLocationById: function () {
+    getAtmLocationsById: function () {
       this.$http.get("/atm/info/by-city", {
             params: {
               cityId: 15
@@ -74,8 +74,6 @@ export default {
     },
 
 
-
-
     addSequenceNumbers: function () {
       let counter = 1
       this.atmLocations.forEach(location => {
@@ -87,7 +85,7 @@ export default {
   },
   beforeMount() {
     this.getAllAtmLocations()
-    this.getAtmLocationById()
+    this.getAtmLocationsById()
   }
 }
 

@@ -10,6 +10,10 @@
           </div>
         </div>
 
+        <div class="col col-lg-9" >
+          <AtmLocationsTable :atm-locations="atmLocations"/>
+        </div>
+
       </div>
     </div>
 
@@ -20,10 +24,11 @@
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
 import ServicesCheckbox from "@/components/ServicesCheckbox";
+import AtmLocationsTable from "@/components/atm_locations_table/AtmLocationsTable";
 
 export default {
   name: 'AtmView',
-  components: {ServicesCheckbox, CitiesDropdown},
+  components: {ServicesCheckbox, CitiesDropdown, AtmLocationsTable},
   data: function () {
     return {
       atmLocations: [

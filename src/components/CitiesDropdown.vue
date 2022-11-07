@@ -33,10 +33,10 @@ export default {
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
     },
-    clickSelectCityEvent: function (){
+
+    clickSelectCityEvent: function () {
         this.$emit('clickSelectCityEvent', this.selectedCityID)
     }
-
 
   },
   beforeMount() {

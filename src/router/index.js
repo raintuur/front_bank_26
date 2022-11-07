@@ -23,6 +23,11 @@ const routes = [
    name: 'customerRoute',
    component: CustomersView
   },
+{
+   path: '/car',
+   name: 'carRoute',
+   component: CarsView
+  },
   {
     path: '/atm',
     name: 'atmRoute',

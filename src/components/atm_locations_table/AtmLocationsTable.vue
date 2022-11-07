@@ -6,28 +6,23 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th scope="col">Nupp</th>
+      <th scope="col">nupp</th>
     </tr>
     </thead>
     <tbody>
 
-    <!-- todo: seda elementi hakkame for loopima objektist 'atmLocations' -->
-    <!-- todo: eesmärk on saada see info propsist
-    ('atmLocations' objekt tuleb componenti kaasa anda) -->
     <!-- todo: tekitame ise järjekorra numbrid -->
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.atmLocationInfo">
-      <th scope="row">{{ atmLocation.sequenceNumber }}</th>
+      <th scope="row">{{atmLocation.sequenceNumber}}</th>
       <td>{{ atmLocation.cityName }}</td>
       <td>{{ atmLocation.atmLocationInfo }}</td>
       <td>
         <div v-for="service in atmLocation.atmServices" class="row">
-          {{ service.serviceName }}
+          {{service.serviceName}}
         </div>
       </td>
       <td>
-        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">
-          Alert
-        </button>
+        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">Alert</button>
       </td>
 
     </tr>
@@ -43,8 +38,9 @@ export default {
   },
   methods: {
     clickAlertButtonEvent: function (locationName) {
-      this.$emit('clickAlertButtonEvent', 'locationName')
+      this.$emit('clickAlertButtonEvent', locationName)
     }
   }
 }
 </script>
+

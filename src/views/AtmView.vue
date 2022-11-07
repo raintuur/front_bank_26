@@ -1,22 +1,25 @@
 <template>
   <div>
+
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
-
           <div class="row">
             <ServicesCheckbox/>
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"/>
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
+
+          />
         </div>
 
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -42,6 +45,7 @@ export default {
         }
       ],
 
+
     }
   },
   methods: {
@@ -54,7 +58,8 @@ export default {
       this.$http.get("/atm/info")
           .then(response => {
             this.atmLocations = response.data
-            this.addSequenceNumbers()
+            this.addSequenceNumbers();
+
           })
           .catch(error => {
             console.log(error)
@@ -62,16 +67,18 @@ export default {
     },
 
     getAtmLocationsById: function (selectedCityId) {
-      alert('Click event juhtus, saime parentis sonumi ja kaivitasime selle meetodi cityId = ' + JSON.stringify(selectedCityId))
+      alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
 
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityId: selectedCityId,
+              cityId: selectedCityId
             }
           }
       ).then(response => {
         this.atmLocations = response.data
         this.addSequenceNumbers()
+
+
         console.log(response.data)
       }).catch(error => {
         console.log(error)
@@ -86,39 +93,21 @@ export default {
         counter++
       });
     }
+
   },
   beforeMount() {
     this.getAllAtmLocations()
   }
 }
 
+
 </script>
 
 
-<!--      <div class="container">-->
-<!--      <div class="row justify-content-center">-->
-<!--        <div class="col col-lg-2">-->
-<!--          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">-->
-<!--        </div>-->
-<!--        <div class="col col-lg-2">-->
-<!--          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="row justify-content-md-center">-->
-<!--        <div class="col col-lg-2 m-2">-->
-<!--          <button v-on:click="helloWorld('nipi','tiri')" type="button" class="btn btn-lg  btn-outline-info">Info</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
 
 
-<!-- methods: {-->
-<!--   helloWorld: function (firstName, lastName) {-->
-<!--     alert('Hello World! ' + this.firstName + ' ' + this.lastName)-->
-<!--   }-->
-<!-- }-->
 
-<!--     firstName: '',-->
-<!--     lastName: ''-->
-<!--   }-->
-<!-- },-->
+
+
+
+

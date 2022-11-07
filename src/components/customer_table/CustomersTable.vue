@@ -1,15 +1,15 @@
 <template>
   <table class="table table-dark table-hover">
-    <CustomerTableHead/>
-    <CustomerTableBody/>
+    <CustomersTableHead/>
+    <CustomersTableBody/>
   </table>
 </template>
 <script>
-import CustomerTableBody from "@/components/customer_table/CustomerTableBody";
-import CustomerTableHead from "@/components/customer_table/CustomerTableHead";
+import CustomersTableHead from "@/components/customer_table/CustomersTableHead";
+import CustomersTableBody from "@/components/customer_table/CustomersTableBody";
 
 export default {
   name: 'CustomersTable',
-  components: {CustomerTableHead, CustomerTableBody}
+  components: {CustomersTableBody, CustomersTableHead}
 }
 </script>

@@ -14,9 +14,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/cars',
-    name: 'carsRoute',
-    component: CarsView
+   path: '/car',
+   name: 'carRoute',
+   component: CarsView
   },
   {
    path: '/customer',

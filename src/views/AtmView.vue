@@ -9,9 +9,11 @@
             <ServicesCheckbox/>
           </div>
         </div>
-        <div class="col col-lg-9">
+
+        <div class="col col-lg-9" >
           <AtmLocationsTable :atm-locations="atmLocations"/>
         </div>
+
       </div>
     </div>
 
@@ -40,12 +42,16 @@ export default {
           ]
         }
       ],
+
+
     }
   },
   methods: {
+
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
+
             this.atmLocations = response.data
             console.log(response.data)
           })
@@ -53,6 +59,7 @@ export default {
             console.log(error)
           })
     },
+
   },
   beforeMount() {
     this.getAllAtmLocations()

@@ -33,7 +33,6 @@ export default {
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
     }
-
   },
   beforeMount() {
     this.getCitiesSelectBoxInfo()

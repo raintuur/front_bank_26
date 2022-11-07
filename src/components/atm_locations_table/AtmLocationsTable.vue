@@ -2,28 +2,29 @@
   <table class="table table-dark table-hover">
     <thead>
     <tr>
-      <th scope="col"></th>
+      <th scope="col">#</th>
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th scope="col">Nupp</th>
+      <th scope="col">nupp</th>
     </tr>
     </thead>
     <tbody>
 
-    <!-- todo: tekitame ise järjekorra numbrid-->
+    <!-- todo: tekitame ise järjekorra numbrid -->
     <tr v-for="atmLocation in atmLocations">
-      <th scope="row">1</th>
-      <td>{{atmLocation.cityName}}</td>
+      <th scope="row">?</th>
+      <td>{{atmLocation.atmL}}</td>
       <td>Otto</td>
       <td>
-        <div class="row">
-          ??
+        <div class=" row">
+          ?????
         </div>
       </td>
       <td>
-        <button type="button" class="btn btn-outline-light">Light</button>
+        <button type="button" class="btn btn-light">Alert</button>
       </td>
+
     </tr>
     </tbody>
   </table>
@@ -31,11 +32,14 @@
 
 <script>
 export default {
-  name: "AtmLocationsTable",
+  name: 'AtmLocationsTable',
   props: {
-    atmLocations: {},
+    atmLocations: Array()
   },
   beforeMount() {
+
+    alert(JSON.stringify(this.atmLocations))
   }
 }
 </script>
+

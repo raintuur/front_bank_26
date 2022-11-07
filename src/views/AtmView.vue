@@ -8,7 +8,15 @@
             <ServicesCheckbox/>
           </div>
         </div>
+
+        <div class="col col-lg-9">
+          <AtmLocationsTable :atm-locations="atmLocations" />
+        </div>
+
+
       </div>
+
+
     </div>
   </div>
 </template>
@@ -16,14 +24,64 @@
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
 import ServicesCheckbox from "@/components/ServicesCheckbox";
+import AtmLocationsTable from "@/components/atm_loactions_table/AtmLocationsTable";
 
 export default {
   name: 'AtmView',
-  components: {ServicesCheckbox, CitiesDropdown},
+  components: {ServicesCheckbox, CitiesDropdown, AtmLocationsTable},
   data: function () {
+    return {
+      atmLocations: [
+        {
+          cityName: '',
+          atmLocationInfo: '',
+          atmServices: [
+            {
+              serviceName: ''
+            }
+          ]
+        }
+      ],
+    }
 
   },
-  methods: {}
+  methods: {
+    getAllAtmLocations: function () {
+      this.$http.get("/atm/info")
+          .then(response => {
+            this.atmLocations = response.data
+            this.addSequenceNumbers();
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+    addSequenceNumbers: function () {
+      let  counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      })
+    },
+
+    getAtmLocationsById: function () {
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: 15
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+  },
+  beforeMount() {
+    this.getAllAtmLocations()
+    this.getAtmLocationsById()
+  }
 }
 
 </script>

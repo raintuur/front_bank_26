@@ -11,13 +11,10 @@
     </thead>
     <tbody>
 
-    <!-- todo: seda elementi hakkame for loopima objektist 'atmLocations' -->
-    <!-- todo: eesmärk on saada see info propsist
-    ('atmLocations' objekt tuleb componenti kaasa anda -->
     <!-- todo: tekitame ise järjekorra numbrid -->
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
+    <tr v-for="atmLocation in atmLocations">
+      <th scope="row">?</th>
+      <td>{{atmLocation.atmL}}</td>
       <td>Otto</td>
       <td>
         <div class=" row">
@@ -37,7 +34,7 @@
 export default {
   name: 'AtmLocationsTable',
   props: {
-    atmLocations: {}
+    atmLocations: Array()
   },
   beforeMount() {
 

@@ -1,16 +1,23 @@
 <template>
   <div>
     <div class="container">
-      <div class=" row justify-content-start ">
-        <div class="col col-lg-3 mb-5">
-          <CitiesDropDown/>
+      <div class=" row ">
+        <div class="col col-3 mb-5">
+          <CitiesDropDown @clickSelectCityEvent="getAtmTableInfoByCityId"/>
         </div>
         <div class="col col-lg-9 mb-5">
-          <atm-locations-table/>
+          <atmLocationsTable :atm-tables="atmLocations" @clickAlertButtonEvent="sendAlertMessage"/>
         </div>
       </div>
-      <div class="row row-cols-1 justify-content-start mt-5">
-        <CitiesServicesCheckbox/>
+      <div class="row justify-content-start mt-5">
+        <div class="col col-3">
+          <CitiesServicesCheckbox/>
+        </div>
+      </div>
+      <div class="row justify-content-start mt-5">
+        <div class="col col-3">
+          <button v-on:click="" type="button" class="btn btn-outline-dark">Filtreeri</button>
+        </div>
       </div>
     </div>
   </div>
@@ -26,7 +33,7 @@ export default {
   components: {CitiesServicesCheckbox, CitiesDropDown, AtmLocationsTable},
   data: function () {
     return {
-      atmTables: [
+      atmLocations: [
         {
           cityName: '',
           atmLocationInfo: '',
@@ -36,29 +43,57 @@ export default {
             }
           ]
         }
-      ]
+      ],
     }
   },
   methods: {
+    generateRowNumbers: function () {
+      let counter = 1
+      this.atmLocations.forEach(tableElement => {
+            tableElement.SequenceNumber = counter++
+            console.log("Olen siin 2")
+          }
+      )
+    },
+
+    sendAlertMessage: function (locationName) {
+      alert("Sinu valitud atm asub asukohas>" + locationName)
+    },
+
     getAtmTableInfo: function () {
       this.$http.get("/atm/info")
           .then(response => {
-            this.atmTable = response.data
+            this.atmLocations = response.data
+            this.generateRowNumbers()
             console.log(response.data)
           })
           .catch(error => {
             console.log(error)
           })
     },
+
+    getAtmTableInfoByCityId: function (selectedCityNameId) {
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: selectedCityNameId,
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+        this.generateRowNumbers()
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
   },
   beforeMount() {
     this.getAtmTableInfo()
-    let counter = 1
-    this.atmTables.forEach(tablerow => {
-      tablerow.sequenceNumber = counter++
-    }
-    )
-  }
+    console.log("Olen siin loopis")
+
+  },
+
 
 }
 </script>

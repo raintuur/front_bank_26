@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="atmService in atmServices" class="col col-2 form-check">
+    <div v-for="atmService in atmServices" class="form-check">
       <input v-model="atmService.isSelected" class="form-check-input" type="checkbox" value=""
              :id="atmService.serviceId">
       <label class="form-check-label" :for="atmService.serviceId">

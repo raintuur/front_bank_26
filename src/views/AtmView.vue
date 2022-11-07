@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-5">
-          <CitiesDropdown/>
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById()" />
           <div class="row mt-5">
             <ServicesCheckbox/>
           </div>
@@ -55,13 +55,15 @@ export default {
           })
     },
 
-    getAtmLocationsById: function () {
+    getAtmLocationsById: function (selectedCityId) {
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityId: 15
+              cityId: 0
             }
           }
       ).then(response => {
+        this.atmLocations = response.data
+        this.addSequenceNumbers()
         console.log(response.data)
       }).catch(error => {
         console.log(error)
@@ -79,7 +81,6 @@ export default {
   },
   beforeMount() {
     this.getAllAtmLocations()
-    this.getAtmLocationsById()
   }
 }
 </script>

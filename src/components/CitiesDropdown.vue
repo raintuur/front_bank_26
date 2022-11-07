@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="selectedCityID" class="form-select" aria-label="Default select example">
+    <select v-on:change="clickSelectCityEvent()" v-model="selectedCityID" class="form-select" aria-label="Default select example">
       <option selected disabled value="0">--Linn--</option>
       <option v-for="city in cities" :key="city.cityNameId" :value="city.cityNameId">{{ city.cityName }}</option>
     </select>
@@ -29,10 +29,14 @@ export default {
             this.cities = result.data
           })
           .catch(error => {
-            alert('VIGA!!!! ')
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
+    },
+
+    clickSelectCityEvent: function () {
+      this.$emit('clickSelectCityEvent', this.selectedCityID)
     }
+
   },
   beforeMount() {
     this.getCitiesSelectBoxInfo()

@@ -4,7 +4,7 @@
       <div class="row justify-content-start">
         <div class="col col-lg-3">
 
-          <CitiesDropdown/>
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
 
           <div class="row">
             <ServicesCheckbox/>
@@ -56,6 +56,25 @@ export default {
             console.log(error)
           })
     },
+
+    getAtmLocationsById: function (selectedCityId) {
+      alert('Click event juhtus, saime parentis sonumi ja kaivitasime selle meetodi cityId = ' + JSON.stringify(selectedCityId))
+
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: 15,
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+        this.addSequenceNumbers()
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
     addSequenceNumbers: function () {
       let counter = 1
       this.atmLocations.forEach(location => {

@@ -14,6 +14,7 @@ import CustomersTable from "@/components/customer_table/CustomersTable";
 export default {
   name: "CustomersView",
   components: {CustomersTable}
+
 }
 
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <select v-model= "selectedCityId" class="form-select" aria-label="Default select example">
+    <select v-on:change="clickSelectCityEvent()" v-model="selectedCityID" class="form-select" aria-label="Default select example">
       <option selected disabled value="0">--Linn--</option>
-      <option v-for="city in cities" :key="city.cityNameId" :value="city.cityNameId">{{city.cityName}}</option>
+      <option v-for="city in cities" :key="city.cityNameId" :value="city.cityNameId">{{ city.cityName }}</option>
     </select>
   </div>
 </template>
@@ -11,9 +11,9 @@ export default {
   name: 'CitiesDropdown',
   data: function () {
     return {
-      selectedCityId: 0,
+      selectedCityID: 0,
       firstName: '',
-      cities:  [
+      cities: [
         {
           cityName: '',
           cityNameId: 0
@@ -29,13 +29,17 @@ export default {
             this.cities = result.data
           })
           .catch(error => {
-            alert('VIGA!')
-            console.log('Oh no!')
+            alert('VIGA!!!! ')
+            console.log('Oh no. Mingi viga tuli vastuseks')
           });
+    },
+
+    clickSelectCityEvent: function (){
+        this.$emit('clickSelectCityEvent', this.selectedCityID)
     }
+
   },
   beforeMount() {
-
     this.getCitiesSelectBoxInfo()
   }
 }

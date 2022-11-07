@@ -20,7 +20,9 @@
         </div>
       </td>
       <td>
-        <button type="button" class="btn btn-light">Alert</button>
+        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">
+          Alert
+        </button>
       </td>
     </tr>
     </tbody>
@@ -37,14 +39,10 @@ export default {
   props: {
     atmLocations: Array()
   },
-  mounted() {
-
-
-    let counter = 1
-    this.atmLocations.forEach(location => {
-      location.sequenceNumber = counter
-      counter++
-    })
+  methods: {
+    clickAlertButtonEvent: function (locationName) {
+      this.$emit('clickAlertButtonEvent', locationName)
+    }
   }
 }
 </script>

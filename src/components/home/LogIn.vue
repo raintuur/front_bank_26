@@ -8,18 +8,21 @@
 
         <AlertError :message="message"/>
 
+
         <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Kasutajanimi</span>
-          <input v-model="username" type="text" class="form-control" >
+          <span class="input-group-text">Kasutajanimi</span>
+          <input v-model="username" type="text" class="form-control">
         </div>
+
         <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
-          <input v-model="password" type="password" class="form-control" >
+          <span class="input-group-text">parool</span>
+          <input v-model="password" type="password" class="form-control">
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
           <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
         </div>
+
       </div>
 
 
@@ -28,8 +31,6 @@
 
   </div>
 </template>
-
-
 <script>
 import AlertError from "@/components/alert/AlertError";
 
@@ -40,32 +41,31 @@ export default {
     return {
       username: '',
       password: '',
-      message: 'TÄIDA UUESTI!'
-
+      message: ''
     }
-
   },
   methods: {
     login: function () {
 
-      if (this.username.length = 0 || this.password.length = 0) {
-        this.message = 'Täida kõik väljad!'
-
+      this.message = ''
+      if (this.username.length == 0 || this.password.length == 0) {
+        this.message = 'Täida kõik väljad'
       } else {
-        this.message = ''
+        // ei ole täidetud
+        this.$http.get("/some/path", {
+              params: {
+                someRequestParam1: this.someDataBlockVariable1,
+                someRequestParam2: this.someDataBlockVariable2
+              }
+            }
+        ).then(response => {
+          console.log(response.data)
+        }).catch(error => {
+          console.log(error)
+        });
       }
 
-      this.$http.get("/some/path", {
-            params: {
-              someRequestParam1: this.someDataBlockVariable1,
-              someRequestParam2: this.someDataBlockVariable2
-            }
-          }
-      ).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      }),
+
     },
   }
 }

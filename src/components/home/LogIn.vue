@@ -52,8 +52,13 @@ export default {
         this.message = 'Täida kõik väljad'
       } else {
         // ei ole täidetud
-        this.$http.get("/login", {
-              params: {
+        this.$http.get("\n" +
+            "https://stoplight.io/mocks/valiit/myproject/15828373/login", {
+
+          headers:{
+            Prefer: 'code=200, example=200 - admin'
+          },
+          params: {
                 username: this.username,
                 password: this.password
               }

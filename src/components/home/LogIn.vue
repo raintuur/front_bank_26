@@ -52,10 +52,10 @@ export default {
         this.message = 'Täida kõik väljad'
       } else {
         // ei ole täidetud
-        this.$http.get("/some/path", {
+        this.$http.get("/login", {
               params: {
-                someRequestParam1: this.someDataBlockVariable1,
-                someRequestParam2: this.someDataBlockVariable2
+                username: this.username,
+                password: this.password
               }
             }
         ).then(response => {

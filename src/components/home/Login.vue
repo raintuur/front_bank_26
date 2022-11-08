@@ -55,7 +55,7 @@ export default {
         this.message = 'Täida kõik väljad!'
       } else {
         this.message = ''
-        this.$http.get("/some/path", {
+        this.$http.get("/login", {
               params: {
                 username: this.username,
                 password: this.password

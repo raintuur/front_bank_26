@@ -16,12 +16,10 @@
           <input v-model="password" type="password" class="form-control">
         </div>
 
-        <div v-if="message.length > 0" class="alert alert-danger" role="alert">
-          {{ message }}
-        </div>
+        <AlertError :message="message"/>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" type="button">Logi sisse</button>
+          <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
         </div>
 
       </div>
@@ -30,27 +28,28 @@
 </template>
 
 <script>
+import AlertError from "@/components/alert/AlertError";
+
 export default {
   name: 'LogIn',
+  components: {AlertError},
   data: function () {
     return {
       username: '',
       password: '',
-      message: 'Mingi tekst'
+      message: ''
     }
   },
   methods: {
-
-
     login: function () {
+      this.message = ''
       if (this.username.length <= 0 || this.password.length <= 0) {
-
+        this.message = 'Palun täida kõik väljad'
       } else {
-
-        this.$http.get("/some/path", {
+        this.$http.get("/login", {
               params: {
-                someRequestParam1: this.someDataBlockVariable1,
-                someRequestParam2: this.someDataBlockVariable2
+                username: this.username,
+                password: this.password
               }
             }
         ).then(response => {

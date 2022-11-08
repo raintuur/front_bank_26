@@ -36,10 +36,8 @@ export default {
   props: {
     atmLocations: Array()
   },
-
   methods: {
     clickAlertButtonEvent: function (locationName) {
-      alert (locationName)
       this.$emit('clickAlertButtonEvent', locationName)
     }
   }

@@ -8,19 +8,19 @@
 
         <AlertError :message="message"/>
 
+
         <div class="input-group mb-3">
           <span class="input-group-text">Kasutajanimi</span>
           <input v-model="username" type="text" class="form-control">
         </div>
+
         <div class="input-group mb-3">
-          <span class="input-group-text">Parool</span>
-          <input v-model="password" type="text" class="form-control">
+          <span class="input-group-text">parool</span>
+          <input v-model="password" type="password" class="form-control">
         </div>
 
-        <div>
-          <div class="d-grid gap-2 col-6 mx-auto">
-            <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
-          </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
         </div>
 
       </div>
@@ -41,11 +41,9 @@ export default {
     return {
       username: '',
       password: '',
-      message: 'mingi text'
-
+      message: ''
     }
   },
-
   methods: {
     login: function () {
 
@@ -53,10 +51,16 @@ export default {
       if (this.username.length == 0 || this.password.length == 0) {
         this.message = 'Täida kõik väljad'
       } else {
-        this.$http.get("/some/path", {
-              params: {
-                someRequestParam1: this.someDataBlockVariable1,
-                someRequestParam2: this.someDataBlockVariable2
+        // ei ole täidetud
+        this.$http.get("\n" +
+            "https://stoplight.io/mocks/valiit/myproject/15828373/login", {
+
+          headers:{
+            Prefer: 'code=200, example=200 - admin'
+          },
+          params: {
+                username: this.username,
+                password: this.password
               }
             }
         ).then(response => {
@@ -65,9 +69,9 @@ export default {
           console.log(error)
         });
       }
-    }
+
+
+    },
   }
 }
-
-
 </script>

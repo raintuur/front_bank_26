@@ -56,6 +56,9 @@ export default {
       } else {
         this.message = ''
         this.$http.get("/login", {
+              headers: {
+                Prefer: 'code=200, example=200-multirole'
+              },
               params: {
                 username: this.username,
                 password: this.password

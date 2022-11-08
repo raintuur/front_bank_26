@@ -16,6 +16,10 @@
           <input v-model="password" type="password" class="form-control">
         </div>
 
+        <div v-if="message.length > 0" class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+
         <div class="d-grid gap-2 col-6 mx-auto">
           <button class="btn btn-primary" type="button">Logi sisse</button>
         </div>
@@ -31,8 +35,31 @@ export default {
   data: function () {
     return {
       username: '',
-      password: ''
+      password: '',
+      message: 'Mingi tekst'
     }
+  },
+  methods: {
+
+
+    login: function () {
+      if (this.username.length <= 0 || this.password.length <= 0) {
+
+      } else {
+
+        this.$http.get("/some/path", {
+              params: {
+                someRequestParam1: this.someDataBlockVariable1,
+                someRequestParam2: this.someDataBlockVariable2
+              }
+            }
+        ).then(response => {
+          console.log(response.data)
+        }).catch(error => {
+          console.log(error)
+        });
+      }
+    },
   }
 }
 </script>

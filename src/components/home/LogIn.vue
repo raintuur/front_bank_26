@@ -5,16 +5,15 @@
       <div class="col-lg-6">
 
         <h4>Sisselogimine</h4>
+
         <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Kasutajanimi</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-default">
+          <span class="input-group-text">Kasutajanimi</span>
+          <input v-model="username" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Parool</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-default">
+          <span class="input-group-text">Parool</span>
+          <input v-model="password" type="password" class="form-control">
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
@@ -25,8 +24,15 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
-  name: 'LogIn'
+  name: 'LogIn',
+  data: function () {
+    return {
+      username: '',
+      password: ''
+    }
+  }
 }
 </script>

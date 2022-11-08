@@ -1,27 +1,31 @@
 <template>
   <div class="home">
     <div class="row">
-      <h1> See on meie eriti äge pank </h1>
+      <h1>? Meie pank on kõige lahedam!!!</h1>
     </div>
+
     <div class="row">
-      <div class="col-lg-6">
-        <h2> See on meie eriti äge pank </h2>
+
+      <div class="col-lg-4">
+        <h2>See on meie eriti äge pank</h2>
+        <p>Siin saab mugavalt vaadata oma kontojääki, vaadata kontoväljavõtet,
+          teha makseid jne.</p>
       </div>
 
-      <div class="col-lg-3">
-        <h3> Sisseloimine </h3>
+      <div class="col-lg-6">
+        <h3>Logi sisse</h3>
+
       </div>
+
     </div>
+
 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'HomeView',
-  components: {}
+  name: 'HomeView'
 }
 </script>

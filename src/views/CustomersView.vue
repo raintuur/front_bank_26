@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row justify-content-md-center m-5">
+    <div class="row justify-content-md-center">
       <div class="col-lg-10">
         <CustomersTable/>
       </div>

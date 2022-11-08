@@ -1,5 +1,5 @@
 module.exports = {
     devServer: {
-        proxy: 'https://stoplight.io/mocks/lambikas/citylist/83536708'
+        proxy: 'https://stoplight.io/mocks/valiit/myproject/15828373'
     }
 }

@@ -34,7 +34,7 @@ export default {
           });
     },
 
-    clickSelectCityEvent: function (){
+    clickSelectCityEvent: function () {
         this.$emit('clickSelectCityEvent', this.selectedCityID)
     }
 

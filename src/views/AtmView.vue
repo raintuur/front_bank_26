@@ -2,44 +2,112 @@
   <div>
 
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col col-lg-2">
-          <input v-model="firstName" type="text" class="form-control" placeholder="First name" aria-label="First name">
+      <div class="row justify-content-start">
+        <div class="col col-lg-3">
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
+          <div class="row">
+            <ServicesCheckbox/>
+          </div>
         </div>
-        <div class="col col-lg-2">
-          <input v-model="lastName" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+
+        <div class="col col-lg-9">
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
+
+          />
         </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-2 m-2">
-          <button v-on:click="helloWorld('Nipi','Tiri')" type="button" class="btn btn-lg  btn-outline-info">Info</button>
-        </div>
+
       </div>
     </div>
-
-
 
 
   </div>
 </template>
 
 <script>
+import CitiesDropdown from "@/components/CitiesDropdown";
+import ServicesCheckbox from "@/components/ServicesCheckbox";
+import AtmLocationsTable from "@/components/atm_locations_table/AtmLocationsTable";
+
 export default {
   name: 'AtmView',
-
+  components: {ServicesCheckbox, CitiesDropdown, AtmLocationsTable},
   data: function () {
     return {
-      firstName: '',
-      lastName: ''
+      atmLocations: [
+        {
+          cityName: '',
+          atmLocationInfo: '',
+          atmServices: [
+            {
+              serviceName: ''
+            }
+          ]
+        }
+      ],
+
+
     }
   },
   methods: {
-    helloWorld: function (firstName, lastname) {
-      alert('Hello World! ' + this.firstName + ' ' + this.lastName)
-    }
-  }
 
+    clickAlertButtonEvent: function (locationName) {
+      alert(locationName + ' alert from parent')
+    },
+
+    getAllAtmLocations: function () {
+      this.$http.get("/atm/info")
+          .then(response => {
+            this.atmLocations = response.data
+            this.addSequenceNumbers();
+
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+
+    getAtmLocationsById: function (selectedCityId) {
+      alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
+
+      this.$http.get("/atm/info/by-city", {
+            params: {
+              cityId: selectedCityId
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+        this.addSequenceNumbers()
+
+
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
+    addSequenceNumbers: function () {
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      });
+    }
+
+  },
+  beforeMount() {
+    this.getAllAtmLocations()
+  }
 }
 
 
 </script>
+
+
+
+
+
+
+
+
+

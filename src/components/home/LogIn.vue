@@ -16,7 +16,7 @@
           <input v-model="password" type="password" class="form-control">
         </div>
 
-        <AlertError :message="message"/>
+        <AlertError :message="errorMessage"/>
 
         <div class="d-grid gap-2 col-6 mx-auto">
           <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
@@ -37,14 +37,22 @@ export default {
     return {
       username: '',
       password: '',
-      message: ''
+      errorMessage: '',
+      loginInfo: {
+        userId: 0,
+        roles: [
+          {
+            roleName: ''
+          }
+        ]
+      }
     }
   },
   methods: {
     login: function () {
-      this.message = ''
+      this.errorMessage = ''
       if (this.username.length <= 0 || this.password.length <= 0) {
-        this.message = 'Palun täida kõik väljad'
+        this.errorMessage = 'Palun täida kõik väljad'
       } else {
         let preference = ''
         switch (this.username) {
@@ -69,7 +77,25 @@ export default {
               }
             }
         ).then(response => {
-          console.log(response.data)
+          this.loginInfo = response.data
+          // todo: IF the user has only one role (admin), go to the Admin page
+          if (this.loginInfo.roles.length > 1) {
+            // User has multiple roles
+
+          } else {
+            // User has only one role
+            if (this.loginInfo.roles[0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
+              this.$router.push({name: 'adminHomeRoute'})
+            } else {
+              this.$router.push({name: 'customerHomeRoute', query: {
+                userId: this.loginInfo.userId,
+                roleName: this.loginInfo.roles[0].roleName
+                }})
+            }
+          }
+
+
         }).catch(error => {
           console.log(error)
         });

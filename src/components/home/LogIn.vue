@@ -46,7 +46,23 @@ export default {
       if (this.username.length <= 0 || this.password.length <= 0) {
         this.message = 'Palun täida kõik väljad'
       } else {
-        this.$http.get("/login", {
+        let preference = ''
+        switch (this.username) {
+          case 'admin':
+            preference = 'code=200, example=200 - admin'
+            break;
+          case 'multirole':
+            preference = 'code=200, example=200 - multirole'
+            break;
+          case 'customer':
+            preference = 'code=200, example=200- customer'
+            break;
+        }
+        this.$http.get("/bank/login", {
+              headers: {
+                'Content-Type': 'application/json',
+                Prefer: preference
+              },
               params: {
                 username: this.username,
                 password: this.password

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-5">
 
-        <AlertError :message="message"/>
+        <AlertError :message="errorMessage"/>
 
         <div class="input-group mb-3">
           <span class="input-group-text">Kasutajanimi</span>
@@ -40,24 +40,47 @@ export default {
     return {
       username: '',
       password: '',
-      message: ''
+      errorMessage: '',
+      loginInfo: {
+        userId: '',
+        roles: [
+          {
+            roleName: ''
+          }
+        ]
+      }
     }
   },
   methods: {
     login: function () {
 
-      this.message = ''
+      this.errorMessage = ''
       if (this.username.length == 0 || this.password.length == 0) {
 
-        this.message = 'Täida kõik väljad'
+        this.errorMessage = 'Täida kõik väljad'
 
       } else {
 
-        this.$http.get("/login", {
 
-          headers:{
-          Prefer: 'code=200, example=200 - admin'
-          },
+        let preference = ''
+        switch (this.username) {
+          case 'admin':
+            preference = 'code=200, example=200 - admin'
+            break
+          case 'customer':
+            preference = 'code=200, example=200 - customer'
+            break
+          case 'multirole':
+            preference = 'code=200, example=200 - multirole'
+            break
+        }
+
+
+        this.$http.get("/bank/login", {
+              headers: {
+                'Content-Type': 'application/json',
+                Prefer: preference
+              },
               params: {
                 username: this.username,
                 password: this.password
@@ -65,6 +88,27 @@ export default {
             }
         ).then(response => {
           console.log(response.data)
+          this.loginInfo = response.data
+          // todo: kui kasutajal on vaid üks roll ja see on admin
+          // siis mine admin lehele
+
+          if (this.loginInfo.roles.length > 1) {
+
+          } else {
+
+            if (this.loginInfo.roles [0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
+              this.$router.push({name: 'adminHomeRoute'});
+            } else {
+              this.$router.push({
+                name: 'customerHomeRoute', query: {
+                  userId: this.loginInfo.userId,
+                  roleName: this.loginInfo.roles[0].roleName
+                }
+              });
+            }
+          }
+
         }).catch(error => {
           console.log(error)
         });

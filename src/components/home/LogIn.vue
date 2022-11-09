@@ -41,7 +41,15 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: ''
+      errorMessage: '',
+      loginInfo: {
+        userId: 0,
+        roles: [
+          {
+            roleName: ''
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -66,17 +74,35 @@ export default {
         }
 
         this.$http.get("/bank/login", {
-          headers: {
-            'Content-Type': 'application/json',
-            Prefer: preference
-          },
-          params: {
+              headers: {
+                'Content-Type': 'application/json',
+                Prefer: preference
+              },
+              params: {
                 username: this.username,
                 password: this.password
               }
             }
         ).then(response => {
           console.log(response.data)
+          this.loginInfo = response.data
+          //  todo: if user has only one role and it is admin
+          //  then go to admin page
+
+          if (this.loginInfo.roles.length > 1) {
+
+          } else {
+
+            if (this.loginInfo.roles[0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
+              this.$router.push({name: 'adminHomeRoute'})
+            } else {
+              this.$router.push({name: 'customerHomeRoute', query: { userId: this.loginInfo.userId}})
+            }
+
+          }
+
+
         }).catch(error => {
           console.log(error)
         });

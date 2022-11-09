@@ -41,7 +41,15 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: ''
+      errorMessage: '',
+      loginInfo: {
+        userId: '',
+        roles: [
+          {
+            roleName: ''
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -77,6 +85,24 @@ export default {
             }
         ).then(response => {
           console.log(response.data)
+          this.loginInfo = response.data
+          //todo: kui kasutajal vaid üks roll admin,
+          // siis mine admin elehele
+          if (this.loginInfo.roles.length > 1) {
+            //kasutajal on mitu rolli
+
+          } else {
+            //kasutajal on vaid üks roll
+            if (this.loginInfo.roles[0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
+              this.$router.push({name: 'adminHomeRout'})
+            } else {
+              this.$router.push({name: 'customerHomeRout', query: {userId:this.loginInfo.userId, roleName:this.loginInfo }})
+            }
+
+          }
+
+
         }).catch(error => {
           console.log(error)
         });

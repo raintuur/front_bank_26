@@ -86,24 +86,29 @@ export default {
         ).then(response => {
           console.log(response.data)
           this.loginInfo = response.data
-          //todo: kui kasutajal on vaid üks roll ja see on admin,
-          // siis mine admine lehele
+          // todo: kui kasutajal on vaid üks roll ja see on admin,
+          //  siis mine admin lehele
 
           if (this.loginInfo.roles.length > 1) {
-            //kasutajal on mitu rolli
+            // kasutajal on mitu rolli
 
-          }else {
-            //kasutajal on vaid üks roll
-            if (this.loginInfo.roles [0].roleName == 'admin') {
-              sessionStorage.setItem('userId',this.loginInfo.userId)
+
+          } else {
+            // kasutajal on vaid üks roll
+            if (this.loginInfo.roles[0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
               this.$router.push({name: 'adminHomeRoute'})
-            } else{
-              this.$router.push({name:'customerHomeRoute', query: {
-                userId: this.loginInfo.userId
-              } })
+            } else {
+              this.$router.push({name: 'customerHomeRoute', query: {
+                userId: this.loginInfo.userId,
+                roleName: this.loginInfo.roles[0].roleName
+                }})
             }
+
           }
-              }).catch(error => {
+
+
+        }).catch(error => {
           console.log(error)
         });
       }

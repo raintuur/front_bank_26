@@ -1,9 +1,7 @@
 <template>
   <div>
     <h1>Admin koduvaade</h1>
-    <h3>
-      Adminni id: {{adminId}}
-    </h3>
+    <h3>Adminni id: {{adminId}}</h3>
   </div>
 </template>
 
@@ -11,10 +9,9 @@
 export default {
   name: 'AdminHomeView',
   data: function () {
-    return{
-      adminId: sessionStorage.getItem(key:'userId')
+    return {
+      adminId: sessionStorage.getItem('userId')
     }
   }
 }
 </script>
-

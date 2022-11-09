@@ -51,9 +51,24 @@ export default {
       if (this.username.length == 0 || this.password.length == 0) {
         this.message = 'Täida kõik väljad'
       } else {
+
+        let preference = ''
+
+        switch (this.username) {
+          case 'admin':
+            preference = 'code=200, example = 200 - admin'
+                break;
+          case 'multirole':
+            preference = 'code=200, example = 200 - multirole'
+            break;
+          case 'customer':
+            preference = 'code=200, example = 200 - customer'
+            break;
+        }
+
         // ei ole täidetud
         this.$http.get("\n" +
-            "https://stoplight.io/mocks/valiit/myproject/15828373/login", {
+            "/bank/login", {
 
           headers:{
             Prefer: 'code=200, example=200 - admin'

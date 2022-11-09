@@ -6,7 +6,7 @@
 
       <div class="col-lg-5">
 
-        <AlertError :message="message"/>
+        <AlertError :message="errorMessage"/>
 
 
         <div class="input-group mb-3">
@@ -41,22 +41,34 @@ export default {
     return {
       username: '',
       password: '',
-      message: ''
+      errorMessage: ''
     }
   },
   methods: {
     login: function () {
+      this.errorMessage = ''
 
-      this.message = ''
       if (this.username.length == 0 || this.password.length == 0) {
-        this.message = 'Täida kõik väljad'
+        this.errorMessage = 'Täida kõik väljad'
       } else {
-        // ei ole täidetud
-        this.$http.get("\n" +
-            "https://stoplight.io/mocks/valiit/myproject/15828373/login", {
 
-          headers:{
-            Prefer: 'code=200, example=200 - admin'
+        let preference = ''
+        switch (this.username) {
+          case 'admin':
+            preference = 'code=200, example=200 - admin'
+            break;
+          case 'multirole':
+            preference = 'code=200, example=200 - multirole'
+            break;
+          case 'customer':
+            preference = 'code=200, example=200 - customer'
+            break;
+        }
+
+        this.$http.get("/bank/login", {
+          headers: {
+            'Content-Type': 'application/json',
+            Prefer: preference
           },
           params: {
                 username: this.username,

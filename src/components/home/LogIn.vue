@@ -6,7 +6,7 @@
 
       <div class="col-lg-5">
 
-        <AlertError :message="message"/>
+        <AlertError :message="errorMessage"/>
 
 
         <div class="input-group mb-3">
@@ -41,37 +41,34 @@ export default {
     return {
       username: '',
       password: '',
-      message: ''
+      errorMessage: ''
     }
   },
   methods: {
     login: function () {
+      this.errorMessage = ''
 
-      this.message = ''
       if (this.username.length == 0 || this.password.length == 0) {
-        this.message = 'Täida kõik väljad'
+        this.errorMessage = 'Täida kõik väljad'
       } else {
 
         let preference = ''
-
         switch (this.username) {
           case 'admin':
-            preference = 'code=200, example = 200 - admin'
-                break;
+            preference = 'code=200, example=200 - admin'
+            break;
           case 'multirole':
-            preference = 'code=200, example = 200 - multirole'
+            preference = 'code=200, example=200 - multirole'
             break;
           case 'customer':
-            preference = 'code=200, example = 200 - customer'
+            preference = 'code=200, example=200 - customer'
             break;
         }
 
-        // ei ole täidetud
-        this.$http.get("\n" +
-            "/bank/login", {
-
-          headers:{
-            Prefer: 'code=200, example=200 - admin'
+        this.$http.get("/bank/login", {
+          headers: {
+            'Content-Type': 'application/json',
+            Prefer: preference
           },
           params: {
                 username: this.username,

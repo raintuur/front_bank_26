@@ -3,12 +3,13 @@
 
     <div class="container">
       <div class="row justify-content-start">
-        <div class="col col-lg-2">
+        <div class="col col-lg-3">
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
             <ServicesCheckbox/>
           </div>
         </div>
+
         <div class="col col-lg-9">
           <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
 
@@ -44,6 +45,7 @@ export default {
         }
       ],
 
+
     }
   },
   methods: {
@@ -53,7 +55,7 @@ export default {
     },
 
     getAllAtmLocations: function () {
-      this.$http.get('/atm/info')
+      this.$http.get("/atm/info")
           .then(response => {
             this.atmLocations = response.data
             this.addSequenceNumbers();
@@ -65,14 +67,17 @@ export default {
     },
 
     getAtmLocationsById: function (selectedCityId) {
+      alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
+
       this.$http.get("/atm/info/by-city", {
             params: {
-              cityid: selectedCityId
+              cityId: selectedCityId
             }
           }
       ).then(response => {
         this.atmLocations = response.data
-        this.addSequenceNumbers();
+        this.addSequenceNumbers()
+
 
         console.log(response.data)
       }).catch(error => {
@@ -80,22 +85,29 @@ export default {
       })
     },
 
+
     addSequenceNumbers: function () {
       let counter = 1
       this.atmLocations.forEach(location => {
         location.sequenceNumber = counter
         counter++
       });
-
     }
 
   },
   beforeMount() {
     this.getAllAtmLocations()
-    this.getAtmLocationsById()
   }
-
 }
 
 
 </script>
+
+
+
+
+
+
+
+
+

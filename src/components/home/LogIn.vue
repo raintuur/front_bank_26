@@ -100,8 +100,7 @@ export default {
               sessionStorage.setItem('userId', this.loginInfo.userId)
               this.$router.push({name: 'adminHomeRoute'});
             } else {
-              this.$router.push({
-                name: 'customerHomeRoute', query: {
+              this.$router.push({name: 'customerHomeRoute', query: {
                   userId: this.loginInfo.userId,
                   roleName: this.loginInfo.roles[0].roleName
                 }

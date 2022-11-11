@@ -108,5 +108,3 @@ ALTER TABLE location
             NOT DEFERRABLE
                 INITIALLY IMMEDIATE
 ;
-
--- End of file.

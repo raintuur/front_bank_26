@@ -1,9 +1,3 @@
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tallinn');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Tartu');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Pärnu');
-INSERT INTO public.city (id, name) VALUES (DEFAULT, 'Viljandi');
-
-
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'AAA123');
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'BBB123');
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'CCC123');

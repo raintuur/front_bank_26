@@ -9,9 +9,9 @@ INSERT INTO public.location (id, city_id, name, address, longitude, latitude) VA
 INSERT INTO public.location (id, city_id, name, address, longitude, latitude) VALUES (DEFAULT, 3, 'Port Arturi Selver', 'Artur Rinne 2', null, null);
 
 
-INSERT INTO public.atm      (id, serial_number, location_id) VALUES   (DEFAULT, 'AAA123', 4);
-INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'BBB123',);
-INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'CCC123');
+INSERT INTO public.atm (id, serial_number, location_id) VALUES (DEFAULT, 'AAA123', 1);
+INSERT INTO public.atm (id, serial_number, location_id) VALUES (DEFAULT, 'BBB123', 1);
+INSERT INTO public.atm (id, serial_number, location_id) VALUES (DEFAULT, 'CCC123', 4);
 
 INSERT INTO public.atm_service (id, name) VALUES (DEFAULT, 'raha välja');
 INSERT INTO public.atm_service (id, name) VALUES (DEFAULT, 'raha sisse');

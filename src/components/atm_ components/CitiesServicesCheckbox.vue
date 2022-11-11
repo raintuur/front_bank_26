@@ -7,7 +7,9 @@
         {{ atmService.serviceName }}
       </label>
     </div>
-<!--    <button v-on:click="someMethod" type="button" class="btn btn-dark">Kontroll</button>-->
+    <div class="mt-5">
+      <button v-on:click="filterButtonPressed(isCashOut,isCashIn,isPayments)" type="button" class="btn btn-dark">Filtreeri</button>
+    </div>
   </div>
 </template>
 
@@ -31,13 +33,13 @@ export default {
   },
   methods: {
 
-    // someMethod: function () {
-    //   let concatenateString= ''
-    //   this.atmServices.forEach(value => {
-    //     concatenateString += value.serviceName + ' is ' + value.isSelected + '\n'
-    //   });
-    //   alert(concatenateString)
-    // },
+    filterButtonPressed: function (isCashOut, isCashIn, isPayment ) {
+      let concatenateString= ''
+      this.atmServices.forEach(value => {
+        concatenateString += value.serviceName + ' is ' + value.isSelected + '\n'
+      });
+      alert(concatenateString)
+    },
 
     getAtmServiceSelectBoxInfo: function () {
       console.log('Olen Siin')

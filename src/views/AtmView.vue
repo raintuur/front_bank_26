@@ -16,7 +16,6 @@
       </div>
       <div class="row justify-content-start mt-5">
         <div class="col col-3">
-          <button v-on:click="" type="button" class="btn btn-outline-dark">Filtreeri</button>
         </div>
       </div>
     </div>
@@ -73,9 +72,25 @@ export default {
     },
 
     getAtmTableInfoByCityId: function (selectedCityNameId) {
+
+      let preference = ''
+      switch (selectedCityNameId) {
+        case 1:
+          preference = 'code=200, example=200-Tallinn'
+          break
+        case 2:
+          preference = 'code=200, example=200-Tartu'
+          break
+        case 3:
+          preference = 'code=200, example=200-Viljandi'
+          break
+      }
+
       this.$http.get("/atm/info/by-city", {
-            params: {
-              cityId: selectedCityNameId,
+            params: {CityId: selectedCityNameId},
+            headers: {
+              'Content-Type': 'application/json',
+              Prefer: preference
             }
           }
       ).then(response => {

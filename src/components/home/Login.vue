@@ -30,7 +30,7 @@
     <div class="w-100"></div>
 
     <div class="col col-sm-5">
-      <button v-on:click="login" type="button" class="btn btn-primary">Logi sisse</button>
+      <button v-on:click="login(11)" type="button" class="btn btn-primary">Logi sisse</button>
     </div>
 
   </div>
@@ -45,19 +45,44 @@ export default {
     return {
       username: '',
       password: '',
-      message: ''
+      message: '',
+      loginInfo:
+          {
+            userId: '',
+            roles: [
+              {
+                roleName: ''
+              }
+            ]
+          }
     }
   },
 
   methods: {
     login: function () {
-      if(this.username.length <= 0 || this.password.length <= 0) {
+
+      let preference = ''
+      let value = this.username
+      switch (value) {
+        case 'multirole':
+          preference = 'code=200, example=200-' + value
+          break
+        case 'admin':
+          preference = 'code=200, example=200-' + value
+          break
+        case 'customer':
+          preference = 'code=200, example=200-' + value
+          break
+      }
+
+      if (this.username.length <= 0 || this.password.length <= 0) {
         this.message = 'Täida kõik väljad!'
       } else {
         this.message = ''
         this.$http.get("/login", {
               headers: {
-                Prefer: 'code=200, example=200-multirole'
+                'Content-Type': 'application/json',
+                Prefer: preference
               },
               params: {
                 username: this.username,
@@ -66,12 +91,28 @@ export default {
             }
         ).then(response => {
           console.log(response.data)
+          this.loginInfo = response.data
+
+          if (this.loginInfo.roles.length > 1) {
+            //multirole
+
+          } else {
+            switch (this.loginInfo.roles[0].roleName) {
+              case 'admin':
+                sessionStorage.setItem('userId',this.loginInfo.userId)
+                this.$router.push({name:'adminHomeRoute'})
+                break
+              case 'customer':
+                this.$router.push({name:'customerHomeRoute', query: {userId:this.loginInfo.userId}})
+                break
+            }
+          }
+
         }).catch(error => {
           console.log(error)
         })
       }
     },
-
 
 
   },

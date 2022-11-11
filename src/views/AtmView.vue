@@ -12,7 +12,6 @@
 
         <div class="col col-lg-9">
           <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
-
           />
         </div>
 

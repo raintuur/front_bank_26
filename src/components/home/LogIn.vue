@@ -8,13 +8,14 @@
 
         <AlertError :message="errorMessage"/>
 
+
         <div class="input-group mb-3">
           <span class="input-group-text">Kasutajanimi</span>
           <input v-model="username" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Parool</span>
+          <span class="input-group-text">parool</span>
           <input v-model="password" type="password" class="form-control">
         </div>
 
@@ -24,7 +25,9 @@
 
       </div>
 
+
     </div>
+
 
   </div>
 </template>
@@ -52,6 +55,7 @@ export default {
   methods: {
     login: function () {
       this.errorMessage = ''
+
       if (this.username.length == 0 || this.password.length == 0) {
         this.errorMessage = 'Täida kõik väljad'
       } else {
@@ -70,7 +74,6 @@ export default {
         }
 
         this.$http.get("/bank/login", {
-
               headers: {
                 'Content-Type': 'application/json',
                 Prefer: preference
@@ -83,28 +86,35 @@ export default {
         ).then(response => {
           console.log(response.data)
           this.loginInfo = response.data
-        //todo: kui kasutajal on vaid üks roll ja see on admin,
-        //  siis mine admin lehele
+          // todo: kui kasutajal on vaid üks roll ja see on admin,
+          //  siis mine admin lehele
+
           if (this.loginInfo.roles.length > 1) {
+            // kasutajal on mitu rolli
+
 
           } else {
-            //kasutajal on vaid üks roll
-            if (this.loginInfo.roles[0].roleName == 'admin' ){
+            // kasutajal on vaid üks roll
+            if (this.loginInfo.roles[0].roleName == 'admin') {
               sessionStorage.setItem('userId', this.loginInfo.userId)
               this.$router.push({name: 'adminHomeRoute'})
             } else {
-              this.$router.push({name: 'customerHomeRoute', query: { userId: this.loginInfo.userId,
+              this.$router.push({name: 'customerHomeRoute', query: {
+                userId: this.loginInfo.userId,
                 roleName: this.loginInfo.roles[0].roleName
-              }})
+                }})
             }
+
           }
+
 
         }).catch(error => {
           console.log(error)
         });
       }
-    }
 
+
+    },
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Kliendi koduvaade</h1>
-    <h3>Kliendi id on {{userId}}</h3>
+    <h3>Kliendi ID on {{userId}}</h3>
   </div>
 </template>
 
@@ -11,10 +11,9 @@ import router from "@/router";
 export default {
   name: 'CustomerHomeView',
   data: function () {
-    return{
+    return {
       userId: this.$route.query.userId
     }
   }
 }
 </script>
-

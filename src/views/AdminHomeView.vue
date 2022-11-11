@@ -8,11 +8,10 @@
 <script>
 export default {
   name: 'AdminHomeView',
-  data: function (){
-    return{
+  data: function () {
+    return {
       adminId: sessionStorage.getItem('userId')
     }
   }
 }
 </script>
-

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="row">
-<!--      todo: Font Awesomw icon-->
-      <h1>?? Meie pank on kõige lahedam!!!</h1>
+      <!--  todo: Font Awesome icon    -->
+      <h1>? Meie pank on kõige lahedam!!!</h1>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-4">
@@ -12,17 +12,16 @@
         <LogIn/>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+
 import HomeViewGreeting from "@/components/home/HomeViewGreeting";
 import LogIn from "@/components/home/LogIn";
 
 export default {
   name: 'HomeView',
-  components: {LogIn, HomeViewGreeting},
+  components: {LogIn, HomeViewGreeting}
 }
 </script>

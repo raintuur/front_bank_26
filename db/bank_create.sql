@@ -12,32 +12,29 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 
-
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 10:20:59.137
+-- Last modification date: 2022-11-11 12:11:08.128
 
 -- tables
--- Table: Table_18
-CREATE TABLE Table_18 (
-
-);
-
 -- Table: address
 CREATE TABLE address (
                          id serial  NOT NULL,
-                         street_name varchar(255)  NOT NULL,
                          city_id int  NOT NULL,
+                         customer_id int  NOT NULL,
+                         location_id int  NOT NULL,
+                         street_name varchar(255)  NOT NULL,
                          start date  NOT NULL DEFAULT now(),
                          "end" date  NULL,
-                         customer_id int  NOT NULL,
+                         longitude decimal(6,2)  NULL,
+                         latitude decimal(6,2)  NULL,
                          CONSTRAINT address_pk PRIMARY KEY (id)
 );
 
 -- Table: atm
 CREATE TABLE atm (
                      id serial  NOT NULL,
-                     serial_number varchar(255)  NOT NULL,
                      location_id int  NOT NULL,
+                     serial_number varchar(255)  NOT NULL,
                      status char(1)  NOT NULL DEFAULT 'A',
                      CONSTRAINT atm_pk PRIMARY KEY (id)
 );
@@ -90,12 +87,9 @@ CREATE TABLE customer (
 -- Table: location
 CREATE TABLE location (
                           id serial  NOT NULL,
-                          city_id int  NOT NULL,
                           name varchar(255)  NOT NULL,
-                          address varchar(255)  NOT NULL,
-                          longitude decimal(6,2)  NULL,
-                          latitude decimal(6,2)  NULL,
                           status char(1)  NOT NULL DEFAULT 'A',
+                          city_id int  NOT NULL,
                           CONSTRAINT location_pk PRIMARY KEY (id)
 );
 
@@ -111,6 +105,7 @@ CREATE TABLE "user" (
                         id serial  NOT NULL,
                         username varchar(50)  NOT NULL,
                         password varchar(50)  NOT NULL,
+                        role_id int  NOT NULL,
                         CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
@@ -127,6 +122,14 @@ ALTER TABLE address ADD CONSTRAINT address_city
 ALTER TABLE address ADD CONSTRAINT address_customer
     FOREIGN KEY (customer_id)
         REFERENCES customer (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: address_location (table: address)
+ALTER TABLE address ADD CONSTRAINT address_location
+    FOREIGN KEY (location_id)
+        REFERENCES location (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
@@ -175,6 +178,14 @@ ALTER TABLE customer ADD CONSTRAINT customer_user
 ALTER TABLE location ADD CONSTRAINT location_city
     FOREIGN KEY (city_id)
         REFERENCES city (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: user_role (table: user)
+ALTER TABLE "user" ADD CONSTRAINT user_role
+    FOREIGN KEY (role_id)
+        REFERENCES role (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;

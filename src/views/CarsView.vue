@@ -1,20 +1,23 @@
 <template>
   <div>
-    <!--    Brand loop-->
-    <div v-for="carBrand in carBrands" class="row justify-content-center">
-      <h1>{{ carBrand.brandName }}</h1>
+<!--  Brand loop  -->
 
-      <!--      Model loop-->
-          <div v-for="model in carBrand.models" class="row justify-content-end">
-            <div class="col">
-              <h5>{{ model.modelName }}</h5>
-            </div>
-            <div class="col">
-              <h5>{{ model.year }}</h5>
-            </div>
-          </div>
+
+    <div v-for="brand in carBrands" class="row justify-content-center">
+      <h6>{{brand.brandName}}</h6>
+      <div v-for="model in brand.models" class="row">
+        <div class="col">
+        {{model.modelName}}
+        </div>
+        <div class="col">
+        {{model.year}}
+        </div>
       </div>
+
     </div>
+
+
+  </div>
 </template>
 
 <script>
@@ -35,9 +38,10 @@ export default {
               year: 2012
             },
             {
-              modelName: 'A6',
+              modelName: 'A6 - RS',
               year: 2013
-            }
+            },
+
           ]
         },
         {
@@ -51,26 +55,31 @@ export default {
               modelName: 'Omega',
               year: 2012
             }
+
           ]
         },
         {
           brandName: 'Skoda',
           models: [
             {
-              modelName: 'Fabia',
+              modelName: 'Astra',
               year: 2011
             },
             {
-              modelName: 'Octavia',
+              modelName: 'Omega',
               year: 2012
             }
-          ]
-        },
-      ]
-    }
-  }
-}
 
+          ]
+        }
+      ]
+
+    }
+
+
+  }
+
+}
 </script>
 
 <style scoped>

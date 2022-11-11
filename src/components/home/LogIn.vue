@@ -1,10 +1,13 @@
 <template>
   <div>
+    <h3>Sisselogimine</h3>
 
     <div class="row justify-content-center">
-      <div class="col-lg-6">
 
-        <h4>Sisselogimine</h4>
+      <div class="col-lg-5">
+
+        <AlertError :message="errorMessage"/>
+
 
         <div class="input-group mb-3">
           <span class="input-group-text">Kasutajanimi</span>
@@ -12,21 +15,22 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Parool</span>
+          <span class="input-group-text">parool</span>
           <input v-model="password" type="password" class="form-control">
         </div>
-
-        <AlertError :message="errorMessage"/>
 
         <div class="d-grid gap-2 col-6 mx-auto">
           <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
         </div>
 
       </div>
+
+
     </div>
+
+
   </div>
 </template>
-
 <script>
 import AlertError from "@/components/alert/AlertError";
 
@@ -39,7 +43,7 @@ export default {
       password: '',
       errorMessage: '',
       loginInfo: {
-        userId: 0,
+        userId: '',
         roles: [
           {
             roleName: ''
@@ -51,9 +55,11 @@ export default {
   methods: {
     login: function () {
       this.errorMessage = ''
-      if (this.username.length <= 0 || this.password.length <= 0) {
-        this.errorMessage = 'Palun täida kõik väljad'
+
+      if (this.username.length == 0 || this.password.length == 0) {
+        this.errorMessage = 'Täida kõik väljad'
       } else {
+
         let preference = ''
         switch (this.username) {
           case 'admin':
@@ -63,9 +69,10 @@ export default {
             preference = 'code=200, example=200 - multirole'
             break;
           case 'customer':
-            preference = 'code=200, example=200- customer'
+            preference = 'code=200, example=200 - customer'
             break;
         }
+
         this.$http.get("/bank/login", {
               headers: {
                 'Content-Type': 'application/json',
@@ -77,13 +84,17 @@ export default {
               }
             }
         ).then(response => {
+          console.log(response.data)
           this.loginInfo = response.data
-          // todo: IF the user has only one role (admin), go to the Admin page
+          // todo: kui kasutajal on vaid üks roll ja see on admin,
+          //  siis mine admin lehele
+
           if (this.loginInfo.roles.length > 1) {
-            // User has multiple roles
+            // kasutajal on mitu rolli
+
 
           } else {
-            // User has only one role
+            // kasutajal on vaid üks roll
             if (this.loginInfo.roles[0].roleName == 'admin') {
               sessionStorage.setItem('userId', this.loginInfo.userId)
               this.$router.push({name: 'adminHomeRoute'})
@@ -93,11 +104,16 @@ export default {
                 roleName: this.loginInfo.roles[0].roleName
                 }})
             }
+
           }
+
+
         }).catch(error => {
           console.log(error)
         });
       }
+
+
     },
   }
 }

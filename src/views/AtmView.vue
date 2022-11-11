@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
@@ -10,21 +11,22 @@
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"/>
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
+
+          />
         </div>
 
-
       </div>
-
-
     </div>
+
+
   </div>
 </template>
 
 <script>
 import CitiesDropdown from "@/components/CitiesDropdown";
 import ServicesCheckbox from "@/components/ServicesCheckbox";
-import AtmLocationsTable from "@/components/atm_loactions_table/AtmLocationsTable";
+import AtmLocationsTable from "@/components/atm_locations_table/AtmLocationsTable";
 
 export default {
   name: 'AtmView',
@@ -42,31 +44,31 @@ export default {
           ]
         }
       ],
+
+
     }
   },
   methods: {
+
+    clickAlertButtonEvent: function (locationName) {
+      alert(locationName + ' alert from parent')
+    },
+
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
             this.atmLocations = response.data
             this.addSequenceNumbers();
-            console.log(response.data)
+
           })
           .catch(error => {
             console.log(error)
           })
     },
-    clickAlertButtonEvent: function (locationName) {
-      alert(locationName + ' alert from parent')
-    },
-    addSequenceNumbers: function () {
-      let counter = 1
-      this.atmLocations.forEach(location => {
-        location.sequenceNumber = counter
-        counter++
-      })
-    },
+
     getAtmLocationsById: function (selectedCityId) {
+      alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
+
       this.$http.get("/atm/info/by-city", {
             params: {
               cityId: selectedCityId
@@ -75,16 +77,37 @@ export default {
       ).then(response => {
         this.atmLocations = response.data
         this.addSequenceNumbers()
+
+
         console.log(response.data)
       }).catch(error => {
         console.log(error)
       })
     },
+
+
+    addSequenceNumbers: function () {
+      let counter = 1
+      this.atmLocations.forEach(location => {
+        location.sequenceNumber = counter
+        counter++
+      });
+    }
+
   },
   beforeMount() {
     this.getAllAtmLocations()
-    this.getAtmLocationsById()
   }
 }
 
+
 </script>
+
+
+
+
+
+
+
+
+

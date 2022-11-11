@@ -8,17 +8,29 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2022-09-16 09:58:27.985
 
-
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 08:02:33.847
+-- Last modification date: 2022-11-11 09:59:58.85
 
 -- tables
+-- Table: address
+CREATE TABLE address
+(
+    id          serial       NOT NULL,
+    street_name varchar(255) NOT NULL,
+    city_id     int          NOT NULL,
+    start       date         NOT NULL DEFAULT NOW(),
+    "end"       date         NULL,
+    customer_id int          NOT NULL,
+    CONSTRAINT address_pk PRIMARY KEY (id)
+);
+
 -- Table: atm
 CREATE TABLE atm
 (
     id            serial       NOT NULL,
     serial_number varchar(255) NOT NULL,
     location_id   int          NOT NULL,
+    status        char(1)      NOT NULL DEFAULT 'A',
     CONSTRAINT atm_pk PRIMARY KEY (id)
 );
 
@@ -48,13 +60,21 @@ CREATE TABLE city
     CONSTRAINT city_pk PRIMARY KEY (id)
 );
 
+-- Table: contact
+CREATE TABLE contact
+(
+    id        serial       NOT NULL,
+    telephone varchar(255) NOT NULL,
+    email     varchar(255) NOT NULL,
+    CONSTRAINT contact_pk PRIMARY KEY (id)
+);
+
 -- Table: customer
 CREATE TABLE customer
 (
     id            serial       NOT NULL,
     first_name    varchar(255) NOT NULL,
     last_name     varchar(255) NOT NULL,
-    hobby         varchar(255) NULL,
     personal_code varchar(50)  NOT NULL,
     CONSTRAINT customer_ak_1 UNIQUE (personal_code) NOT DEFERRABLE INITIALLY IMMEDIATE,
     CONSTRAINT customer_pk PRIMARY KEY (id)
@@ -69,10 +89,29 @@ CREATE TABLE location
     address   varchar(255)  NOT NULL,
     longitude decimal(6, 2) NULL,
     latitude  decimal(6, 2) NULL,
+    status    char(1)       NOT NULL DEFAULT 'A',
     CONSTRAINT location_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
+-- Reference: address_city (table: address)
+ALTER TABLE address
+    ADD CONSTRAINT address_city
+        FOREIGN KEY (city_id)
+            REFERENCES city (id)
+            NOT DEFERRABLE
+                INITIALLY IMMEDIATE
+;
+
+-- Reference: address_customer (table: address)
+ALTER TABLE address
+    ADD CONSTRAINT address_customer
+        FOREIGN KEY (customer_id)
+            REFERENCES customer (id)
+            NOT DEFERRABLE
+                INITIALLY IMMEDIATE
+;
+
 -- Reference: atm_location (table: atm)
 ALTER TABLE atm
     ADD CONSTRAINT atm_location
@@ -108,3 +147,6 @@ ALTER TABLE location
             NOT DEFERRABLE
                 INITIALLY IMMEDIATE
 ;
+
+-- End of file.
+

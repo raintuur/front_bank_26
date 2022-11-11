@@ -14,13 +14,14 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-10 14:04:47.009
+-- Last modification date: 2022-11-11 08:02:33.847
 
 -- tables
 -- Table: atm
 CREATE TABLE atm (
                      id serial  NOT NULL,
                      serial_number varchar(255)  NOT NULL,
+                     location_id int  NOT NULL,
                      CONSTRAINT atm_pk PRIMARY KEY (id)
 );
 
@@ -39,6 +40,14 @@ CREATE TABLE atm_service_relation (
                                       CONSTRAINT atm_service_relation_pk PRIMARY KEY (id)
 );
 
+-- Table: city
+CREATE TABLE city (
+                      id serial  NOT NULL,
+                      name varchar(255)  NOT NULL,
+                      CONSTRAINT city_ak_1 UNIQUE (name) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+                      CONSTRAINT city_pk PRIMARY KEY (id)
+);
+
 -- Table: customer
 CREATE TABLE customer (
                           id serial  NOT NULL,
@@ -50,7 +59,26 @@ CREATE TABLE customer (
                           CONSTRAINT customer_pk PRIMARY KEY (id)
 );
 
+-- Table: location
+CREATE TABLE location (
+                          id serial  NOT NULL,
+                          city_id int  NOT NULL,
+                          name varchar(255)  NOT NULL,
+                          address varchar(255)  NOT NULL,
+                          longitude decimal(6,2)  NULL,
+                          latitude decimal(6,2)  NULL,
+                          CONSTRAINT location_pk PRIMARY KEY (id)
+);
+
 -- foreign keys
+-- Reference: atm_location (table: atm)
+ALTER TABLE atm ADD CONSTRAINT atm_location
+    FOREIGN KEY (location_id)
+        REFERENCES location (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: atm_service_relation_atm (table: atm_service_relation)
 ALTER TABLE atm_service_relation ADD CONSTRAINT atm_service_relation_atm
     FOREIGN KEY (atm_id)
@@ -67,5 +95,12 @@ ALTER TABLE atm_service_relation ADD CONSTRAINT atm_service_relation_atm_service
             INITIALLY IMMEDIATE
 ;
 
--- End of file.
+-- Reference: location_city (table: location)
+ALTER TABLE location ADD CONSTRAINT location_city
+    FOREIGN KEY (city_id)
+        REFERENCES city (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
 
+-- End of file.

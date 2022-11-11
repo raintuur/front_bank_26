@@ -1,3 +1,5 @@
+
+
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'AAA123');
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'BBB123');
 INSERT INTO public.atm (id, serial_number) VALUES (DEFAULT, 'CCC123');

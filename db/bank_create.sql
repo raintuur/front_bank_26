@@ -9,19 +9,16 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- Last modification date: 2022-09-16 09:58:27.985
 
 
-
-
-
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 12:11:08.128
+-- Last modification date: 2022-11-11 12:23:53.839
 
 -- tables
 -- Table: address
 CREATE TABLE address (
                          id serial  NOT NULL,
                          city_id int  NOT NULL,
-                         customer_id int  NOT NULL,
-                         location_id int  NOT NULL,
+                         customer_id int  NULL,
+                         location_id int  NULL,
                          street_name varchar(255)  NOT NULL,
                          start date  NOT NULL DEFAULT now(),
                          "end" date  NULL,

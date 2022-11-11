@@ -10,9 +10,21 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 12:23:53.839
+-- Last modification date: 2022-11-11 14:19:12.904
 
 -- tables
+-- Table: account
+CREATE TABLE account (
+                         id serial  NOT NULL,
+                         user_id int  NOT NULL,
+                         number varchar(50)  NOT NULL,
+                         description varchar(255)  NOT NULL,
+                         status char(1)  NOT NULL,
+                         balance bigint  NOT NULL,
+                         CONSTRAINT account_ak_1 UNIQUE (number) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+                         CONSTRAINT account_pk PRIMARY KEY (id)
+);
+
 -- Table: address
 CREATE TABLE address (
                          id serial  NOT NULL,
@@ -97,6 +109,20 @@ CREATE TABLE role (
                       CONSTRAINT role_pk PRIMARY KEY (id)
 );
 
+-- Table: transaction
+CREATE TABLE transaction (
+                             id serial  NOT NULL,
+                             account_id int  NOT NULL,
+                             sender varchar(50)  NOT NULL,
+                             receiver varchar(50)  NOT NULL,
+                             description varchar(50)  NOT NULL,
+                             amount bigint  NOT NULL,
+                             direction char(1)  NOT NULL,
+                             balance bigint  NOT NULL,
+                             timestamp timestamp  NOT NULL,
+                             CONSTRAINT transaction_pk PRIMARY KEY (id)
+);
+
 -- Table: user
 CREATE TABLE "user" (
                         id serial  NOT NULL,
@@ -107,6 +133,14 @@ CREATE TABLE "user" (
 );
 
 -- foreign keys
+-- Reference: account_user (table: account)
+ALTER TABLE account ADD CONSTRAINT account_user
+    FOREIGN KEY (user_id)
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: address_city (table: address)
 ALTER TABLE address ADD CONSTRAINT address_city
     FOREIGN KEY (city_id)
@@ -175,6 +209,14 @@ ALTER TABLE customer ADD CONSTRAINT customer_user
 ALTER TABLE location ADD CONSTRAINT location_city
     FOREIGN KEY (city_id)
         REFERENCES city (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: statement_account (table: transaction)
+ALTER TABLE transaction ADD CONSTRAINT statement_account
+    FOREIGN KEY (account_id)
+        REFERENCES account (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;

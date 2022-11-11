@@ -41,7 +41,15 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: ''
+      errorMessage: '',
+      loginInfo: {
+        userId: '',
+        roles: [
+          {
+            roleName: ''
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -66,17 +74,40 @@ export default {
         }
 
         this.$http.get("/bank/login", {
-          headers: {
-            'Content-Type': 'application/json',
-            Prefer: preference
-          },
-          params: {
+              headers: {
+                'Content-Type': 'application/json',
+                Prefer: preference
+              },
+              params: {
                 username: this.username,
                 password: this.password
               }
             }
         ).then(response => {
           console.log(response.data)
+          this.loginInfo = response.data
+          // todo: kui kasutajal on vaid üks roll ja see on admin,
+          //  siis mine admin lehele
+
+          if (this.loginInfo.roles.length > 1) {
+            // kasutajal on mitu rolli
+
+
+          } else {
+            // kasutajal on vaid üks roll
+            if (this.loginInfo.roles[0].roleName == 'admin') {
+              sessionStorage.setItem('userId', this.loginInfo.userId)
+              this.$router.push({name: 'adminHomeRoute'})
+            } else {
+              this.$router.push({name: 'customerHomeRoute', query: {
+                userId: this.loginInfo.userId,
+                roleName: this.loginInfo.roles[0].roleName
+                }})
+            }
+
+          }
+
+
         }).catch(error => {
           console.log(error)
         });

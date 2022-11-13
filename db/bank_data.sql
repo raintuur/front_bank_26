@@ -29,7 +29,7 @@ INSERT INTO public.atm_service_relation (id, atm_id, atm_service_id) VALUES (DEF
 INSERT INTO public.role (id, type) VALUES (DEFAULT, 'admin');
 INSERT INTO public.role (id, type) VALUES (DEFAULT, 'customer');
 
-INSERT INTO public."user" (id, username, password, role_id) VALUES (DEFAULT, 'admin', '123', 1);
+
 
 
 INSERT INTO public.customer (id, first_name, last_name, personal_code) VALUES (DEFAULT, 'Rain', 'Tüür', '38405040000');

@@ -20,10 +20,6 @@ FROM atm
 WHERE c.name = 'Tallinn'
   AND "as".name = 'maksed';
 
-INSERT INTO "user" (username, password, role_id)
-VALUES ('rain', '123', 2);
 
-INSERT INTO customer (first_name, last_name, personal_code, user_id)
-VALUES ('Rain', 'Tüür', 'EE0001',);
 
 

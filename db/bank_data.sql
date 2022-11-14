@@ -30,4 +30,6 @@ INSERT INTO public.role (id, type) VALUES (DEFAULT, 'admin');
 INSERT INTO public.role (id, type) VALUES (DEFAULT, 'customer');
 
 INSERT INTO public."user" (id, username, password, role_id) VALUES (DEFAULT, 'admin', '123', 1);
+insert into "user" (username, password, role_id) values ('Mati', '123', 2);
 
+INSERT into customer (first_name, last_name, personal_code, user_id) VALUES ('Mati', 'Mari', 'EE001', 2);

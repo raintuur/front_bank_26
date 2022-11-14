@@ -8,10 +8,8 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2022-09-16 09:58:27.985
 
-
-
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-14 08:51:13.983
+-- Last modification date: 2022-11-14 08:53:29.931
 
 -- tables
 -- Table: account
@@ -130,7 +128,7 @@ CREATE TABLE "user" (
                         username varchar(50)  NOT NULL,
                         password varchar(50)  NOT NULL,
                         role_id int  NOT NULL,
-                        CONSTRAINT user_ak_1 UNIQUE () NOT DEFERRABLE  INITIALLY IMMEDIATE,
+                        CONSTRAINT user_ak_1 UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                         CONSTRAINT user_pk PRIMARY KEY (id)
 );
 

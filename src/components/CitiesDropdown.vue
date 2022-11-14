@@ -29,7 +29,7 @@ export default {
             this.cities = result.data
           })
           .catch(error => {
-            alert('VIGA!!!! ')
+            // alert('VIGA!!!! ')
             console.log('Oh no. Mingi viga tuli vastuseks')
           });
     },

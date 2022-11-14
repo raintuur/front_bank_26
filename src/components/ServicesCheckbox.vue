@@ -29,7 +29,8 @@ export default {
             this.atmServices = result.data
           })
           .catch(error => {
-            alert("NO!!!!")
+            // alert("NO!!!!")
+            console.log('Services checkboxi viga')
           });
     }
   },

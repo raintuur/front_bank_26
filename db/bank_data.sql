@@ -25,9 +25,10 @@ INSERT INTO public.atm_service_relation (id, atm_id, atm_service_id) VALUES (DEF
 INSERT INTO public.atm_service_relation (id, atm_id, atm_service_id) VALUES (DEFAULT, 3, 1);
 INSERT INTO public.atm_service_relation (id, atm_id, atm_service_id) VALUES (DEFAULT, 3, 2);
 
-
 INSERT INTO public.role (id, type) VALUES (DEFAULT, 'admin');
 INSERT INTO public.role (id, type) VALUES (DEFAULT, 'customer');
 
 INSERT INTO public."user" (id, username, password, role_id) VALUES (DEFAULT, 'admin', '123', 1);
+INSERT INTO public."customer" (first_name, last_name, personal_code, user_id) VALUES ('Anton', 'Klink', 'EE001', '1')
+
 

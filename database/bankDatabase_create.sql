@@ -7,17 +7,32 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 10:25:09.861
+-- Last modification date: 2022-11-11 14:19:32.748
 
 -- tables
+-- Table: Account
+CREATE TABLE Account (
+                         id serial  NOT NULL,
+                         user_id int  NOT NULL,
+                         number varchar(50)  NOT NULL,
+                         description varchar(255)  NOT NULL,
+                         status char(1)  NOT NULL,
+                         balance bigint  NOT NULL,
+                         CONSTRAINT Account_ak_1 UNIQUE (number) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+                         CONSTRAINT Account_pk PRIMARY KEY (id)
+);
+
 -- Table: address
 CREATE TABLE address (
                          id serial  NOT NULL,
-                         street_name varchar(255)  NOT NULL,
                          city_id int  NOT NULL,
+                         location_id int  NULL,
+                         customer_id int  NULL,
+                         street_name varchar(255)  NOT NULL,
                          start_date date  NOT NULL DEFAULT now(),
                          end_date date  NULL,
-                         customer_id int  NOT NULL,
+                         longitude decimal(8,2)  NULL,
+                         latitude decimal(8,2)  NULL,
                          CONSTRAINT address_pk PRIMARY KEY (id)
 );
 
@@ -57,12 +72,12 @@ CREATE TABLE city (
 CREATE TABLE contact (
                          id serial  NOT NULL,
                          phone varchar(255)  NOT NULL,
+                         customer_id int  NOT NULL,
                          phone_start date  NOT NULL DEFAULT now(),
                          phone_end date  NULL,
                          email varchar(255)  NOT NULL,
                          email_start date  NOT NULL DEFAULT now(),
                          email_end date  NULL,
-                         customer_id int  NOT NULL,
                          CONSTRAINT contact_pk PRIMARY KEY (id)
 );
 
@@ -81,11 +96,8 @@ CREATE TABLE customer (
 CREATE TABLE location (
                           id serial  NOT NULL,
                           name varchar(255)  NOT NULL,
-                          city_id int  NOT NULL,
-                          address varchar(255)  NOT NULL,
-                          longitude decimal(8,2)  NULL,
-                          latitude decimal(8,2)  NULL,
                           status char(1)  NOT NULL DEFAULT 'A',
+                          city_id int  NOT NULL,
                           CONSTRAINT location_ak_1 UNIQUE (name) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                           CONSTRAINT location_pk PRIMARY KEY (id)
 );
@@ -98,24 +110,39 @@ CREATE TABLE role (
                       CONSTRAINT role_pk PRIMARY KEY (id)
 );
 
+-- Table: transaction
+CREATE TABLE transaction (
+                             id serial  NOT NULL,
+                             Account_id int  NOT NULL,
+                             sender varchar(50)  NOT NULL,
+                             receiver varchar(50)  NOT NULL,
+                             description varchar(50)  NOT NULL,
+                             amount bigint  NOT NULL,
+                             direction char(1)  NOT NULL,
+                             balance bigint  NOT NULL,
+                             timestamp timestamp  NOT NULL,
+                             CONSTRAINT transaction_pk PRIMARY KEY (id)
+);
+
 -- Table: user
 CREATE TABLE "user" (
                         id serial  NOT NULL,
                         username varchar(50)  NOT NULL,
                         password varchar(50)  NOT NULL,
+                        role_id int  NOT NULL,
                         CONSTRAINT user_ak_1 UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                         CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
--- Table: user_role
-CREATE TABLE user_role (
-                           id serial  NOT NULL,
-                           user_id int  NOT NULL,
-                           role_id int  NOT NULL,
-                           CONSTRAINT user_role_pk PRIMARY KEY (id)
-);
-
 -- foreign keys
+-- Reference: Account_user (table: Account)
+ALTER TABLE Account ADD CONSTRAINT Account_user
+    FOREIGN KEY (user_id)
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: address_city (table: address)
 ALTER TABLE address ADD CONSTRAINT address_city
     FOREIGN KEY (city_id)
@@ -128,6 +155,14 @@ ALTER TABLE address ADD CONSTRAINT address_city
 ALTER TABLE address ADD CONSTRAINT address_customer
     FOREIGN KEY (customer_id)
         REFERENCES customer (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: address_location (table: address)
+ALTER TABLE address ADD CONSTRAINT address_location
+    FOREIGN KEY (location_id)
+        REFERENCES location (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
@@ -180,23 +215,21 @@ ALTER TABLE location ADD CONSTRAINT location_city
             INITIALLY IMMEDIATE
 ;
 
--- Reference: role_user_role (table: user_role)
-ALTER TABLE user_role ADD CONSTRAINT role_user_role
+-- Reference: statement_Account (table: transaction)
+ALTER TABLE transaction ADD CONSTRAINT statement_Account
+    FOREIGN KEY (Account_id)
+        REFERENCES Account (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: user_role (table: user)
+ALTER TABLE "user" ADD CONSTRAINT user_role
     FOREIGN KEY (role_id)
         REFERENCES role (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
 
--- Reference: role_user_user (table: user_role)
-ALTER TABLE user_role ADD CONSTRAINT role_user_user
-    FOREIGN KEY (user_id)
-        REFERENCES "user" (id)
-        NOT DEFERRABLE
-            INITIALLY IMMEDIATE
-;
-
 -- End of file.
-
-
 

@@ -11,7 +11,7 @@
 --  U - UPDATE
 --  D - DELETE
 
-SELECT atm.serial_number, l.name, atm.status
+SELECT atm.serial_number, l.name, atm.status AS "seisund"
 FROM atm
          JOIN location l ON l.id = atm.location_id
          JOIN city c ON c.id = l.city_id

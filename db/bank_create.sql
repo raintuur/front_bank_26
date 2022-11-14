@@ -5,39 +5,42 @@ CREATE SCHEMA public
 -- taastab vajalikud andmebaasi õigused
     GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-09-16 09:58:27.985
-
-
-
-
-
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 10:20:59.137
+-- Last modification date: 2022-11-14 09:17:17.509
 
 -- tables
--- Table: Table_18
-CREATE TABLE Table_18 (
-
+-- Table: account
+CREATE TABLE account (
+                         id serial  NOT NULL,
+                         user_id int  NOT NULL,
+                         number varchar(50)  NOT NULL,
+                         description varchar(255)  NOT NULL,
+                         status char(1)  NOT NULL DEFAULT 'A',
+                         balance bigint  NOT NULL,
+                         CONSTRAINT account_ak_1 UNIQUE (number) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+                         CONSTRAINT account_pk PRIMARY KEY (id)
 );
 
 -- Table: address
 CREATE TABLE address (
                          id serial  NOT NULL,
-                         street_name varchar(255)  NOT NULL,
                          city_id int  NOT NULL,
+                         customer_id int  NULL,
+                         location_id int  NULL,
+                         street_name varchar(255)  NOT NULL,
                          start date  NOT NULL DEFAULT now(),
                          "end" date  NULL,
-                         customer_id int  NOT NULL,
+                         longitude decimal(6,2)  NULL,
+                         latitude decimal(6,2)  NULL,
                          CONSTRAINT address_pk PRIMARY KEY (id)
 );
 
 -- Table: atm
 CREATE TABLE atm (
                      id serial  NOT NULL,
-                     serial_number varchar(255)  NOT NULL,
                      location_id int  NOT NULL,
+                     serial_number varchar(255)  NOT NULL,
                      status char(1)  NOT NULL DEFAULT 'A',
                      CONSTRAINT atm_pk PRIMARY KEY (id)
 );
@@ -68,9 +71,9 @@ CREATE TABLE city (
 -- Table: contact
 CREATE TABLE contact (
                          id serial  NOT NULL,
+                         customer_id int  NOT NULL,
                          telephone varchar(255)  NOT NULL,
                          email varchar(255)  NOT NULL,
-                         customer_id int  NOT NULL,
                          start date  NOT NULL DEFAULT now(),
                          "end" date  NULL,
                          CONSTRAINT contact_pk PRIMARY KEY (id)
@@ -79,10 +82,10 @@ CREATE TABLE contact (
 -- Table: customer
 CREATE TABLE customer (
                           id serial  NOT NULL,
+                          user_id int  NOT NULL,
                           first_name varchar(255)  NOT NULL,
                           last_name varchar(255)  NOT NULL,
-                          personal_code varchar(50)  NOT NULL,
-                          user_id int  NOT NULL,
+                          personal_code varchar(11)  NOT NULL,
                           CONSTRAINT customer_ak_1 UNIQUE (personal_code) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                           CONSTRAINT customer_pk PRIMARY KEY (id)
 );
@@ -92,9 +95,6 @@ CREATE TABLE location (
                           id serial  NOT NULL,
                           city_id int  NOT NULL,
                           name varchar(255)  NOT NULL,
-                          address varchar(255)  NOT NULL,
-                          longitude decimal(6,2)  NULL,
-                          latitude decimal(6,2)  NULL,
                           status char(1)  NOT NULL DEFAULT 'A',
                           CONSTRAINT location_pk PRIMARY KEY (id)
 );
@@ -106,15 +106,39 @@ CREATE TABLE role (
                       CONSTRAINT role_pk PRIMARY KEY (id)
 );
 
+-- Table: transaction
+CREATE TABLE transaction (
+                             id serial  NOT NULL,
+                             account_id int  NOT NULL,
+                             sender varchar(50)  NOT NULL,
+                             receiver varchar(50)  NOT NULL,
+                             description varchar(50)  NOT NULL,
+                             amount bigint  NOT NULL,
+                             direction char(1)  NOT NULL,
+                             balance bigint  NOT NULL,
+                             timestamp timestamp  NOT NULL,
+                             CONSTRAINT transaction_pk PRIMARY KEY (id)
+);
+
 -- Table: user
 CREATE TABLE "user" (
                         id serial  NOT NULL,
                         username varchar(50)  NOT NULL,
                         password varchar(50)  NOT NULL,
+                        role_id int  NOT NULL,
+                        CONSTRAINT user_ak_1 UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                         CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
+-- Reference: account_user (table: account)
+ALTER TABLE account ADD CONSTRAINT account_user
+    FOREIGN KEY (user_id)
+        REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: address_city (table: address)
 ALTER TABLE address ADD CONSTRAINT address_city
     FOREIGN KEY (city_id)
@@ -127,6 +151,14 @@ ALTER TABLE address ADD CONSTRAINT address_city
 ALTER TABLE address ADD CONSTRAINT address_customer
     FOREIGN KEY (customer_id)
         REFERENCES customer (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: address_location (table: address)
+ALTER TABLE address ADD CONSTRAINT address_location
+    FOREIGN KEY (location_id)
+        REFERENCES location (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
@@ -167,6 +199,7 @@ ALTER TABLE contact ADD CONSTRAINT contact_customer
 ALTER TABLE customer ADD CONSTRAINT customer_user
     FOREIGN KEY (user_id)
         REFERENCES "user" (id)
+        ON DELETE  CASCADE
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
@@ -175,6 +208,22 @@ ALTER TABLE customer ADD CONSTRAINT customer_user
 ALTER TABLE location ADD CONSTRAINT location_city
     FOREIGN KEY (city_id)
         REFERENCES city (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: statement_account (table: transaction)
+ALTER TABLE transaction ADD CONSTRAINT statement_account
+    FOREIGN KEY (account_id)
+        REFERENCES account (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: user_role (table: user)
+ALTER TABLE "user" ADD CONSTRAINT user_role
+    FOREIGN KEY (role_id)
+        REFERENCES role (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;

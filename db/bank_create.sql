@@ -17,6 +17,8 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 
+
+
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2022-11-14 09:17:47.284
 

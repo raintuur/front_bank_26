@@ -15,8 +15,8 @@ export default {
       firstName: '',
       cities: [
         {
-          cityName: '',
-          cityNameId: 0
+          cityId: 0,
+          cityName: ''
         },
       ]
     }

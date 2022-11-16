@@ -7,7 +7,7 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-11 14:19:32.748
+-- Last modification date: 2022-11-14 09:16:58.549
 
 -- tables
 -- Table: Account
@@ -48,7 +48,7 @@ CREATE TABLE atm (
 -- Table: atm_service
 CREATE TABLE atm_service (
                              id serial  NOT NULL,
-                             service_name varchar(255)  NOT NULL,
+                             name varchar(255)  NOT NULL,
                              CONSTRAINT atm_service_pk PRIMARY KEY (id)
 );
 
@@ -203,6 +203,7 @@ ALTER TABLE contact ADD CONSTRAINT contact_customer
 ALTER TABLE customer ADD CONSTRAINT customer_user
     FOREIGN KEY (user_id)
         REFERENCES "user" (id)
+        ON DELETE  CASCADE
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
@@ -232,4 +233,5 @@ ALTER TABLE "user" ADD CONSTRAINT user_role
 ;
 
 -- End of file.
+
 

@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getAtmServicesCheckboxInfo: function () {
-      this.$http.get('/atm/service')
+      this.$http.get('/atm/option')
           .then(result => {
             this.atmOptions = result.data
           })

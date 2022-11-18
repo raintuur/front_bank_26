@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div v-for="atmService in atmServices" class="form-check">
-      <input v-model="atmService.isSelected" class="form-check-input" type="checkbox" value=""
-             :id="atmService.serviceId">
-      <label class="form-check-label" :for="atmService.serviceId">
-        {{ atmService.serviceName }}
+    <div v-for="option in atmOptions" class="form-check">
+      <input v-model="option.isSelected" class="form-check-input" type="checkbox" value=""
+             :id="option.optionId">
+      <label class="form-check-label" :for="option.optionId">
+        {{ option.optionName }}
       </label>
     </div>
     <div class="mt-5">
@@ -22,11 +22,11 @@ export default {
       isCashIn: Boolean(false),
       isPayments: Boolean(false),
 
-      atmServices: [
+      atmOptions: [
         {
-          serviceId: 0,
-          serviceName: '',
-          isSelected: Boolean(false)
+          optionId: 0,
+          optionName: '',
+          isSelected: null
         }
       ]
     }
@@ -43,10 +43,10 @@ export default {
 
     getAtmServiceSelectBoxInfo: function () {
       console.log('Olen Siin')
-      this.$http.get('/atm/service')
+      this.$http.get('/atm/option')
           .then(result => {
-            this.atmServices = result.data
-            console.log('Services = ' + JSON.stringify(this.atmServices))
+            this.atmOptions = result.data
+            console.log('Services = ' + JSON.stringify(this.atmOptions))
           })
           .catch(error => {
             alert('Viga')

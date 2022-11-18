@@ -35,10 +35,10 @@ export default {
       atmLocations: [
         {
           cityName: '',
-          atmLocationInfo: '',
-          atmServices: [
+          locationName: '',
+          atmOptions: [
             {
-              atmServiceName: ''
+              optionName: ''
             }
           ]
         }

@@ -11,7 +11,7 @@
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
+          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="navigateToAdminPage"
 
           />
         </div>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
 
-    clickAlertButtonEvent: function (locationName) {
+    navigateToAdminPage: function (locationName) {
       alert(locationName + ' alert from parent')
     },
 

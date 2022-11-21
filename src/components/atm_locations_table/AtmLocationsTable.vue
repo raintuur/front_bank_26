@@ -12,17 +12,18 @@
     <tbody>
 
     <!-- todo: tekitame ise järjekorra numbrid -->
-    <tr v-for="atmLocation in atmLocations" :key="atmLocation.atmLocationInfo">
-      <th scope="row">{{atmLocation.sequenceNumber}}</th>
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
+      <th scope="row">{{ atmLocation.sequenceNumber }}</th>
       <td>{{ atmLocation.cityName }}</td>
-      <td>{{ atmLocation.atmLocationInfo }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
-        <div v-for="service in atmLocation.atmServices" class="row">
-          {{service.serviceName}}
+        <div v-for="option in atmLocation.options" class="row">
+          {{ option.optionName }}
         </div>
       </td>
       <td>
-        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">Alert</button>
+        <button v-on:click="clickNavigateToAdminEvent(atmLocation.locationId)" type="button" class="btn btn-light">Lisa ATM
+        </button>
       </td>
 
     </tr>
@@ -37,8 +38,8 @@ export default {
     atmLocations: Array()
   },
   methods: {
-    clickAlertButtonEvent: function (locationName) {
-      this.$emit('clickAlertButtonEvent', locationName)
+    clickNavigateToAdminEvent: function (locationId) {
+      this.$emit('clickNavigateToAdminEvent', locationId)
     }
   }
 }

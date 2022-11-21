@@ -6,13 +6,12 @@
         <div class="col col-lg-3">
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
-            <ServicesCheckbox/>
+            <ServicesCheckbox :atm-options="atmOptions"/>
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="clickAlertButtonEvent"
-
+          <AtmLocationsTable :atm-locations="atmLocations" @clickNavigateToAdminEvent="navigateToAdminPage"
           />
         </div>
 
@@ -35,25 +34,26 @@ export default {
     return {
       atmLocations: [
         {
+          locationId: 0,
+          locationName: '',
           cityName: '',
-          atmLocationInfo: '',
-          atmServices: [
+          options: [
             {
-              serviceName: ''
+              optionName: ''
             }
           ]
         }
       ],
-
-
+      atmOptions: [
+        {
+          optionId: 0,
+          optionName: '',
+          isSelected: false
+        }
+      ]
     }
   },
   methods: {
-
-    clickAlertButtonEvent: function (locationName) {
-      alert(locationName + ' alert from parent')
-    },
-
     getAllAtmLocations: function () {
       this.$http.get("/atm/info")
           .then(response => {
@@ -77,14 +77,42 @@ export default {
       ).then(response => {
         this.atmLocations = response.data
         this.addSequenceNumbers()
-
-
         console.log(response.data)
       }).catch(error => {
         console.log(error)
       })
     },
-
+    //
+    // getAtmTableInfoByCityId: function (selectedCityNameId) {
+    //
+    //   let preference = ''
+    //   switch (selectedCityNameId) {
+    //     case 1:
+    //       preference = 'code=200, example=200-Tallinn'
+    //       break
+    //     case 2:
+    //       preference = 'code=200, example=200-Tartu'
+    //       break
+    //     case 3:
+    //       preference = 'code=200, example=200-Viljandi'
+    //       break
+    //   }
+    //
+    //   this.$http.get("/atm/info/by-city", {
+    //         params: {CityId: selectedCityNameId},
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           Prefer: preference
+    //         }
+    //       }
+    //   ).then(response => {
+    //     this.atmLocations = response.data
+    //     this.generateRowNumbers()
+    //     console.log(response.data)
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // },
 
     addSequenceNumbers: function () {
       let counter = 1
@@ -92,11 +120,28 @@ export default {
         location.sequenceNumber = counter
         counter++
       });
+    },
+
+    getAtmServicesCheckboxInfo: function () {
+      this.$http.get('/atm/option')
+          .then(result => {
+            this.atmOptions = result.data
+          })
+          .catch(error => {
+            // alert("NO!!!!")
+            console.log('Services checkboxi viga')
+          });
+    },
+
+    navigateToAdminPage: function (locationId) {
+      sessionStorage.setItem("locationId", locationId)
+      this.$router.push({name: "adminHomeRoute"})
     }
 
   },
   beforeMount() {
     this.getAllAtmLocations()
+    this.getAtmServicesCheckboxInfo()
   }
 }
 

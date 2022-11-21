@@ -67,7 +67,7 @@ export default {
     },
 
     navigateToAdminPage: function (locationId) {
-      sessionStorage.setItem(locationId, locationId)
+      sessionStorage.setItem("locationId", locationId)
       this.$router.push({name: 'adminHomeRoute'})
 
     },

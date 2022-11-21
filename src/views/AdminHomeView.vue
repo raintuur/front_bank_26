@@ -11,7 +11,7 @@
       </div>
 
       <select v-model="atmRequest.status" class="form-select" aria-label="Default select example">
-        <option selected disabled>Staatus</option>
+        <option selected disabled value="X">Staatus</option>
         <option value="A">Aktiivne</option>
         <option value="P">Ootel</option>
         <option value="S">Hoolduses</option>
@@ -20,7 +20,7 @@
 
       <ServicesCheckbox :atm-options="atmRequest.options"/>
 
-      <button class="btn btn-primary" type="button">Lisa ATM</button>
+      <button v-on:click="addAtm" class="btn btn-primary" type="button">Lisa ATM</button>
     </div>
 
   </div>
@@ -40,7 +40,7 @@ export default {
       atmRequest: {
         locationId: sessionStorage.getItem('locationId'),
         serialNumber: "string",
-        status: 's',
+        status: 'X',
         options: [
           {
             optionId: 0,
@@ -52,6 +52,16 @@ export default {
     }
   },
   methods: {
+    addAtm: function () {
+      this.$http.post("/atm/new", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
     getAtmServicesCheckboxInfo: function () {
       this.$http.get('/atm/option')
           .then(result => {

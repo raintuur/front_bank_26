@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-for="service in atmOptions" class="form-check">
-      <input v-model="service.isSelected" class="form-check-input" type="checkbox" id="flexCheckDefault">
+    <div v-for="option in atmOptions" class="form-check">
+      <input v-model="option.isSelected" class="form-check-input" type="checkbox" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
-        {{ service.optionName }}
+        {{ option.optionName }}
       </label>
     </div>
   </div>
@@ -13,7 +13,6 @@ export default {
   props: {
     atmOptions: {}
   },
-
   name: 'ServicesCheckbox'
 }
 </script>

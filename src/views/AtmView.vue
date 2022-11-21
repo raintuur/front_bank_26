@@ -6,12 +6,12 @@
         <div class="col col-lg-3">
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
-            <ServicesCheckbox :atm-options="atmOptions"/>
+            <ServicesCheckbox :atm-options="atmOptions" />
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent="navigateToAdminPage"
+          <AtmLocationsTable :atm-locations="atmLocations" @clickNavigateToAdminEvent="navigateToAdminPage"
 
           />
         </div>
@@ -60,12 +60,9 @@ export default {
   },
   methods: {
 
-
-
-
     navigateToAdminPage: function (locationId) {
-    sessionStorage.setItem('locationId',locationId)
-      this.$router.push({ name:'adminHomeRoute' })
+      sessionStorage.setItem('locationId', locationId)
+      this.$router.push({name: 'adminHomeRoute'})
     },
 
     getAllAtmLocations: function () {
@@ -147,7 +144,6 @@ export default {
             alert("NO!!!!")
           });
     },
-
   },
   beforeMount() {
     this.getAllAtmLocations()

@@ -53,7 +53,7 @@ export default {
   methods: {
 
     addAtm: function () {
-      this.$http.post("/atm/new", this.atmRequest
+      this.$http.post("/atm", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {

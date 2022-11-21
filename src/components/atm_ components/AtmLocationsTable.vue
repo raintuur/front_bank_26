@@ -13,21 +13,21 @@
     <!--todo: Seda elementi hakkame for loopima atmLocations-->
     <!--todo: Eesmärk saada see info propsist-->
     <!--todo: tekitame ise järjekorra numbrid-->
-    <tr v-for="atmTable in atmTables" >
+    <tr v-for="atmTable in atmTables">
       <th scope="row">{{ atmTable.SequenceNumber }}</th>
       <td>{{ atmTable.cityName }} </td>
-      <td>{{ atmTable.atmLocationInfo }}</td>
+      <td>{{ atmTable.locationName }}</td>
       <td>
         <div class="row row-cols-1">
-          <div v-for="service in atmTable.atmServices" class="col">
+          <div v-for="option in atmTable.atmOptions" class="col">
 
-            {{ service.atmServiceName }}
+            {{ option.optionName }}
           </div>
         </div>
       </td>
       <td>
-        <button v-on:click="clickAlertButtonEvent(atmTable.atmLocationInfo)" type="button" class="btn btn-outline-dark">Alert
-        </button>
+        <button v-on:click="clickNavigateToAdminEvent(atmTable.locationId)"
+                type="button" class="btn btn-outline-dark"> Lisa ATM asukohta </button>
       </td>
     </tr>
     </tbody>
@@ -43,17 +43,10 @@ export default {
   },
 
   methods: {
-    clickAlertButtonEvent: function (locationName) {
-      this.$emit('clickAlertButtonEvent',locationName)
+    clickNavigateToAdminEvent: function (locationId) {
+      this.$emit('clickNavigateToAdminEvent',locationId)
     }
   }
-
 }
 
-
 </script>
-
-
-<style scoped>
-
-</style>

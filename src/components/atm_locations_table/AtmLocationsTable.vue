@@ -22,7 +22,7 @@
         </div>
       </td>
       <td>
-        <button v-on:click="clickAlertButtonEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">Alert</button>
+        <button v-on:click="clickNavigateToAdminEvent(atmLocation.atmLocationInfo)" type="button" class="btn btn-light">Alert</button>
       </td>
 
     </tr>
@@ -37,7 +37,7 @@ export default {
     atmLocations: Array()
   },
   methods: {
-    clickAlertButtonEvent: function (locationName) {
+    clickNavigateToAdminEvent: function (locationName) {
       this.$emit('clickAlertButtonEvent', locationName)
     }
   }

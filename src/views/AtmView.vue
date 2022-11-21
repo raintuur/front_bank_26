@@ -71,8 +71,6 @@ export default {
       alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
 
 
-
-
       this.$http.get("/atm/info/by-city", {
             params: {
               cityId: selectedCityId
@@ -89,36 +87,6 @@ export default {
       })
     },
 
-    // getAtmTableInfoByCityId: function (selectedCityNameId) {
-    //
-    //   let preference = ''
-    //   switch (selectedCityNameId) {
-    //     case 1:
-    //       preference = 'code=200, example=200-Tallinn'
-    //       break
-    //     case 2:
-    //       preference = 'code=200, example=200-Tartu'
-    //       break
-    //     case 3:
-    //       preference = 'code=200, example=200-Viljandi'
-    //       break
-    //   }
-    //
-    //   this.$http.get("/atm/info/by-city", {
-    //         params: {CityId: selectedCityNameId},
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //           Prefer: preference
-    //         }
-    //       }
-    //   ).then(response => {
-    //     this.atmLocations = response.data
-    //     this.generateRowNumbers()
-    //     console.log(response.data)
-    //   }).catch(error => {
-    //     console.log(error)
-    //   })
-    // },
 
     addSequenceNumbers: function () {
       let counter = 1

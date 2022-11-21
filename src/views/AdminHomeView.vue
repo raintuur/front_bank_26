@@ -12,7 +12,7 @@
       </div>
 
       <select v-model="atmRequest.status" class="form-select" aria-label="Default select example">
-        <option selected disabled value="X" >Vali staatus</option>
+        <option selected disabled value="" >Vali staatus</option>
         <option value="A">aktiivne</option>
         <option value="P">aktiveerimata</option>
       </select>
@@ -39,7 +39,7 @@ export default {
       atmRequest: {
         locationId: sessionStorage.getItem('locationId'),
         serialNumber: '',
-        status: 'X',
+        status: '',
         options: [
           {
             optionId: 0,

@@ -13,6 +13,6 @@ export default {
   props: {
     atmOptions: {}
   },
-  name: 'ServicesCheckbox',
+  name: 'ServicesCheckbox'
 }
 </script>

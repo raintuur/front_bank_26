@@ -8,10 +8,10 @@
 
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">ATM seeria number</span>
-        <input type="text" placeholder="AAA" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input v-model="atmRequest.serialNumber" type="text" placeholder="AAA" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
 
-      <select class="form-select" aria-label="Default select example">
+      <select v-model="atmRequest.status" class="form-select" aria-label="Default select example">
         <option selected disabled >Vali staatus</option>
         <option value="A">aktiivne</option>
         <option value="P">aktiveerimata</option>
@@ -20,7 +20,7 @@
 
       <ServicesCheckbox :atm-options="atmRequest.options"/>
 
-      <button class="btn btn-primary" type="button">Lisa ATM</button>
+      <button v-on:click="addAtm" class="btn btn-primary" type="button">Lisa ATM</button>
 
     </div>
 
@@ -51,6 +51,17 @@ export default {
     }
   },
   methods: {
+
+    addAtm: function () {
+      this.$http.post("/atm/new", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
     getAtmServicesCheckboxInfo: function () {
       this.$http.get('/atm/option')
           .then(result => {

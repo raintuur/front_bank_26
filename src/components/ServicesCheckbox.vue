@@ -10,31 +10,10 @@
 </template>
 <script>
 export default {
-  name: 'ServicesCheckbox',
-  data: function () {
-    return {
-      atmOptions: [
-        {
-          optionId: 0,
-          optionName: '',
-          isSelected: false
-        }
-      ]
-    }
+  props: {
+    atmOptions: {}
   },
-  methods: {
-    getAtmServicesCheckboxInfo: function () {
-      this.$http.get('/atm/option')
-          .then(result => {
-            this.atmOptions = result.data
-          })
-          .catch(error => {
-            alert("NO!!!!")
-          });
-    }
-  },
-  beforeMount() {
-    this.getAtmServicesCheckboxInfo()
-  }
+
+  name: 'ServicesCheckbox'
 }
 </script>

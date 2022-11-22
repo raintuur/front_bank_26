@@ -16,12 +16,12 @@ const routes = [
         component: HomeView
     },
     {
-        path: '/customer/Home',
+        path: '/customer/home',
         name: 'customerHomeRoute',
         component: CustomerHomeView
     },
     {
-        path: '/admin/Home',
+        path: '/admin/home',
         name: 'adminHomeRoute',
         component: AdminHomeView
     },

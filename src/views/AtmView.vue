@@ -6,7 +6,7 @@
         <div class="col col-lg-3">
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
-            <ServicesCheckbox :atm-options="atmOptions"/>
+            <ServicesCheckbox :atm-options="atmOptions" />
           </div>
         </div>
 

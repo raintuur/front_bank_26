@@ -4,14 +4,14 @@
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
-          <CitiesDropdown @clickSelectCityEvent = "getAtmLocationsById" />
+          <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
-            <ServicesCheckbox/>
+            <ServicesCheckbox :atm-options="atmOptions" />
           </div>
         </div>
 
         <div class="col col-lg-9">
-          <AtmLocationsTable :atm-locations="atmLocations" @clickAlertButtonEvent = "clickAlertButtonEvent"/>
+          <AtmLocationsTable :atm-locations="atmLocations" @clickNavigateToAdminEvent="navigateToAdminPage"/>
         </div>
 
       </div>
@@ -29,13 +29,21 @@ export default {
   components: {ServicesCheckbox, CitiesDropdown, AtmLocationsTable},
   data: function () {
     return {
+      atmOptions: [
+        {
+          optionId: 0,
+          optionName: '',
+          isSelected: false
+        }
+      ],
       atmLocations: [
         {
+          locationId: 0,
+          locationName: '',
           cityName: '',
-          atmLocationInfo: '',
-          atmServices: [
+          options: [
             {
-              serviceName: ''
+              optionName: ''
             }
           ]
         }
@@ -43,9 +51,9 @@ export default {
     }
   },
   methods: {
-
-    clickAlertButtonEvent: function (locationName) {
-      alert(locationName + 'alert from parent')
+    navigateToAdminPage: function (locationId) {
+      sessionStorage.setItem('locationId', locationId)
+      this.$router.push({name: 'adminHomeRoute'})
     },
 
     getAllAtmLocations: function () {
@@ -77,17 +85,62 @@ export default {
       })
     },
 
+
+    // getAtmTableInfoByCityId: function (selectedCityNameId) {
+    //
+    //   let preference = ''
+    //   switch (selectedCityNameId) {
+    //     case 1:
+    //       preference = 'code=200, example=200-Tallinn'
+    //       break
+    //     case 2:
+    //       preference = 'code=200, example=200-Tartu'
+    //       break
+    //     case 3:
+    //       preference = 'code=200, example=200-Viljandi'
+    //       break
+    //   }
+    //
+    //   this.$http.get("/atm/info/by-city", {
+    //         params: {CityId: selectedCityNameId},
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           Prefer: preference
+    //         }
+    //       }
+    //   ).then(response => {
+    //     this.atmLocations = response.data
+    //     this.generateRowNumbers()
+    //     console.log(response.data)
+    //   }).catch(error => {
+    //     console.log(error)
+    //   })
+    // },
+
+
     addSequenceNumbers: function () {
       let counter = 1
       this.atmLocations.forEach(location => {
         location.sequenceNumber = counter
         counter++
       });
-    }
+    },
+
+    getAtmServicesCheckboxInfo: function () {
+      console.log('OLEN SIIN')
+      this.$http.get('/atm/option')
+          .then(result => {
+            this.atmOptions = result.data
+          })
+          .catch(error => {
+            alert('ERRORRRR')
+          });
+    },
 
   },
   beforeMount() {
     this.getAllAtmLocations()
+    this.getAtmServicesCheckboxInfo()
   }
 }
 

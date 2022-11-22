@@ -54,7 +54,6 @@ export default {
 
       this.errorMessage = ''
 
-      console.log('OLEN SIIIN')
       if (this.username.length === 0 || this.password.length === 0) {
         this.errorMessage = 'Täida kõik väljad!'
       } else {
@@ -96,6 +95,7 @@ export default {
               sessionStorage.setItem('userId', this.loginInfo.userId)
               this.$router.push({name: 'adminHomeRoute'});
             } else {
+              // siis mine customer lehele
               this.$router.push({name: 'customerHomeRoute', query: {
                 userId: this.loginInfo.userId,
                 roleName: this.loginInfo.roles[0].roleName

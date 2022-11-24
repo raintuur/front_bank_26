@@ -1,12 +1,15 @@
 <template>
   <div>
+    <div>
+
+    </div>
 
     <div class="container">
       <div class="row justify-content-start">
         <div class="col col-lg-3">
           <CitiesDropdown @clickSelectCityEvent="getAtmLocationsById"/>
           <div class="row">
-            <ServicesCheckbox :atm-options="atmOptions" />
+            <Services  Checkbox :atm-options="atmOptions" />
           </div>
         </div>
 

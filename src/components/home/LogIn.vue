@@ -41,71 +41,51 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: '',
-      loginInfo: {
+
+      loginResponse: {
         userId: '',
         roleId: 0,
         roleType: 0,
-      }
+      },
+      errorMessage: '',
+      errorCode: ''
     }
   },
   methods: {
     login: function () {
+
       this.errorMessage = ''
-
-      if (this.username.length == 0 || this.password.length == 0) {
-        this.errorMessage = 'Täida kõik väljad'
-      } else {
-
-        // Stoplighti näide, et kuidas sundida mock serverti mingit kindlat vastust andma
-        // let preference = ''
-        // switch (this.username) {
-        //   case 'admin':
-        //     preference = 'code=200, example=200 - admin'
-        //     break;
-        //   case 'multirole':
-        //     preference = 'code=200, example=200 - multirole'
-        //     break;
-        //   case 'customer':
-        //     preference = 'code=200, example=200 - customer'
-        //     break;
-        // }
-
-        this.$http.get("/login", {
-              // Stoplighti näide, et kuidas sundida mock serverti mingit kindlat vastust andma
-              // headers: {
-              //   'Content-Type': 'application/json',
-              //   Prefer: preference
-              // },
-              params: {
-                username: this.username,
-                password: this.password
-              }
+      this.$http.get("/login", {
+            params: {
+              username: this.username,
+              password: this.password
             }
-        ).then(response => {
-          console.log(response.data)
-          this.loginInfo = response.data
+          }
+      ).then(response => {
+        this.loginResponse = response.data
 
-          sessionStorage.setItem('userId', this.loginInfo.userId)
-          this.$router.push({name: 'adminHomeRoute'})
+        if (this.loginResponse.roleType === 'admin') {
+          sessionStorage.setItem('userId', this.loginResponse.userId)
+          this.$router.push({
+            name:'adminHomeRoute'
+          })
+        } else {
 
           this.$router.push({
-            name: 'customerHomeRoute', query: {
-              userId: this.loginInfo.userId,
-              roleName: this.loginInfo.roles[0].roleName
+            name: 'customerHomeRoute', query {
+              userId: this.loginResponse.userId,
+              roleName: this.loginResponse.roleType
             }
           })
+        }
 
-
-
-
-        }).catch(error => {
-          console.log(error)
-        });
-      }
-
-
+      }).catch(error => {
+        this.errorMessage = error.response.data.message
+        this.errorCode = error.response.data.errorCode
+        console.log(error)
+      })
     },
+
   }
 }
 </script>

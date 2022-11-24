@@ -6,7 +6,7 @@
 
       <div class="col-lg-5">
 
-        <AlertError :message="errorMessage"/>
+        <AlertError :message="errorResponse.message"/>
 
 
         <div class="input-group mb-3">
@@ -41,75 +41,80 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: '',
-      loginInfo: {
-        userId: 0,
-        roles: [
-          {
-            roleName: ''
-          }
-        ]
-      }
+
+      loginResponse: {
+        userId: '',
+        roleId: 0,
+        roleType: 0,
+      },
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      },
     }
   },
   methods: {
+
     login: function () {
-      this.errorMessage = ''
-
+      this.errorResponse.message = ''
       if (this.username.length == 0 || this.password.length == 0) {
-        this.errorMessage = 'Täida kõik väljad'
+        this.displayRequiredFieldsNotFilledAlert();
       } else {
-
-        let preference = ''
-        switch (this.username) {
-          case 'admin':
-            preference = 'code=200, example=200 - admin'
-            break;
-          case 'multirole':
-            preference = 'code=200, example=200 - multirole'
-            break;
-          case 'customer':
-            preference = 'code=200, example=200 - customer'
-            break;
-        }
-
-        this.$http.get("/bank/login", {
-              headers: {
-                'Content-Type': 'application/json',
-                Prefer: preference
-              },
-              params: {
-                username: this.username,
-                password: this.password
-              }
-            }
-        ).then(response => {
-          console.log(response.data)
-          this.loginInfo = response.data
-          //  todo: if user has only one role and it is admin
-          //  then go to admin page
-
-          if (this.loginInfo.roles.length > 1) {
-
-          } else {
-
-            if (this.loginInfo.roles[0].roleName == 'admin') {
-              sessionStorage.setItem('userId', this.loginInfo.userId)
-              this.$router.push({name: 'adminHomeRoute'})
-            } else {
-              this.$router.push({name: 'customerHomeRoute', query: { userId: this.loginInfo.userId}})
-            }
-
-          }
-
-
-        }).catch(error => {
-          console.log(error)
-        });
+        this.sendLoginRequest();
       }
-
-
     },
+
+    displayRequiredFieldsNotFilledAlert: function () {
+      this.errorResponse.message = 'Täida kõik väljad';
+    },
+
+    sendLoginRequest: function () {
+      this.$http.get("/login", {
+            params: {
+              username: this.username,
+              password: this.password
+            }
+          }
+      ).then(response => {
+        this.loginResponse = response.data
+        this.navigateToNextPage();
+      }).catch(error => {
+        this.errorResponse = error.response.data
+      });
+    },
+
+
+    navigateToNextPage: function () {
+      if (this.loginResponse.roleType === 'admin') {
+        this.navigateToAdmin();
+      } else {
+        this.navigateToCustomer();
+      }
+    },
+
+    navigateToAdmin: function () {
+      sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$router.push({
+        name: 'adminHomeRoute'
+      });
+    },
+
+    navigateToCustomer: function () {
+      this.$router.push({
+        name: 'customerHomeRoute', query: {
+          userId: this.loginResponse.userId,
+          roleName: this.loginResponse.roleType
+        }
+      })
+    },
+
+
+
   }
 }
 </script>
+
+
+
+
+

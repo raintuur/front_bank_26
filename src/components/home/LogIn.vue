@@ -6,7 +6,7 @@
 
       <div class="col-lg-5">
 
-        <AlertError :message="errorMessage"/>
+        <AlertError :message="errorResponse.message"/>
 
 
         <div class="input-group mb-3">
@@ -47,14 +47,28 @@ export default {
         roleId: 0,
         roleType: 0,
       },
-      errorMessage: '',
-      errorCode: ''
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      },
     }
   },
   methods: {
-    login: function () {
 
-      this.errorMessage = ''
+    login: function () {
+      this.errorResponse.message = ''
+      if (this.username.length == 0 || this.password.length == 0) {
+        this.displayRequiredFieldsNotFilledAlert();
+      } else {
+        this.sendLoginRequest();
+      }
+    },
+
+    displayRequiredFieldsNotFilledAlert: function () {
+      this.errorResponse.message = 'Täida kõik väljad';
+    },
+
+    sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
               username: this.username,
@@ -63,29 +77,44 @@ export default {
           }
       ).then(response => {
         this.loginResponse = response.data
-
-        if (this.loginResponse.roleType === 'admin') {
-          sessionStorage.setItem('userId', this.loginResponse.userId)
-          this.$router.push({
-            name:'adminHomeRoute'
-          })
-        } else {
-
-          this.$router.push({
-            name: 'customerHomeRoute', query {
-              userId: this.loginResponse.userId,
-              roleName: this.loginResponse.roleType
-            }
-          })
-        }
-
+        this.navigateToNextPage();
       }).catch(error => {
-        this.errorMessage = error.response.data.message
-        this.errorCode = error.response.data.errorCode
-        console.log(error)
+        this.errorResponse = error.response.data
+      });
+    },
+
+
+    navigateToNextPage: function () {
+      if (this.loginResponse.roleType === 'admin') {
+        this.navigateToAdmin();
+      } else {
+        this.navigateToCustomer();
+      }
+    },
+
+    navigateToAdmin: function () {
+      sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$router.push({
+        name: 'adminHomeRoute'
+      });
+    },
+
+    navigateToCustomer: function () {
+      this.$router.push({
+        name: 'customerHomeRoute', query: {
+          userId: this.loginResponse.userId,
+          roleName: this.loginResponse.roleType
+        }
       })
     },
+
+
 
   }
 }
 </script>
+
+
+
+
+

@@ -14,6 +14,8 @@
         <img :src="pictureResponse.pictureData" class="myPicSize">
       </div>
 
+      <font-awesome-icon v-on:click="test123" icon="fa-solid fa-pen-to-square" />
+
 
 
     </div>

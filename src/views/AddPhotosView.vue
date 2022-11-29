@@ -5,9 +5,17 @@
     <button v-on:click="addPicture" type="button" class="btn btn-primary">Salvesta pilt</button>
 
     <div class="row">
-      <div>
+
+<!--  todo: Kui  pictureData == null   -->
+      <div v-if="pictureResponse.pictureData === null">
         <img src="../assets/avatar.png" class="myPicSize">
       </div>
+      <div v-else>
+        <img :src="pictureResponse.pictureData" class="myPicSize">
+      </div>
+
+
+
     </div>
 
   </div>
@@ -25,6 +33,10 @@ export default {
       pictureRequest: {
         userId: 0,
         pictureData: ''
+      },
+      pictureResponse: {
+        userId: 0,
+        pictureData: ''
       }
     }
   },
@@ -35,9 +47,10 @@ export default {
     },
 
     addPicture: function () {
+      this.pictureRequest.userId = this.userId
       this.$http.post("/photo", this.pictureRequest
       ).then(response => {
-        console.log(response.data)
+        this.getUserPhoto()
       }).catch(error => {
         console.log(error)
       })
@@ -48,13 +61,11 @@ export default {
         params: {
           userId: this.userId
         }
+      }).then(response => {
+        this.pictureResponse = response.data
+      }).catch(error => {
+        console.log(error)
       })
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
     },
 
   },

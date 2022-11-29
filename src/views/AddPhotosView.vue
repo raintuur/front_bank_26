@@ -1,6 +1,8 @@
 <template>
   <div>
-  <ImageInput @pictureInputSuccess="addPicture" />
+  <ImageInput @pictureInputSuccess="setPicture" />
+
+    <button v-on:click="addPicture" type="button" class="btn btn-primary">Salvesta pilt</button>
 
   </div>
 </template>
@@ -21,8 +23,11 @@ export default {
   },
 
   methods: {
-    addPicture: function (picture) {
-      this.pictureRequest.pictureData = picture
+    setPicture: function (picture) {
+      this.pictureRequest.pictureData = picture;
+    },
+
+    addPicture: function () {
       this.$http.post("/photo", this.pictureRequest
       ).then(response => {
         console.log(response.data)

@@ -1,8 +1,14 @@
 <template>
   <div>
-  <ImageInput @pictureInputSuccess="setPicture" />
+    <ImageInput @pictureInputSuccess="setPicture"/>
 
     <button v-on:click="addPicture" type="button" class="btn btn-primary">Salvesta pilt</button>
+
+    <div class="row">
+      <div>
+        <img src="../assets/avatar.png" class="myPicSize" >
+      </div>
+    </div>
 
   </div>
 </template>

@@ -13,7 +13,7 @@
       <div v-else>
         <img :src="pictureResponse.pictureData" class="myPicSize">
       </div>
-
+      
 
 
     </div>
@@ -42,6 +42,10 @@ export default {
   },
 
   methods: {
+    test123: function () {
+      alert("TEST")
+
+    },
     setPicture: function (picture) {
       this.pictureRequest.pictureData = picture;
     },

@@ -2,21 +2,24 @@
   <div>
     <ImageInput @pictureInputSuccess="setPicture"/>
 
-    <button v-on:click="addPicture" type="button" class="btn btn-primary">Salvesta pilt</button>
+    <button  v-on:click="addPicture" type="button" class="btn btn-primary">Salvesta pilt</button>
 
     <div class="row">
 
 <!--  todo: Kui  pictureData == null   -->
+
       <div v-if="pictureResponse.pictureData === null">
         <img src="../assets/avatar.png" class="myPicSize">
       </div>
       <div v-else>
         <img :src="pictureResponse.pictureData" class="myPicSize">
       </div>
-
-
+      <font-awesome-icon icon="fa-sharp fa-solid fa-user-pen" />
 
     </div>
+
+
+
 
   </div>
 </template>

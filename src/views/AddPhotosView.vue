@@ -6,7 +6,7 @@
 
     <div class="row">
       <div>
-        <img src="../assets/avatar.png" class="myPicSize" >
+        <img src="../assets/avatar.png" class="myPicSize">
       </div>
     </div>
 
@@ -21,8 +21,9 @@ export default {
   components: {ImageInput},
   data: function () {
     return {
+      userId: sessionStorage.getItem('userId'),
       pictureRequest: {
-        userId: sessionStorage.getItem('userId'),
+        userId: 0,
         pictureData: ''
       }
     }
@@ -42,6 +43,23 @@ export default {
       })
     },
 
+    getUserPhoto: function () {
+      this.$http.get("/photo", {
+        params: {
+          userId: this.userId
+        }
+      })
+          .then(response => {
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+
+  },
+  beforeMount() {
+    this.getUserPhoto()
   }
 }
 </script>

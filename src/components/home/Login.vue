@@ -59,12 +59,8 @@ export default {
     },
 
     pushToCustomerPage: function () {
-      this.$router.push({
-        name: 'customerHomeRoute', query: {
-          userId: this.loginInfo.userId,
-          roleType: this.loginInfo.roleType
-        }
-      })
+      sessionStorage.setItem('userId', this.loginInfo.userId)
+      this.$router.push({name: 'customerHomeRoute'})
     },
 
     checkRoleType: function () {

@@ -5,6 +5,7 @@
       <router-link to="/atm">ATM</router-link> |
       <router-link to="/customer">Customer</router-link>  |
       <router-link to="/car">Cars</router-link> |
+      <router-link to="/photo">Pildi lisamine</router-link> |
       <router-link to="/about">About</router-link>|
       <router-link to="/adminHome">Admin</router-link>
     </nav>

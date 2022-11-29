@@ -12,12 +12,14 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 
 import Login from "@/components/home/Login";
 import HomeGreeting from "@/components/home/HomeGreeting";
+
 
 export default {
   name: 'HomeView',

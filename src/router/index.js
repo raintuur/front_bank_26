@@ -6,6 +6,7 @@ import CustomersView from "@/views/CustomersView";
 import CarsView from "@/views/CarsView";
 import CustomerHomeView from "@/views/CustomerHomeView";
 import AdminHomeView from "@/views/AdminHomeView";
+import AddPhotosView from "@/views/AddPhotosView";
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
         path: '/customer/home',
         name: 'customerHomeRoute',
         component: CustomerHomeView
+    },
+    {
+        path: '/photo',
+        name: 'AddPhotoRoute',
+        component: AddPhotosView
     },
     {
         path: '/admin/home',

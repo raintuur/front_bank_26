@@ -6,13 +6,15 @@
 
     <div class="row">
 
+<!--  todo: Kui  pictureData == null   -->
       <div v-if="pictureResponse.pictureData === null">
-        <img src="../assets/avatar.png" class="myPicSize" >
+        <img src="../assets/avatar.png" class="myPicSize">
+      </div>
+      <div v-else>
+        <img :src="pictureResponse.pictureData" class="myPicSize">
       </div>
 
-      <div v-else>
-        <img :src="pictureResponse.pictureData" class="myPicSize" >
-      </div>
+
 
     </div>
 
@@ -32,8 +34,8 @@ export default {
         userId: 0,
         pictureData: ''
       },
-      pictureResponse:{
-        userId:0,
+      pictureResponse: {
+        userId: 0,
         pictureData: ''
       }
     }
@@ -56,11 +58,10 @@ export default {
 
     getUserPhoto: function () {
       this.$http.get("/photo", {
-            params: {
-              userId: this.userId,
-            }
-          }
-      ).then(response => {
+        params: {
+          userId: this.userId
+        }
+      }).then(response => {
         this.pictureResponse = response.data
       }).catch(error => {
         console.log(error)
@@ -68,11 +69,9 @@ export default {
     },
 
   },
-
   beforeMount() {
     this.getUserPhoto()
   }
-
 }
 </script>
 

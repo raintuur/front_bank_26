@@ -97,6 +97,7 @@ export default {
     },
 
     navigateToCustomer: function () {
+      sessionStorage.setItem('userId', this.loginResponse.userId);
       this.$router.push({
         name: 'customerHomeRoute', query: {
           userId: this.loginResponse.userId,

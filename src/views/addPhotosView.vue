@@ -39,7 +39,7 @@ export default {
       },
       pictureResponse: {
         userId: 0,
-        pictureData: null
+        pictureData: ''
       }
     }
   },

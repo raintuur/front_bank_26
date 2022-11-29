@@ -17,6 +17,11 @@ const routes = [
         component: HomeView
     },
     {
+        path: '/photo',
+        name: 'addPhotosRoute',
+        component: AddPhotosView
+    },
+    {
         path: '/customer/home',
         name: 'customerHomeRoute',
         component: CustomerHomeView

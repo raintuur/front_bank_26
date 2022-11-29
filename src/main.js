@@ -5,7 +5,7 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
-import "../src/assets/css/myStyle.css"
+import "@/assets/css/myStyle.css"
 
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false

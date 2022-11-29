@@ -23,7 +23,7 @@ export default {
   methods: {
     addPicture: function (picture) {
       this.pictureRequest.pictureData = picture
-      this.$http.post("/picture", this.pictureRequest
+      this.$http.post("/photo", this.pictureRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {

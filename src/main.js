@@ -14,3 +14,12 @@ new Vue({
   router,
   render: function (h) { return h(App) }
 }).$mount('#app')
+
+// font awesome stuff
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+
+// font awesome stuff
+library.add(faUserSecret)
+Vue.component('font-awesome-icon', FontAwesomeIcon)

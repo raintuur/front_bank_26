@@ -3,9 +3,11 @@
     <h3>Sisselogimine</h3>
 
     <div class="row justify-content-center">
+
       <div class="col-lg-5">
 
         <AlertError :message="errorResponse.message"/>
+
 
         <div class="input-group mb-3">
           <span class="input-group-text">Kasutajanimi</span>
@@ -13,14 +15,13 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Parool</span>
+          <span class="input-group-text">parool</span>
           <input v-model="password" type="password" class="form-control">
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
           <button v-on:click="login" class="btn btn-primary" type="button">Logi sisse</button>
         </div>
-
 
       </div>
 
@@ -31,7 +32,7 @@
   </div>
 </template>
 <script>
-import AlertError from "@/components/Alert/AlertError";
+import AlertError from "@/components/alert/AlertError";
 
 export default {
   name: 'LogIn',
@@ -43,16 +44,17 @@ export default {
 
       loginResponse: {
         userId: '',
-        roleId: 2,
+        roleId: 0,
         roleType: 0,
       },
       errorResponse: {
         message: '',
-        errorCode: 0,
-      }
+        errorCode: 0
+      },
     }
   },
   methods: {
+
     login: function () {
       this.errorResponse.message = ''
       if (this.username.length == 0 || this.password.length == 0) {
@@ -63,7 +65,7 @@ export default {
     },
 
     displayRequiredFieldsNotFilledAlert: function () {
-      this.errorResponse.message = 'Taida koik valjad'
+      this.errorResponse.message = 'Täida kõik väljad';
     },
 
     sendLoginRequest: function () {
@@ -81,6 +83,7 @@ export default {
       });
     },
 
+
     navigateToNextPage: function () {
       if (this.loginResponse.roleType === 'admin') {
         this.navigateToAdmin();
@@ -91,6 +94,7 @@ export default {
 
     navigateToAdmin: function () {
       sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$emit('updateStatusEvent')
       this.$router.push({
         name: 'adminHomeRoute'
       });
@@ -98,6 +102,7 @@ export default {
 
     navigateToCustomer: function () {
       sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$emit('updateStatusEvent')
       this.$router.push({
         name: 'customerHomeRoute', query: {
           userId: this.loginResponse.userId,
@@ -105,6 +110,14 @@ export default {
         }
       })
     },
+
+
+
   }
 }
 </script>
+
+
+
+
+

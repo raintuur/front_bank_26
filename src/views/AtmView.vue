@@ -80,7 +80,6 @@ export default {
     getAtmLocationsById: function (selectedCityId) {
       alert('Klick event juhtus, saime parentis sõnumi ja käivitasime selle meetodi, City id: ' + selectedCityId)
 
-
       this.$http.get("/atm/info/by-city", {
             params: {
               cityId: selectedCityId
@@ -127,7 +126,6 @@ export default {
     //     console.log(error)
     //   })
     // },
-
 
     addSequenceNumbers: function () {
       let counter = 1

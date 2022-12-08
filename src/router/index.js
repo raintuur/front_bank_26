@@ -17,6 +17,11 @@ const routes = [
         component: HomeView
     },
     {
+        path: '/photo',
+        name: 'addPhotosRoute',
+        component: AddPhotosView
+    },
+    {
         path: '/customer/home',
         name: 'customerHomeRoute',
         component: CustomerHomeView
@@ -40,11 +45,6 @@ const routes = [
         path: '/atm',
         name: 'atmRoute',
         component: AtmView
-    },
-    {
-        path: '/photo',
-        name: 'addPhotosRoute',
-        component: AddPhotosView
     },
     {
         path: '/about',

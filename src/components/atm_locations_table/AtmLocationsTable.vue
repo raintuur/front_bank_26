@@ -6,7 +6,8 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th scope="col">nupp</th>
+      <th scope="col">lisa</th>
+      <th scope="col">kustuta</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
         <button v-on:click="clickNavigateToAdminEvent(atmLocation.locationId)" type="button" class="btn btn-light">
           Lisa ATM asukohta
         </button>
+      </td>
+      <td>
+        <font-awesome-icon icon="fa-solid fa-trash" />
       </td>
 
     </tr>

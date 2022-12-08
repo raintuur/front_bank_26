@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+  <!--  SIIN komponendis App.vue rida 44 on @updateStatusEvent listener, mis käivitab siin komponendis oleva meetodi 'updateStatus'  -->
+  <!--  updateStatusEvent EVENT visatakse õhku LogIn.vue komponendist (rida 97 või 105)  -->
+  <!--  HomeView.vue komponendis (rida 15) on selline süntaks (v-on="$listeners"), mis viskab lihtsalt omakorda 'emiti' edasi ülesse poole  -->
+  <!--  mis siis püütaksegi kinni siin kompinendis App.vue real 44  -->
 
     <!--  ILMA SISSE LOGIMATA  -->
     <div v-if="displayWithLogin">
@@ -37,7 +41,7 @@
       </nav>
     </div>
 
-    <router-view @updateStatus="updateStatus"/>
+    <router-view @updateStatusEvent="updateStatus"/>
   </div>
 </template>
 <script>

@@ -11,7 +11,7 @@
       <div class="col-lg-6">
 
         <!--    SELLINE v-on="$listeners" viskab childist tuleva emiti ülesse edasi   -->
-        <!--    ehk siis see emit jõuab AOO.vue'sse edasi   -->
+        <!--    ehk siis see emit jõuab App.vue'sse edasi   -->
         <LogIn v-on="$listeners"/>
       </div>
     </div>

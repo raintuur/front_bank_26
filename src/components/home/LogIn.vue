@@ -94,6 +94,7 @@ export default {
 
     navigateToAdmin: function () {
       sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$emit('updateStatus')
       this.$router.push({
         name: 'adminHomeRoute'
       });
@@ -101,6 +102,7 @@ export default {
 
     navigateToCustomer: function () {
       sessionStorage.setItem('userId', this.loginResponse.userId);
+      this.$emit('updateStatus')
       this.$router.push({
         name: 'customerHomeRoute', query: {
           userId: this.loginResponse.userId,

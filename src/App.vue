@@ -1,16 +1,68 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/atm">ATM</router-link> |
-      <router-link to="/customer">Kliendid</router-link> |
-      <router-link to="/photo">Lisa pilt</router-link> |
-      <router-link to="/car">Auto</router-link> |
-      <router-link to="/about">Meist</router-link>
-    </nav>
-    <router-view/>
+
+    <!--  ILMA SISSE LOGIMATA  -->
+    <div v-if="displayWithLogin">
+      <nav>
+        <router-link to="/">Home</router-link>
+        |
+        <router-link to="/atm">ATM</router-link>
+        |
+        <router-link to="/customer">Kliendid</router-link>
+        |
+        <router-link to="/photo">Lisa pilt</router-link>
+        |
+        <router-link to="/car">Auto</router-link>
+        |
+        <router-link to="/about">Meist</router-link>
+
+        <button>LOGIN</button>
+      </nav>
+
+    </div>
+    <!--  SISSE LOGITUD  -->
+    <div v-else>
+      <nav>
+        <router-link to="/">Home</router-link>
+        |
+        <router-link to="/atm">ATM</router-link>
+        |
+        <router-link to="/customer">Kliendid</router-link>
+        |
+        <router-link to="/photo">Lisa pilt</router-link>
+        |
+        <router-link to="/car">Auto</router-link>
+        |
+        <router-link to="/about">Meist</router-link>
+      </nav>
+    </div>
+
+    <router-view @updateStatus="updateStatus"/>
   </div>
 </template>
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      displayWithLogin: true,
+      userId: sessionStorage.getItem('userId')
+    }
+  },
+  methods: {
+    updateStatus: function () {
+      this.userId = sessionStorage.getItem('userId')
+      // kui userId on tühi, siis displayWithLogin = true
+      // kui userId on täidetud, siis displayWithLogin = false
+      this.displayWithLogin = this.userId == null
+
+    }
+  },
+  mounted() {
+    this.updateStatus()
+  }
+}
+</script>
 
 <style>
 #app {

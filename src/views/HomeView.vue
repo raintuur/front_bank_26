@@ -9,7 +9,7 @@
         <HomeViewGreeting/>
       </div>
       <div class="col-lg-6">
-        <LogIn/>
+        <LogIn v-on="$listeners"/>
       </div>
     </div>
   </div>
